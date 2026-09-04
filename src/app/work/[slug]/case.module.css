@@ -318,3 +318,10 @@
   color: var(--ink-2);
   margin-right: auto;
 }
+
+.cover {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--r-lg);
+}

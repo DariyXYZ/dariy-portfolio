@@ -82,6 +82,18 @@ export type CaseVisual = VisualBase &
   (
     | { kind: "shot"; src: string; alt: string; url?: string }
     | {
+        /** Ряд мобильных экранов: показываем сценарий, а не один кадр. */
+        kind: "screens";
+        items: { src: string; alt: string; label: string; note?: string }[];
+        /** sm для плотных рядов, md для мобильных, wide для десктопных экранов. */
+        size?: "sm" | "md" | "wide";
+      }
+    | {
+        /** Было и стало по одному экрану. */
+        kind: "compare";
+        pairs: { before: string; after: string; label: string; note: string }[];
+      }
+    | {
         /** Большой артефакт исследования: показываем целиком и мелко, детали по клику. */
         kind: "artifact";
         src: string;
@@ -119,6 +131,8 @@ export type CaseBlock = {
   title: string;
   body: string;
   visual?: CaseVisual;
+  /** Несколько визуалов подряд, когда одного кадра не хватает. */
+  visuals?: CaseVisual[];
   /** Помечаем разделы, которые входят в короткий режим чтения. */
   short?: boolean;
 };

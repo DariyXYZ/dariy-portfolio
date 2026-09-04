@@ -50,7 +50,7 @@ export function Zoomable({ src, alt, hint = "Открыть целиком" }: Z
           aria-label={alt}
           onClick={() => setOpen(false)}
         >
-          <span className={styles.close}>Esc или клик — закрыть</span>
+          <span className={styles.close}>Esc или клик, чтобы закрыть</span>
           <div className={styles.scroll}>
             {/* Полный размер отдаём обычным img: оригинал без пересжатия */}
             {/* eslint-disable-next-line @next/next/no-img-element */}

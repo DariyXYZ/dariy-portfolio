@@ -22,14 +22,14 @@ const mono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: site.name + " — " + site.role.toLowerCase(),
+    default: site.name + " · " + site.role.toLowerCase(),
     template: "%s · " + site.name,
   },
   description: site.positioning,
   openGraph: {
     type: "website",
     locale: "ru_RU",
-    title: site.name + " — " + site.role.toLowerCase(),
+    title: site.name + " · " + site.role.toLowerCase(),
     description: site.positioning,
     siteName: site.name,
   },

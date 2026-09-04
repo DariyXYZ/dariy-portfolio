@@ -2,6 +2,11 @@
   margin: 0;
 }
 
+/* Несколько визуалов подряд внутри одного раздела. */
+.figure + .figure {
+  margin-top: var(--s-6);
+}
+
 .caption {
   margin-top: var(--s-3);
   font-size: var(--fs-xs);
@@ -648,4 +653,186 @@
   letter-spacing: var(--ls-label);
   text-transform: uppercase;
   color: var(--ink-3);
+}
+
+/* ---------------- ряд мобильных экранов ---------------- */
+
+.phone {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--paper);
+  line-height: 0;
+}
+
+.phoneImage {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.scRow,
+.scRowSm {
+  display: grid;
+  gap: var(--s-4);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.scRow {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.scRowSm {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (min-width: 640px) {
+  .scRow {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .scRowSm {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+.scItem {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  min-width: 0;
+}
+
+.scLabel {
+  margin-top: var(--s-1);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.35;
+}
+
+.scNote {
+  font-size: var(--fs-xs);
+  color: var(--ink-3);
+  line-height: 1.45;
+  text-wrap: pretty;
+}
+
+/* ---------------- было и стало ---------------- */
+
+.cmpList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-5);
+}
+
+.cmp {
+  display: grid;
+  gap: var(--s-4);
+  grid-template-columns: 1fr;
+  align-items: start;
+  padding: var(--s-5);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--sand);
+}
+
+@media (min-width: 720px) {
+  .cmp {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: var(--s-6);
+  }
+}
+
+.cmpText {
+  min-width: 0;
+}
+
+.cmpLabel {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.4;
+}
+
+.cmpNote {
+  margin-top: var(--s-2);
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+  line-height: 1.55;
+  max-width: 46ch;
+  text-wrap: pretty;
+}
+
+.cmpPair {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+}
+
+.cmpSide {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  width: 176px;
+  max-width: 36vw;
+}
+
+.cmpArrow {
+  flex: none;
+  color: var(--ink-4);
+}
+
+.cmpBadgeWas,
+.cmpBadgeNow {
+  align-self: flex-start;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  border-radius: var(--r-pill);
+  padding: 3px 9px;
+}
+
+.cmpBadgeWas {
+  color: var(--stop);
+  background: var(--stop-soft);
+}
+
+.cmpBadgeNow {
+  color: var(--live);
+  background: var(--live-soft);
+}
+
+/* Десктопные экраны показываем по одному во всю ширину: иначе не прочитать. */
+.scRowWide {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--s-7);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.screenFrame {
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  overflow: hidden;
+  background: var(--paper);
+  line-height: 0;
+  box-shadow:
+    0 1px 2px rgba(27, 26, 24, 0.04),
+    0 24px 50px -44px rgba(27, 26, 24, 0.5);
+}
+
+.scRowWide .scLabel {
+  margin-top: var(--s-3);
+  font-size: var(--fs-sm);
+}
+
+.scRowWide .scNote {
+  font-size: var(--fs-sm);
+  max-width: 64ch;
 }

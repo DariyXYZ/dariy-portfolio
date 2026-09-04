@@ -26,19 +26,6 @@
   gap: var(--s-3);
 }
 
-.portrait {
-  aspect-ratio: 21 / 9;
-  border: 1px dashed var(--line);
-  border-radius: var(--r-lg);
-  background: var(--sand);
-  display: grid;
-  place-items: center;
-  font-size: var(--fs-xs);
-  letter-spacing: var(--ls-label);
-  text-transform: uppercase;
-  color: var(--ink-4);
-}
-
 .list {
   display: flex;
   flex-direction: column;

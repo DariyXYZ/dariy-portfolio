@@ -26,8 +26,8 @@ export default function AboutPage() {
             </h1>
             <p className={styles.lead}>
               Продуктовый дизайнер с четырьмя годами коммерческого опыта в AI SaaS,
-              EdTech и e-commerce. Архитектурный бэкграунд МАРХИ даёт системное
-              мышление: сначала понимаю, как устроено целое, потом рисую части.
+              EdTech и e-commerce. Пришёл из архитектуры, из МАРХИ, и привычка
+              осталась: сначала разбираюсь, как устроено целое, потом рисую части.
             </p>
             <div className={styles.actions}>
               <ButtonLink href={site.resumeFile} variant="primary" size="lg" download>
@@ -40,15 +40,6 @@ export default function AboutPage() {
           </Reveal>
         </Container>
       </section>
-
-      {/* ---------- Портрет-заглушка ---------- */}
-      <Container>
-        <Reveal>
-          <div className={styles.portrait} aria-hidden="true">
-            <span>Фото или рабочий кадр</span>
-          </div>
-        </Reveal>
-      </Container>
 
       {/* ---------- Опыт ---------- */}
       <Section>
@@ -133,7 +124,7 @@ export default function AboutPage() {
             <div className={styles.langs}>
               <p className="label">Языки</p>
               <p className={styles.langsText}>
-                Русский — родной · Английский — B2, Upper-Intermediate
+                Русский: родной · Английский: B2, Upper-Intermediate
               </p>
             </div>
           </Reveal>

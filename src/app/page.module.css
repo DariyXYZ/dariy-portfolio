@@ -311,3 +311,16 @@
   font-size: var(--fs-sm);
   color: var(--ink-3);
 }
+
+.heroImage {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--r-lg);
+}
+
+.heroShotCaption {
+  margin-top: var(--s-3);
+  font-size: var(--fs-xs);
+  color: var(--ink-3);
+}

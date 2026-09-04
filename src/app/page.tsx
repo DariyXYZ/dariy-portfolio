@@ -4,15 +4,16 @@ import { ButtonLink } from "@/components/ui/button";
 import { Pill } from "@/components/ui/pill";
 import { Reveal } from "@/components/ui/reveal";
 import { ArrowLink } from "@/components/ui/arrow-link";
-import { BrowserFrame } from "@/components/ui/browser-frame";
-import { CaseCard, getFeaturedCases } from "@/features/cases";
+import Image from "next/image";
+import { CaseCard, cases, getFeaturedCases } from "@/features/cases";
 import { process, experience } from "@/features/profile";
-import { site, facts } from "@/config/site";
+import { site, facts, asset } from "@/config/site";
 import { HeroArc } from "./_components/hero-arc";
 import styles from "./page.module.css";
 
 export default function HomePage() {
   const featured = getFeaturedCases();
+  const drafts = cases.filter((item) => item.status === "draft").length;
 
   return (
     <>
@@ -26,7 +27,7 @@ export default function HomePage() {
             </div>
 
             <h1 className={styles.heroTitle + " " + styles.fadeUp + " " + styles.d2}>
-              Сложное&nbsp;решение&nbsp;&mdash;{" "}
+              Сложное&nbsp;решение{" "}
               <span className="dim">за&nbsp;один&nbsp;экран</span>
             </h1>
 
@@ -51,10 +52,18 @@ export default function HomePage() {
           </div>
 
           <div className={styles.heroShot + " " + styles.fadeUp + " " + styles.d6}>
-            <BrowserFrame
-              url="ai-rendering.ind.studio"
-              caption="AI Rendering для архитекторов — ключевой экран платформы"
+            <Image
+              src={asset("/cases/ai-architecture-rendering/cover.webp")}
+              alt="Платформа ИИ-визуализаций для архитекторов"
+              width={2400}
+              height={1500}
+              priority
+              sizes="(max-width: 1200px) 100vw, 1200px"
+              className={styles.heroImage}
             />
+            <p className={styles.heroShotCaption}>
+              AI Rendering для архитекторов: рабочее место с Prompt Assistant
+            </p>
           </div>
         </Container>
       </section>
@@ -87,7 +96,7 @@ export default function HomePage() {
                   <span className="dim">после моей работы</span>
                 </>
               }
-              lead="В заголовке каждого кейса — результат, а не название проекта. Внутри: контекст, решения и то, какие альтернативы я отверг."
+              lead="В заголовке каждого кейса стоит результат, а не название проекта. Внутри контекст, решения и альтернативы, которые я отверг."
               action={<ArrowLink href="/work">Все кейсы</ArrowLink>}
             />
           </Reveal>
@@ -102,7 +111,7 @@ export default function HomePage() {
 
           <div className={styles.moreRow}>
             <ButtonLink href="/work" variant="secondary" size="md">
-              Ещё три кейса в работе
+              {"Ещё " + drafts + " кейса в работе"}
             </ButtonLink>
           </div>
         </Container>
@@ -172,11 +181,11 @@ export default function HomePage() {
             <div className={styles.contact}>
               <Pill tone="live">{site.availability.label}</Pill>
               <h2 className={styles.contactTitle}>
-                Расскажите о задаче — <span className="dim">отвечу за день</span>
+                Расскажите о задаче. <span className="dim">Отвечу за день</span>
               </h2>
               <p className={styles.contactLead}>
                 Открыт к продуктовым командам, где дизайнер отвечает за сценарий
-                целиком, а не только за макеты.
+                целиком, а не за отрисовку макетов по чужому ТЗ.
               </p>
               <div className={styles.contactActions}>
                 <ButtonLink href={"mailto:" + site.email} variant="primary" size="lg" external>

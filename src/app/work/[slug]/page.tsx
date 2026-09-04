@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/container";
@@ -8,7 +9,7 @@ import { Pill } from "@/components/ui/pill";
 import { BrowserFrame } from "@/components/ui/browser-frame";
 import { ArrowLink } from "@/components/ui/arrow-link";
 import { getCase, getPublishedCases, CaseVisual } from "@/features/cases";
-import { site } from "@/config/site";
+import { site, asset } from "@/config/site";
 import { CaseNav } from "./_components/case-nav";
 import styles from "./case.module.css";
 
@@ -128,13 +129,14 @@ export default async function CasePage({ params }: PageProps) {
         <Container>
           <Reveal>
             {item.cover ? (
-              <CaseVisual
-                visual={{
-                  kind: "shot",
-                  src: item.cover.src,
-                  alt: item.cover.alt,
-                  url: item.liveUrl?.replace(/^https?:\/\//, ""),
-                }}
+              <Image
+                src={asset(item.cover.src)}
+                alt={item.cover.alt}
+                width={2400}
+                height={1500}
+                priority
+                sizes="(max-width: 1200px) 100vw, 1200px"
+                className={styles.cover}
               />
             ) : (
               <BrowserFrame url={item.slug + ".product"} />
@@ -178,6 +180,9 @@ export default async function CasePage({ params }: PageProps) {
                   <h2 className={styles.blockTitle}>{block.title}</h2>
                   <p className={styles.blockText}>{block.body}</p>
                   {block.visual ? <CaseVisual visual={block.visual} /> : null}
+                  {block.visuals?.map((visual, i) => (
+                    <CaseVisual key={block.kicker + "-" + i} visual={visual} />
+                  ))}
                 </Reveal>
               ))}
 

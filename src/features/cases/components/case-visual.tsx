@@ -10,8 +10,8 @@ type CaseVisualProps = {
 };
 
 /** Один вход для всех схем и снимков внутри кейса. */
-/** Экраны и артефакты видны сразу, схемы фреймворков прячем под раскрытие. */
-const ALWAYS_OPEN = new Set(["shot", "artifact"]);
+/** Экраны видны сразу. Всё, что помечено фреймворком, прячем под раскрытие. */
+const ALWAYS_OPEN = new Set(["shot", "screens", "compare"]);
 
 export function CaseVisual({ visual }: CaseVisualProps) {
   const caption = visual.caption ? (
@@ -62,6 +62,10 @@ function Body({ visual }: CaseVisualProps) {
   switch (visual.kind) {
     case "shot":
       return <Shot visual={visual} />;
+    case "screens":
+      return <Screens visual={visual} />;
+    case "compare":
+      return <Compare visual={visual} />;
     case "artifact":
       return <Artifact visual={visual} />;
     case "journey":
@@ -113,6 +117,90 @@ function Shot({ visual }: { visual: Extract<Visual, { kind: "shot" }> }) {
         sizes="(max-width: 900px) 100vw, 780px"
         className={styles.shotImage}
       />
+    </div>
+  );
+}
+
+/* ---------------- ряд мобильных экранов ---------------- */
+
+function Screens({ visual }: { visual: Extract<Visual, { kind: "screens" }> }) {
+  const wide = visual.size === "wide";
+  const cls = wide ? styles.scRowWide : visual.size === "sm" ? styles.scRowSm : styles.scRow;
+
+  return (
+    <ul className={cls}>
+      {visual.items.map((item) => (
+        <li key={item.src} className={styles.scItem}>
+          <div className={wide ? styles.screenFrame : styles.phone}>
+            <Image
+              src={asset(item.src)}
+              alt={item.alt}
+              width={wide ? 1440 : 780}
+              height={wide ? 1024 : 1688}
+              sizes={wide ? "(max-width: 900px) 100vw, 1100px" : "(max-width: 700px) 45vw, 220px"}
+              className={styles.phoneImage}
+            />
+          </div>
+          <p className={styles.scLabel}>{item.label}</p>
+          {item.note ? <p className={styles.scNote}>{item.note}</p> : null}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+/* ---------------- было и стало ---------------- */
+
+function Compare({ visual }: { visual: Extract<Visual, { kind: "compare" }> }) {
+  return (
+    <div className={styles.cmpList}>
+      {visual.pairs.map((pair) => (
+        <div key={pair.label} className={styles.cmp}>
+          <div className={styles.cmpText}>
+            <p className={styles.cmpLabel}>{pair.label}</p>
+            <p className={styles.cmpNote}>{pair.note}</p>
+          </div>
+          <div className={styles.cmpPair}>
+            <figure className={styles.cmpSide}>
+              <span className={styles.cmpBadgeWas}>Было</span>
+              <div className={styles.phone}>
+                <Image
+                  src={asset(pair.before)}
+                  alt={`До правки: ${pair.label}`}
+                  width={780}
+                  height={1688}
+                  sizes="(max-width: 700px) 40vw, 200px"
+                  className={styles.phoneImage}
+                />
+              </div>
+            </figure>
+            <span className={styles.cmpArrow} aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+                <path
+                  d="M4 11h13m0 0-4.5-4.5M17 11l-4.5 4.5"
+                  stroke="currentColor"
+                  strokeWidth="1.4"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </span>
+            <figure className={styles.cmpSide}>
+              <span className={styles.cmpBadgeNow}>Стало</span>
+              <div className={styles.phone}>
+                <Image
+                  src={asset(pair.after)}
+                  alt={`После правки: ${pair.label}`}
+                  width={780}
+                  height={1688}
+                  sizes="(max-width: 700px) 40vw, 200px"
+                  className={styles.phoneImage}
+                />
+              </div>
+            </figure>
+          </div>
+        </div>
+      ))}
     </div>
   );
 }
