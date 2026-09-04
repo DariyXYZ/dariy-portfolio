@@ -1,0 +1,37 @@
+.section {
+  padding-block: var(--section-y);
+}
+
+.paper {
+  background: var(--paper);
+}
+
+.sand {
+  background: var(--sand);
+}
+
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--s-5);
+  margin-bottom: var(--s-8);
+}
+
+.headMain {
+  max-width: 46ch;
+}
+
+.kicker {
+  margin-bottom: var(--s-4);
+}
+
+.lead {
+  margin-top: var(--s-4);
+}
+
+.headAction {
+  padding-top: 3px;
+  flex: none;
+}

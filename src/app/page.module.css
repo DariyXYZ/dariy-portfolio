@@ -1,0 +1,313 @@
+/* =========================================================
+   ГЛАВНАЯ
+   ========================================================= */
+
+.hero {
+  position: relative;
+  padding-block: clamp(56px, 8vw, 104px) clamp(48px, 6vw, 88px);
+  overflow: hidden;
+}
+
+.heroInner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--s-5);
+}
+
+.heroTitle {
+  font-size: var(--fs-display);
+  letter-spacing: var(--ls-display);
+  line-height: 1.01;
+  max-width: 16ch;
+  margin-top: var(--s-2);
+}
+
+.heroLead {
+  max-width: 54ch;
+  font-size: var(--fs-lead);
+  line-height: 1.5;
+  color: var(--ink-2);
+  text-wrap: pretty;
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--s-3);
+  margin-top: var(--s-2);
+}
+
+.heroPlace {
+  font-size: var(--fs-sm);
+  color: var(--ink-3);
+}
+
+.heroShot {
+  position: relative;
+  z-index: 1;
+  margin-top: clamp(40px, 6vw, 80px);
+}
+
+/* --- каскад появления первого экрана --- */
+
+.fadeUp {
+  opacity: 0;
+  transform: translateY(14px);
+  animation: fadeUp 760ms var(--ease) forwards;
+}
+
+.d1 {
+  animation-delay: 60ms;
+}
+.d2 {
+  animation-delay: 140ms;
+}
+.d3 {
+  animation-delay: 220ms;
+}
+.d4 {
+  animation-delay: 300ms;
+}
+.d5 {
+  animation-delay: 380ms;
+}
+.d6 {
+  animation-delay: 480ms;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fadeUp {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}
+
+/* =========================================================
+   ПОЛОСА ФАКТОВ
+   ========================================================= */
+
+.facts {
+  border-block: 1px solid var(--line);
+  background: var(--paper);
+}
+
+.factsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (min-width: 900px) {
+  .factsGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.fact {
+  padding: var(--s-6) var(--s-5);
+  border-right: 1px solid var(--line-2);
+  border-bottom: 1px solid var(--line-2);
+}
+
+.fact:last-child {
+  border-right: none;
+}
+
+@media (min-width: 900px) {
+  .fact {
+    border-bottom: none;
+    padding-block: var(--s-7);
+  }
+}
+
+.fact:first-child {
+  padding-left: 0;
+}
+
+.factValue {
+  font-size: clamp(1.6rem, 2.6vw, 2.1rem);
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.factCaption {
+  margin-top: var(--s-2);
+  font-size: var(--fs-sm);
+  color: var(--ink-3);
+  max-width: 24ch;
+  line-height: 1.45;
+}
+
+/* =========================================================
+   КЕЙСЫ
+   ========================================================= */
+
+.caseGrid {
+  display: grid;
+  gap: var(--s-5);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 900px) {
+  .caseGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .caseGrid > :first-child {
+    grid-column: 1 / -1;
+  }
+}
+
+.moreRow {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--s-8);
+}
+
+/* =========================================================
+   ПРОЦЕСС
+   ========================================================= */
+
+.process {
+  display: grid;
+  gap: var(--s-5);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 860px) {
+  .process {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--s-6);
+  }
+}
+
+.step {
+  border-top: 1px solid var(--ink);
+  padding-top: var(--s-5);
+}
+
+.stepNum {
+  font-size: var(--fs-xs);
+  color: var(--ink-3);
+}
+
+.stepTitle {
+  margin-top: var(--s-4);
+  font-size: clamp(1.15rem, 1.7vw, 1.4rem);
+  font-weight: 500;
+  letter-spacing: -0.022em;
+  line-height: 1.25;
+}
+
+.stepBody {
+  margin-top: var(--s-3);
+  color: var(--ink-2);
+  font-size: var(--fs-sm);
+  line-height: 1.55;
+}
+
+/* =========================================================
+   ОПЫТ
+   ========================================================= */
+
+.expList {
+  display: flex;
+  flex-direction: column;
+}
+
+.expItem {
+  display: grid;
+  gap: var(--s-3);
+  grid-template-columns: 1fr;
+  padding-block: var(--s-6);
+  border-top: 1px solid var(--line);
+}
+
+@media (min-width: 800px) {
+  .expItem {
+    grid-template-columns: 200px 1fr;
+    gap: var(--s-7);
+    align-items: start;
+  }
+}
+
+.expPeriod {
+  font-size: var(--fs-sm);
+  color: var(--ink-3);
+  padding-top: 4px;
+}
+
+.expCompany {
+  font-size: clamp(1.2rem, 1.8vw, 1.45rem);
+  font-weight: 500;
+  letter-spacing: -0.022em;
+}
+
+.expRole {
+  margin-top: 4px;
+  color: var(--ink-2);
+  font-size: var(--fs-sm);
+}
+
+.expSummary {
+  margin-top: var(--s-4);
+  color: var(--ink-2);
+  font-size: var(--fs-sm);
+  max-width: 58ch;
+  line-height: 1.55;
+}
+
+/* =========================================================
+   КОНТАКТ
+   ========================================================= */
+
+.contact {
+  border-radius: var(--r-lg);
+  border: 1px solid var(--line);
+  background: var(--sand);
+  padding: clamp(32px, 5vw, 72px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--s-5);
+}
+
+.contactTitle {
+  font-size: clamp(1.9rem, 4vw, 3.1rem);
+  letter-spacing: var(--ls-display);
+  line-height: 1.05;
+  max-width: 18ch;
+}
+
+.contactLead {
+  color: var(--ink-2);
+  max-width: 48ch;
+  text-wrap: pretty;
+}
+
+.contactActions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--s-3);
+  margin-top: var(--s-2);
+}
+
+.contactMeta {
+  margin-top: var(--s-4);
+  font-size: var(--fs-sm);
+  color: var(--ink-3);
+}

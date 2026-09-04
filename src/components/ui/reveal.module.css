@@ -1,0 +1,20 @@
+.root {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity var(--dur-slow) var(--ease),
+    transform var(--dur-slow) var(--ease);
+  will-change: opacity, transform;
+}
+
+.shown {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .root {
+    opacity: 1;
+    transform: none;
+  }
+}

@@ -1,0 +1,83 @@
+.wrap {
+  margin: 0;
+}
+
+.frame {
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  background: var(--paper);
+  box-shadow:
+    0 1px 2px rgba(27, 26, 24, 0.04),
+    0 28px 60px -40px rgba(27, 26, 24, 0.5);
+}
+
+.bar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 11px 16px;
+  border-bottom: 1px solid var(--line-2);
+  background: var(--paper);
+}
+
+.dots {
+  display: inline-flex;
+  gap: 6px;
+  flex: none;
+}
+
+.dots i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--line);
+}
+
+.url {
+  flex: 1;
+  text-align: center;
+  font-size: var(--fs-xs);
+  color: var(--ink-3);
+  background: var(--sand);
+  border-radius: var(--r-pill);
+  padding: 4px 12px;
+  max-width: 280px;
+  margin-inline: auto;
+}
+
+.body {
+  min-height: 300px;
+}
+
+.sand .body {
+  background: var(--sand);
+}
+
+.placeholder {
+  aspect-ratio: 16 / 10;
+  display: grid;
+  place-items: center;
+  background-image:
+    linear-gradient(var(--line-2) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line-2) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.phLabel {
+  font-size: var(--fs-xs);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--ink-4);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  padding: 7px 16px;
+}
+
+.caption {
+  margin-top: var(--s-4);
+  text-align: center;
+  font-size: var(--fs-sm);
+  color: var(--ink-3);
+}

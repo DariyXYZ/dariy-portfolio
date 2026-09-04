@@ -1,0 +1,65 @@
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+  margin-bottom: var(--s-7);
+  padding-bottom: var(--s-6);
+  border-bottom: 1px solid var(--line);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 38px;
+  padding-inline: 16px;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--line);
+  background: var(--paper);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--ink-2);
+  transition:
+    background-color var(--dur-fast) var(--ease),
+    border-color var(--dur-fast) var(--ease),
+    color var(--dur-fast) var(--ease);
+}
+
+.chip:hover {
+  border-color: var(--ink-4);
+  color: var(--ink);
+}
+
+.chipActive {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+}
+
+.count {
+  font-size: var(--fs-xs);
+  color: var(--ink-4);
+  font-variant-numeric: tabular-nums;
+}
+
+.chipActive .count {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.grid {
+  display: grid;
+  gap: var(--s-5);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.empty {
+  padding-block: var(--s-9);
+  text-align: center;
+  color: var(--ink-3);
+}

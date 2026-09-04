@@ -1,0 +1,38 @@
+.root {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: var(--r-pill);
+  padding: 6px 13px;
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.default {
+  background: var(--sand);
+  color: var(--ink-2);
+  border: 1px solid var(--line-2);
+}
+
+.outline {
+  background: transparent;
+  color: var(--ink-3);
+  border: 1px solid var(--line);
+}
+
+.live {
+  background: var(--live-soft);
+  color: var(--live);
+  border: 1px solid rgba(21, 127, 69, 0.18);
+}
+
+.live::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--live);
+  flex: none;
+}

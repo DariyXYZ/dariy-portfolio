@@ -1,0 +1,277 @@
+/* ---------- шапка кейса ---------- */
+
+.hero {
+  padding-block: clamp(40px, 5vw, 72px) clamp(40px, 5vw, 64px);
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--fs-sm);
+  color: var(--ink-3);
+  transition: color var(--dur-fast) var(--ease);
+}
+
+.back:hover {
+  color: var(--ink);
+}
+
+.heroMeta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: var(--s-6);
+}
+
+.heroType {
+  font-size: var(--fs-sm);
+  color: var(--ink-3);
+}
+
+.heroDot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--ink-4);
+}
+
+.title {
+  margin-top: var(--s-5);
+  font-size: var(--fs-h1);
+  letter-spacing: var(--ls-display);
+  line-height: 1.04;
+  max-width: 20ch;
+}
+
+.project {
+  margin-top: var(--s-4);
+  font-size: var(--fs-lead);
+  color: var(--ink-3);
+}
+
+.summary {
+  margin-top: var(--s-5);
+  color: var(--ink-2);
+  max-width: 62ch;
+  font-size: var(--fs-lead);
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+.live {
+  margin-top: var(--s-5);
+}
+
+.metaGrid {
+  margin-top: var(--s-8);
+  display: grid;
+  gap: var(--s-5);
+  grid-template-columns: repeat(2, 1fr);
+  padding-top: var(--s-6);
+  border-top: 1px solid var(--line);
+}
+
+@media (min-width: 860px) {
+  .metaGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.metaItem {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+}
+
+.metaValue {
+  margin: 0;
+  font-size: var(--fs-sm);
+  color: var(--ink);
+  line-height: 1.45;
+}
+
+/* ---------- метрики ---------- */
+
+.metricsBand {
+  background: var(--ink);
+  color: var(--paper);
+  padding-block: clamp(32px, 4vw, 56px);
+}
+
+.metrics {
+  display: grid;
+  gap: var(--s-6);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 760px) {
+  .metrics {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--s-7);
+  }
+}
+
+.metric {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+}
+
+.metricValue {
+  font-size: clamp(1.8rem, 3.4vw, 2.9rem);
+  letter-spacing: -0.035em;
+  line-height: 1;
+}
+
+.metricLabel {
+  font-size: var(--fs-sm);
+  color: rgba(255, 255, 255, 0.62);
+  max-width: 30ch;
+  line-height: 1.45;
+}
+
+/* ---------- разделы ---------- */
+
+.blocks {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-9);
+}
+
+.block {
+  display: grid;
+  gap: var(--s-5);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 900px) {
+  .block {
+    grid-template-columns: 300px 1fr;
+    gap: var(--s-8);
+    align-items: start;
+  }
+}
+
+.blockHead {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  position: sticky;
+  top: 90px;
+}
+
+@media (max-width: 899px) {
+  .blockHead {
+    position: static;
+  }
+}
+
+.blockNum {
+  font-size: var(--fs-xs);
+  color: var(--ink-4);
+}
+
+.blockTitle {
+  font-size: clamp(1.3rem, 2.1vw, 1.7rem);
+  font-weight: 400;
+  letter-spacing: var(--ls-head);
+  line-height: 1.18;
+}
+
+.blockBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-5);
+}
+
+.blockText {
+  color: var(--ink-2);
+  max-width: 60ch;
+  text-wrap: pretty;
+}
+
+.blockPlaceholder {
+  border: 1px dashed var(--line);
+  border-radius: var(--r-md);
+  background: var(--paper);
+  min-height: 220px;
+  display: grid;
+  place-items: center;
+  font-size: var(--fs-xs);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--ink-4);
+}
+
+/* ---------- следующий кейс ---------- */
+
+.next {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-5);
+  padding: clamp(24px, 3.5vw, 40px);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  transition:
+    border-color var(--dur) var(--ease),
+    background-color var(--dur) var(--ease);
+}
+
+.next:hover {
+  border-color: var(--ink-4);
+  background: var(--sand);
+}
+
+.nextTitle {
+  margin-top: var(--s-3);
+  font-size: clamp(1.25rem, 2.2vw, 1.75rem);
+  letter-spacing: var(--ls-head);
+  line-height: 1.15;
+  max-width: 24ch;
+}
+
+.nextProject {
+  margin-top: var(--s-2);
+  font-size: var(--fs-sm);
+  color: var(--ink-3);
+}
+
+.nextArrow {
+  flex: none;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  display: grid;
+  place-items: center;
+  transition:
+    background-color var(--dur) var(--ease),
+    color var(--dur) var(--ease),
+    transform var(--dur) var(--ease);
+}
+
+.next:hover .nextArrow {
+  background: var(--ink);
+  color: var(--paper);
+  transform: translate(2px, -2px);
+}
+
+/* ---------- призыв ---------- */
+
+.cta {
+  margin-top: var(--s-8);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-4);
+  padding-top: var(--s-6);
+  border-top: 1px solid var(--line);
+}
+
+.ctaText {
+  color: var(--ink-2);
+  margin-right: auto;
+}

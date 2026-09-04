@@ -1,0 +1,153 @@
+.root {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid transparent;
+  transition:
+    border-color var(--dur) var(--ease),
+    background-color var(--dur) var(--ease);
+}
+
+.scrolled {
+  border-bottom-color: var(--line-2);
+}
+
+.inner {
+  max-width: 1440px;
+  margin-inline: auto;
+  padding: 14px var(--gutter);
+  display: flex;
+  align-items: center;
+  gap: var(--s-6);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  font-size: 1rem;
+  flex: none;
+}
+
+.mark {
+  width: 22px;
+  height: 22px;
+  border-radius: 7px;
+  background: var(--ink);
+  flex: none;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: var(--s-5);
+  margin-left: var(--s-4);
+}
+
+.link {
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+  padding: 6px 0;
+  position: relative;
+  transition: color var(--dur-fast) var(--ease);
+}
+
+.link:hover {
+  color: var(--ink);
+}
+
+.active {
+  color: var(--ink);
+}
+
+.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--ink);
+}
+
+.actions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--s-5);
+}
+
+.resume {
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+  transition: color var(--dur-fast) var(--ease);
+}
+
+.resume:hover {
+  color: var(--ink);
+}
+
+.burger {
+  display: none;
+  margin-left: auto;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--r-sm);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.burger span {
+  display: block;
+  width: 18px;
+  height: 1.5px;
+  background: var(--ink);
+  transition: transform var(--dur) var(--ease);
+}
+
+.barTop {
+  transform: translateY(3.25px) rotate(45deg);
+}
+
+.barBottom {
+  transform: translateY(-3.25px) rotate(-45deg);
+}
+
+.sheet {
+  display: none;
+  flex-direction: column;
+  padding: var(--s-2) var(--gutter) var(--s-5);
+  border-top: 1px solid var(--line-2);
+  background: var(--paper);
+}
+
+.sheetLink {
+  padding: 14px 0;
+  font-size: 1.125rem;
+  border-bottom: 1px solid var(--line-2);
+}
+
+.sheetLink:last-child {
+  border-bottom: none;
+}
+
+@media (max-width: 860px) {
+  .nav,
+  .actions {
+    display: none;
+  }
+
+  .burger {
+    display: flex;
+  }
+
+  .sheet {
+    display: flex;
+  }
+}

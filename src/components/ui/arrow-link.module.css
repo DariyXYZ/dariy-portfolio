@@ -1,0 +1,29 @@
+.root {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.text {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 0% 1px;
+  transition: background-size var(--dur) var(--ease);
+  padding-bottom: 2px;
+}
+
+.root:hover .text {
+  background-size: 100% 1px;
+}
+
+.icon {
+  transition: transform var(--dur) var(--ease);
+}
+
+.root:hover .icon {
+  transform: translate(2px, -2px);
+}

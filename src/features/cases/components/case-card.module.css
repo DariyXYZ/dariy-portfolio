@@ -1,0 +1,244 @@
+.card {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  background: var(--paper);
+  overflow: hidden;
+  transition:
+    border-color var(--dur) var(--ease),
+    transform var(--dur) var(--ease),
+    box-shadow var(--dur) var(--ease);
+}
+
+.card:hover {
+  border-color: var(--ink-4);
+  transform: translateY(-3px);
+  box-shadow: 0 24px 50px -38px rgba(27, 26, 24, 0.55);
+}
+
+.draft:hover {
+  transform: none;
+  border-color: var(--line);
+  box-shadow: none;
+}
+
+.link {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: inherit;
+}
+
+/* ---------- визуал ---------- */
+
+.visual {
+  background: var(--sand);
+  border-bottom: 1px solid var(--line-2);
+  padding: var(--s-5);
+}
+
+.visualInner {
+  aspect-ratio: 16 / 9;
+  border-radius: var(--r-md);
+  border: 1px dashed var(--line);
+  background-image:
+    linear-gradient(var(--line-2) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line-2) 1px, transparent 1px);
+  background-size: 40px 40px;
+  display: grid;
+  place-items: center;
+  transition: transform var(--dur-slow) var(--ease);
+}
+
+.card:not(.draft):hover .visualInner {
+  transform: scale(1.012);
+}
+
+.visualLabel {
+  font-size: var(--fs-xs);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--ink-4);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  padding: 6px 14px;
+}
+
+.wide .visualInner {
+  aspect-ratio: 21 / 9;
+}
+
+/* ---------- содержимое ---------- */
+
+.body {
+  padding: var(--s-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.num {
+  font-size: var(--fs-xs);
+  color: var(--ink-4);
+}
+
+.type {
+  font-size: var(--fs-xs);
+  color: var(--ink-3);
+}
+
+.dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--ink-4);
+}
+
+.outcome {
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  font-weight: 400;
+  letter-spacing: var(--ls-head);
+  line-height: 1.16;
+  text-wrap: balance;
+  margin-top: -4px;
+}
+
+.wide .outcome {
+  font-size: clamp(1.5rem, 2.9vw, 2.4rem);
+  max-width: 20ch;
+}
+
+.project {
+  font-size: var(--fs-sm);
+  color: var(--ink-3);
+  margin-top: -8px;
+}
+
+/* ---------- метрики ---------- */
+
+.metrics {
+  display: grid;
+  gap: var(--s-3);
+  padding-top: var(--s-4);
+  border-top: 1px solid var(--line-2);
+  margin-top: auto;
+}
+
+.wide .metrics {
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s-5);
+}
+
+.metric {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.wide .metric {
+  gap: 4px;
+}
+
+.metricValue {
+  font-size: var(--fs-body);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.wide .metricValue {
+  font-size: 1.35rem;
+}
+
+.metricLabel {
+  font-size: var(--fs-xs);
+  color: var(--ink-3);
+  line-height: 1.4;
+}
+
+/* ---------- низ ---------- */
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-4);
+  padding-top: var(--s-4);
+  border-top: 1px solid var(--line-2);
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.card:not(.draft):hover .cta svg {
+  transform: translate(2px, -2px);
+}
+
+.cta svg {
+  transition: transform var(--dur) var(--ease);
+}
+
+.draft .cta {
+  color: var(--ink-4);
+}
+
+.tags {
+  font-size: var(--fs-xs);
+  color: var(--ink-4);
+  text-align: right;
+}
+
+@media (max-width: 640px) {
+  .body {
+    padding: var(--s-5);
+  }
+
+  .tags {
+    display: none;
+  }
+
+  .wide .metrics {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- реальная обложка ---------- */
+
+.coverWrap {
+  border-radius: var(--r-md);
+  overflow: hidden;
+  border: 1px solid var(--line-2);
+  background: var(--paper);
+  aspect-ratio: 16 / 9;
+}
+
+.wide .coverWrap {
+  aspect-ratio: 21 / 9;
+}
+
+.cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform var(--dur-slow) var(--ease);
+}
+
+.card:not(.draft):hover .cover {
+  transform: scale(1.014);
+}
