@@ -107,9 +107,49 @@ export type CaseVisual = VisualBase &
         xLabel: string;
         yLabel: string;
         quadrants: [string, string, string, string];
+        /** Какой угол подсветить: там лежит то, что берём в работу. */
+        highlight?: "tl" | "tr" | "bl" | "br";
         dots: PlotDot[];
       }
     | { kind: "principles"; items: { title: string; body: string }[] }
+    | {
+        /** Таблица сравнения: конкуренты, состояния, требования. */
+        kind: "table";
+        columns: string[];
+        rows: { cells: string[]; accent?: boolean }[];
+        /** Первая колонка шире остальных: в ней обычно название строки. */
+        wideFirst?: boolean;
+      }
+    | {
+        /** Реплики из тестов и вывод, который из них следует. */
+        kind: "quotes";
+        items: { quote: string; who: string; insight: string; action?: string }[];
+      }
+    | {
+        /** Истории пользователя с критериями приёмки. */
+        kind: "stories";
+        items: { id?: string; story: string; criteria: string[]; note?: string }[];
+      }
+    | {
+        /** Структурированный документ: группы с заголовком и списком. */
+        kind: "plan";
+        groups: { title: string; items: string[] }[];
+        columns?: 2 | 3 | 4;
+      }
+    | {
+        /** Крупные числа с подписями. */
+        kind: "stat";
+        items: { value: string; label: string; note?: string }[];
+      }
+    | {
+        /** Расшифровки сессий: участник, разделы, реплики. */
+        kind: "transcript";
+        sessions: {
+          who: string;
+          tag: string;
+          sections: { title: string; lines: string[] }[];
+        }[];
+      }
     | {
         kind: "metrics";
         rows: { stage: string; value: string; target: string; note?: string }[];

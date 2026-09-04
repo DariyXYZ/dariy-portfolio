@@ -74,6 +74,18 @@ function Body({ visual }: CaseVisualProps) {
       return <Plot visual={visual} />;
     case "principles":
       return <Principles visual={visual} />;
+    case "table":
+      return <Table visual={visual} />;
+    case "quotes":
+      return <Quotes visual={visual} />;
+    case "stories":
+      return <Stories visual={visual} />;
+    case "plan":
+      return <Plan visual={visual} />;
+    case "stat":
+      return <Stat visual={visual} />;
+    case "transcript":
+      return <Transcript visual={visual} />;
     case "decisions":
       return <Decisions visual={visual} />;
     case "metrics":
@@ -265,7 +277,9 @@ function Plot({ visual }: { visual: Extract<Visual, { kind: "plot" }> }) {
     <div className={styles.plotWrap}>
       <span className={styles.axY}>{visual.yLabel}</span>
       <div className={styles.field}>
-        <span className={styles.tint} />
+        {visual.highlight ? (
+          <span className={`${styles.tint} ${styles["tint" + visual.highlight.toUpperCase()]}`} />
+        ) : null}
         <span className={styles.midH} />
         <span className={styles.midV} />
         <span className={`${styles.qLab} ${styles.qTL}`}>{tl}</span>
@@ -305,6 +319,147 @@ function Principles({ visual }: { visual: Extract<Visual, { kind: "principles" }
         </li>
       ))}
     </ul>
+  );
+}
+
+/* ---------------- таблица сравнения ---------------- */
+
+function Table({ visual }: { visual: Extract<Visual, { kind: "table" }> }) {
+  const cols = visual.wideFirst
+    ? `1.1fr repeat(${visual.columns.length - 1}, 1fr)`
+    : `repeat(${visual.columns.length}, 1fr)`;
+
+  return (
+    <div className={styles.tableWrap}>
+      <div className={styles.table} style={{ "--cols": cols } as React.CSSProperties}>
+        <div className={styles.tHead}>
+          {visual.columns.map((col) => (
+            <span key={col} className="label">
+              {col}
+            </span>
+          ))}
+        </div>
+        {visual.rows.map((row) => (
+          <div key={row.cells[0]} className={row.accent ? styles.tRowAccent : styles.tRow}>
+            {row.cells.map((cell, i) => (
+              <p key={i} className={i === 0 ? styles.tKey : styles.tCell}>
+                {cell}
+              </p>
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ---------------- реплики и выводы ---------------- */
+
+function Quotes({ visual }: { visual: Extract<Visual, { kind: "quotes" }> }) {
+  return (
+    <ul className={styles.quotes}>
+      {visual.items.map((item) => (
+        <li key={item.quote} className={styles.quote}>
+          <p className={styles.qText}>{`«${item.quote}»`}</p>
+          <p className={styles.qWho}>{item.who}</p>
+          <p className={styles.qInsight}>{item.insight}</p>
+          {item.action ? (
+            <p className={styles.qAction}>
+              <span className="label">Что сделал</span>
+              {item.action}
+            </p>
+          ) : null}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+/* ---------------- истории и критерии ---------------- */
+
+function Stories({ visual }: { visual: Extract<Visual, { kind: "stories" }> }) {
+  return (
+    <ul className={styles.stories}>
+      {visual.items.map((item, i) => (
+        <li key={item.story} className={styles.story}>
+          <span className={"mono " + styles.stId}>{item.id ?? "US" + (i + 1)}</span>
+          <div className={styles.stBody}>
+            <p className={styles.stText}>{item.story}</p>
+            <ul className={styles.stCrit}>
+              {item.criteria.map((line) => (
+                <li key={line}>{line}</li>
+              ))}
+            </ul>
+            {item.note ? <p className={styles.stNote}>{item.note}</p> : null}
+          </div>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+/* ---------------- структурированный документ ---------------- */
+
+function Plan({ visual }: { visual: Extract<Visual, { kind: "plan" }> }) {
+  return (
+    <div
+      className={styles.plan}
+      style={{ "--cols": visual.columns ?? 2 } as React.CSSProperties}
+    >
+      {visual.groups.map((group) => (
+        <section key={group.title} className={styles.plGroup}>
+          <h4 className={styles.plTitle}>{group.title}</h4>
+          <ul className={styles.plList}>
+            {group.items.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </section>
+      ))}
+    </div>
+  );
+}
+
+/* ---------------- крупные числа ---------------- */
+
+function Stat({ visual }: { visual: Extract<Visual, { kind: "stat" }> }) {
+  return (
+    <ul className={styles.stats}>
+      {visual.items.map((item) => (
+        <li key={item.label} className={styles.statItem}>
+          <span className={styles.statValue}>{item.value}</span>
+          <span className={styles.statLabel}>{item.label}</span>
+          {item.note ? <span className={styles.statNote}>{item.note}</span> : null}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+/* ---------------- расшифровки сессий ---------------- */
+
+function Transcript({ visual }: { visual: Extract<Visual, { kind: "transcript" }> }) {
+  return (
+    <div className={styles.transcript}>
+      {visual.sessions.map((session) => (
+        <article key={session.who} className={styles.session}>
+          <header className={styles.sHead}>
+            <p className={styles.sWho}>{session.who}</p>
+            <span className={styles.sTag}>{session.tag}</span>
+          </header>
+          {session.sections.map((section) => (
+            <div key={section.title} className={styles.sSection}>
+              <p className="label">{section.title}</p>
+              <ul className={styles.sLines}>
+                {section.lines.map((line, i) => (
+                  <li key={i}>{line}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </article>
+      ))}
+    </div>
   );
 }
 

@@ -109,6 +109,7 @@ export const stempsCareer: CaseStudy[] = [
             "Держим в поле зрения",
             "Не тратим время",
           ],
+          highlight: "tl",
           dots: [
             { label: "Выбирают по стажу, а не по цене", x: 18, y: 86, hot: true },
             { label: "Вход через задачу поднимает доскроллы", x: 34, y: 70, hot: true },
