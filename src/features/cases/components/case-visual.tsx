@@ -2,6 +2,7 @@ import Image from "next/image";
 import type { CaseVisual as Visual, FrameworkTag } from "../types";
 import { asset } from "@/config/site";
 import { Diagram } from "./diagram";
+import { Zoomable } from "./zoomable";
 import styles from "./case-visual.module.css";
 
 type CaseVisualProps = {
@@ -9,12 +10,40 @@ type CaseVisualProps = {
 };
 
 /** Один вход для всех схем и снимков внутри кейса. */
+/** Экраны и артефакты видны сразу, схемы фреймворков прячем под раскрытие. */
+const ALWAYS_OPEN = new Set(["shot", "artifact"]);
+
 export function CaseVisual({ visual }: CaseVisualProps) {
+  const caption = visual.caption ? (
+    <figcaption className={styles.caption}>{visual.caption}</figcaption>
+  ) : null;
+
+  if (!visual.framework || ALWAYS_OPEN.has(visual.kind)) {
+    return (
+      <figure className={styles.figure}>
+        {visual.framework ? <FrameworkHead tag={visual.framework} /> : null}
+        <Body visual={visual} />
+        {caption}
+      </figure>
+    );
+  }
+
   return (
     <figure className={styles.figure}>
-      {visual.framework ? <FrameworkHead tag={visual.framework} /> : null}
-      <Body visual={visual} />
-      {visual.caption ? <figcaption className={styles.caption}>{visual.caption}</figcaption> : null}
+      <details className={styles.fold}>
+        <summary className={styles.foldHead}>
+          <span className={styles.pm} aria-hidden="true" />
+          <span className={styles.foldMain}>
+            <span className={styles.foldName}>{visual.framework.name}</span>
+            <span className={styles.foldWhat}>{visual.framework.what}</span>
+          </span>
+          <span className={styles.foldTag}>Фреймворк</span>
+        </summary>
+        <div className={styles.foldBody}>
+          <Body visual={visual} />
+          {caption}
+        </div>
+      </details>
     </figure>
   );
 }
@@ -33,6 +62,8 @@ function Body({ visual }: CaseVisualProps) {
   switch (visual.kind) {
     case "shot":
       return <Shot visual={visual} />;
+    case "artifact":
+      return <Artifact visual={visual} />;
     case "journey":
       return <Journey visual={visual} />;
     case "plot":
@@ -234,6 +265,17 @@ function Metrics({ visual }: { visual: Extract<Visual, { kind: "metrics" }> }) {
           <p className={styles.mTarget}>{row.target}</p>
         </div>
       ))}
+    </div>
+  );
+}
+
+/* ---------------- артефакт исследования ---------------- */
+
+function Artifact({ visual }: { visual: Extract<Visual, { kind: "artifact" }> }) {
+  return (
+    <div className={styles.artifact}>
+      <p className={styles.artifactTitle}>{visual.title}</p>
+      <Zoomable src={asset(visual.src)} alt={visual.alt} />
     </div>
   );
 }

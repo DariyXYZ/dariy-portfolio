@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/container";
-import { Section } from "@/components/ui/section";
 import { Reveal } from "@/components/ui/reveal";
 import { ButtonLink } from "@/components/ui/button";
 import { Pill } from "@/components/ui/pill";
@@ -10,6 +9,7 @@ import { BrowserFrame } from "@/components/ui/browser-frame";
 import { ArrowLink } from "@/components/ui/arrow-link";
 import { getCase, getPublishedCases, CaseVisual } from "@/features/cases";
 import { site } from "@/config/site";
+import { CaseNav } from "./_components/case-nav";
 import styles from "./case.module.css";
 
 type PageProps = {
@@ -50,6 +50,15 @@ export default async function CasePage({ params }: PageProps) {
     { label: "Роль", value: item.role },
     { label: "Сроки", value: item.timeline },
     { label: "Команда", value: item.team },
+  ];
+
+  const navItems = [
+    ...(item.businessGoal ? [{ id: "goal", label: "Зачем это бизнесу" }] : []),
+    ...item.blocks.map((block) => ({
+      id: "s-" + block.kicker,
+      label: block.title,
+      num: block.kicker,
+    })),
   ];
 
   return (
@@ -115,7 +124,7 @@ export default async function CasePage({ params }: PageProps) {
       </div>
 
       {/* ---------- Ключевой визуал ---------- */}
-      <Section>
+      <div className={styles.coverWrap}>
         <Container>
           <Reveal>
             {item.cover ? (
@@ -128,76 +137,82 @@ export default async function CasePage({ params }: PageProps) {
                 }}
               />
             ) : (
-              <BrowserFrame
-                url={item.slug + ".product"}
-                caption="Заглушка: сюда встанет ключевой экран кейса"
-              />
+              <BrowserFrame url={item.slug + ".product"} />
             )}
           </Reveal>
         </Container>
-      </Section>
+      </div>
 
-      {/* ---------- Разделы ---------- */}
-      <Section tone="sand">
-        <Container>
-          <div className={styles.blocks}>
-            {item.blocks.map((block) => (
-              <Reveal key={block.kicker}>
-                <article className={styles.block}>
-                  <div className={styles.blockHead}>
-                    <span className={"mono " + styles.blockNum}>{block.kicker}</span>
-                    <h2 className={styles.blockTitle}>{block.title}</h2>
+      {/* ---------- Тело кейса с навигацией ---------- */}
+      <div className={styles.body}>
+        <Container size="wide">
+          <div className={styles.layout}>
+            <CaseNav items={navItems} />
+
+            <div className={styles.content}>
+              {item.businessGoal ? (
+                <section id="goal" className={styles.section}>
+                  <p className="label">Зачем это бизнесу</p>
+                  <h2 className={styles.goalTitle}>{item.businessGoal.goal}</h2>
+                  <div className={styles.goalGrid}>
+                    <div className={styles.goalCard}>
+                      <span className="label">Где деньги</span>
+                      <p>{item.businessGoal.money}</p>
+                    </div>
+                    <div className={styles.goalCardAccent}>
+                      <span className="label">На что жму</span>
+                      <p>{item.businessGoal.lever}</p>
+                    </div>
                   </div>
-                  <div className={styles.blockBody}>
-                    <p className={styles.blockText}>{block.body}</p>
-                    {block.visual ? (
-                      <CaseVisual visual={block.visual} />
-                    ) : (
-                      <div className={styles.blockPlaceholder} aria-hidden="true">
-                        <span>Блок фреймворка или визуал</span>
-                      </div>
-                    )}
+                </section>
+              ) : null}
+
+              {item.blocks.map((block) => (
+                <Reveal
+                  key={block.kicker}
+                  as="section"
+                  id={"s-" + block.kicker}
+                  className={styles.section}
+                >
+                  <p className={"mono " + styles.blockNum}>{block.kicker}</p>
+                  <h2 className={styles.blockTitle}>{block.title}</h2>
+                  <p className={styles.blockText}>{block.body}</p>
+                  {block.visual ? <CaseVisual visual={block.visual} /> : null}
+                </Reveal>
+              ))}
+
+              <Reveal>
+                <Link href={"/work/" + next.slug} className={styles.next}>
+                  <div>
+                    <p className="label">Следующий кейс</p>
+                    <p className={styles.nextTitle}>{next.outcome}</p>
+                    <p className={styles.nextProject}>{next.title}</p>
                   </div>
-                </article>
+                  <span className={styles.nextArrow} aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                      <path
+                        d="M5 15L15 5M15 5H8M15 5V12"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </span>
+                </Link>
               </Reveal>
-            ))}
-          </div>
-        </Container>
-      </Section>
 
-      {/* ---------- Следующий кейс ---------- */}
-      <Section>
-        <Container>
-          <Reveal>
-            <Link href={"/work/" + next.slug} className={styles.next}>
-              <div>
-                <p className="label">Следующий кейс</p>
-                <p className={styles.nextTitle}>{next.outcome}</p>
-                <p className={styles.nextProject}>{next.title}</p>
+              <div className={styles.cta}>
+                <p className={styles.ctaText}>Хотите обсудить похожую задачу?</p>
+                <ButtonLink href={"mailto:" + site.email} variant="primary" size="md" external>
+                  Написать
+                </ButtonLink>
+                <ArrowLink href="/about">Обо мне</ArrowLink>
               </div>
-              <span className={styles.nextArrow} aria-hidden="true">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                  <path
-                    d="M5 15L15 5M15 5H8M15 5V12"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </span>
-            </Link>
-          </Reveal>
-
-          <div className={styles.cta}>
-            <p className={styles.ctaText}>Хотите обсудить похожую задачу?</p>
-            <ButtonLink href={"mailto:" + site.email} variant="primary" size="md" external>
-              Написать
-            </ButtonLink>
-            <ArrowLink href="/about">Обо мне</ArrowLink>
+            </div>
           </div>
         </Container>
-      </Section>
+      </div>
     </>
   );
 }

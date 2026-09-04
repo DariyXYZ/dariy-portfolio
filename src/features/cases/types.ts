@@ -81,6 +81,14 @@ type VisualBase = {
 export type CaseVisual = VisualBase &
   (
     | { kind: "shot"; src: string; alt: string; url?: string }
+    | {
+        /** Большой артефакт исследования: показываем целиком и мелко, детали по клику. */
+        kind: "artifact";
+        src: string;
+        alt: string;
+        title: string;
+        scale?: "wide" | "tall";
+      }
     | { kind: "journey"; stages: JourneyStage[] }
     | {
         kind: "plot";
@@ -130,6 +138,12 @@ export type CaseStudy = {
   timeline: string;
   team: string;
   summary: string;
+  /** Ради чего это делалось с точки зрения денег. */
+  businessGoal?: {
+    goal: string;
+    money: string;
+    lever: string;
+  };
   /** Ссылка на живой продукт, если он публично доступен. */
   liveUrl?: string;
   /** Обложка для карточки и шапки кейса. */

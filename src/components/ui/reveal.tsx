@@ -9,13 +9,14 @@ type RevealProps = {
   delay?: number;
   as?: "div" | "li" | "section";
   className?: string;
+  id?: string;
 };
 
 /**
  * Появление при попадании в область просмотра.
  * Режим «меньше движения» обрабатывается в CSS, поэтому здесь его нет.
  */
-export function Reveal({ children, delay = 0, as = "div", className }: RevealProps) {
+export function Reveal({ children, delay = 0, as = "div", className, id }: RevealProps) {
   const ref = useRef<HTMLElement | null>(null);
   const [shown, setShown] = useState(false);
 
@@ -52,6 +53,7 @@ export function Reveal({ children, delay = 0, as = "div", className }: RevealPro
       // Полиморфный тег: тип ссылки различается для div, li и section.
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       ref={ref as any}
+      id={id}
       className={[styles.root, shown ? styles.shown : "", className]
         .filter(Boolean)
         .join(" ")}

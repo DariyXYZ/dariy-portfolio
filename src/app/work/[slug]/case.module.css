@@ -132,40 +132,41 @@
   line-height: 1.45;
 }
 
-/* ---------- разделы ---------- */
+/* ---------- обложка ---------- */
 
-.blocks {
-  display: flex;
-  flex-direction: column;
-  gap: var(--s-9);
+.coverWrap {
+  padding-block: clamp(48px, 6vw, 88px);
 }
 
-.block {
+/* ---------- тело с навигацией ---------- */
+
+.body {
+  padding-bottom: clamp(72px, 9vw, 140px);
+}
+
+.layout {
   display: grid;
-  gap: var(--s-5);
   grid-template-columns: 1fr;
+  gap: var(--s-8);
 }
 
-@media (min-width: 900px) {
-  .block {
-    grid-template-columns: 300px 1fr;
-    gap: var(--s-8);
-    align-items: start;
+@media (min-width: 1000px) {
+  .layout {
+    grid-template-columns: 216px minmax(0, 1fr);
+    gap: clamp(48px, 6vw, 104px);
   }
 }
 
-.blockHead {
+.content {
+  min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: var(--s-3);
-  position: sticky;
-  top: 90px;
 }
 
-@media (max-width: 899px) {
-  .blockHead {
-    position: static;
-  }
+.section {
+  position: relative;
+  padding-bottom: clamp(64px, 8vw, 112px);
+  scroll-margin-top: 96px;
 }
 
 .blockNum {
@@ -174,35 +175,77 @@
 }
 
 .blockTitle {
-  font-size: clamp(1.3rem, 2.1vw, 1.7rem);
+  margin-top: var(--s-4);
+  font-size: clamp(1.5rem, 2.7vw, 2.1rem);
   font-weight: 400;
   letter-spacing: var(--ls-head);
-  line-height: 1.18;
-}
-
-.blockBody {
-  display: flex;
-  flex-direction: column;
-  gap: var(--s-5);
+  line-height: 1.14;
+  max-width: 22ch;
 }
 
 .blockText {
+  margin-top: var(--s-5);
+  margin-bottom: var(--s-6);
   color: var(--ink-2);
-  max-width: 60ch;
+  max-width: 64ch;
+  font-size: var(--fs-body);
+  line-height: 1.6;
   text-wrap: pretty;
 }
 
-.blockPlaceholder {
-  border: 1px dashed var(--line);
-  border-radius: var(--r-md);
-  background: var(--paper);
-  min-height: 220px;
+/* ---------- зачем это бизнесу ---------- */
+
+.goalTitle {
+  margin-top: var(--s-4);
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 400;
+  letter-spacing: var(--ls-display);
+  line-height: 1.1;
+  max-width: 22ch;
+}
+
+.goalGrid {
+  margin-top: var(--s-6);
   display: grid;
-  place-items: center;
-  font-size: var(--fs-xs);
-  letter-spacing: var(--ls-label);
-  text-transform: uppercase;
-  color: var(--ink-4);
+  gap: var(--s-3);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 720px) {
+  .goalGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.goalCard,
+.goalCardAccent {
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  padding: var(--s-5);
+}
+
+.goalCardAccent {
+  background: var(--ink);
+  border-color: var(--ink);
+}
+
+.goalCard p,
+.goalCardAccent p {
+  margin-top: var(--s-3);
+  font-size: var(--fs-sm);
+  line-height: 1.55;
+}
+
+.goalCard p {
+  color: var(--ink-2);
+}
+
+.goalCardAccent p {
+  color: var(--paper);
+}
+
+.goalCardAccent :global(.label) {
+  color: rgba(255, 255, 255, 0.5);
 }
 
 /* ---------- следующий кейс ---------- */
