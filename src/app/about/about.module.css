@@ -15,7 +15,7 @@
   font-size: var(--fs-lead);
   line-height: 1.55;
   color: var(--ink-2);
-  max-width: 58ch;
+  max-width: 44ch;
   text-wrap: pretty;
 }
 
@@ -162,8 +162,9 @@
 
 @media (min-width: 900px) {
   .heroGrid {
-    grid-template-columns: minmax(0, 1fr) 340px;
-    gap: clamp(40px, 5vw, 88px);
+    grid-template-columns: minmax(0, 1fr) clamp(300px, 34vw, 460px);
+    gap: clamp(32px, 4vw, 72px);
+    align-items: center;
   }
 }
 
@@ -171,25 +172,15 @@
   min-width: 0;
 }
 
-/* Портрет вырезан по белому, поэтому кладём его на песочную плашку
-   и убираем белый через multiply: остаётся только растр. */
+/* Портрет вырезан по белому: multiply убирает фон, подложка не нужна. */
 .portraitFrame {
   margin: 0;
   width: 100%;
-  max-width: 340px;
-  aspect-ratio: 1;
-  border: 1px solid var(--line);
-  border-radius: var(--r-lg);
-  background: var(--sand-2);
-  overflow: hidden;
-  display: grid;
-  place-items: end center;
 }
 
 .portrait {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
   display: block;
   mix-blend-mode: multiply;
 }

@@ -36,13 +36,6 @@ export function TypedHeadline() {
   const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   useEffect(() => {
-    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (media.matches) {
-      // Без анимации показываем первую реплику целиком, но не в теле эффекта.
-      const frame = requestAnimationFrame(() => setShown(PHRASES[0]));
-      return () => cancelAnimationFrame(frame);
-    }
-
     let index = 0;
     let length = 0;
     let erasing = false;
