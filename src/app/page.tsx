@@ -10,6 +10,7 @@ import { process, experience } from "@/features/profile";
 import { site, facts, asset } from "@/config/site";
 import { HeroArc } from "./_components/hero-arc";
 import styles from "./page.module.css";
+import { typo } from "@/lib/typo";
 
 export default function HomePage() {
   const featured = getFeaturedCases();
@@ -32,9 +33,9 @@ export default function HomePage() {
             </h1>
 
             <p className={styles.heroLead + " " + styles.fadeUp + " " + styles.d3}>
-              Продуктовый дизайнер с четырьмя годами в AI SaaS, EdTech и e-commerce.
-              Веду полный цикл: исследование, сценарий, дизайн-система, авторский
-              надзор на разработке.
+              {typo(
+                "Продуктовый дизайнер с четырьмя годами в AI SaaS, EdTech и e-commerce. Веду полный цикл: исследование, сценарий, дизайн-система, авторский надзор на разработке.",
+              )}
             </p>
 
             <div className={styles.heroActions + " " + styles.fadeUp + " " + styles.d4}>
@@ -92,11 +93,13 @@ export default function HomePage() {
               kicker="Кейсы"
               title={
                 <>
-                  Что изменилось в продукте{" "}
+                  {typo("Что изменилось в продукте ")}
                   <span className="dim">после моей работы</span>
                 </>
               }
-              lead="В заголовке каждого кейса стоит результат, а не название проекта. Внутри контекст, решения и альтернативы, которые я отверг."
+              lead={typo(
+                "В заголовке каждого кейса стоит результат, а не название проекта. Внутри контекст, решения и альтернативы, которые я отверг.",
+              )}
               action={<ArrowLink href="/work">Все кейсы</ArrowLink>}
             />
           </Reveal>
@@ -125,8 +128,8 @@ export default function HomePage() {
               kicker="Как я работаю"
               title={
                 <>
-                  Дизайн заканчивается не в Figma,{" "}
-                  <span className="dim">а в проде</span>
+                  {typo("Дизайн заканчивается не в Figma, ")}
+                  <span className="dim">{typo("а в проде")}</span>
                 </>
               }
             />
@@ -152,7 +155,7 @@ export default function HomePage() {
           <Reveal>
             <SectionHead
               kicker="Опыт"
-              title="Где я это делал"
+              title={typo("Где я это делал")}
               action={<ArrowLink href="/about">Подробнее обо мне</ArrowLink>}
             />
           </Reveal>
@@ -181,11 +184,13 @@ export default function HomePage() {
             <div className={styles.contact}>
               <Pill tone="live">{site.availability.label}</Pill>
               <h2 className={styles.contactTitle}>
-                Расскажите о задаче. <span className="dim">Отвечу за день</span>
+                {typo("Расскажите о задаче. ")}
+                <span className="dim">{typo("Отвечу за день")}</span>
               </h2>
               <p className={styles.contactLead}>
-                Открыт к продуктовым командам, где дизайнер отвечает за сценарий
-                целиком, а не за отрисовку макетов по чужому ТЗ.
+                {typo(
+                  "Открыт к продуктовым командам, где дизайнер отвечает за сценарий целиком, а не за отрисовку макетов по чужому ТЗ.",
+                )}
               </p>
               <div className={styles.contactActions}>
                 <ButtonLink href={"mailto:" + site.email} variant="primary" size="lg" external>

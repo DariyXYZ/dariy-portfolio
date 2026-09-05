@@ -7,6 +7,7 @@ import { Pill } from "@/components/ui/pill";
 import { experience, education, skillGroups } from "@/features/profile";
 import { site } from "@/config/site";
 import styles from "./about.module.css";
+import { typo } from "@/lib/typo";
 
 export const metadata: Metadata = {
   title: "Обо мне",
@@ -22,12 +23,13 @@ export default function AboutPage() {
           <Reveal>
             <p className="label">Обо мне</p>
             <h1 className={styles.title}>
-              Вижу сценарий как структуру, <span className="dim">а не набор экранов</span>
+              {typo("Вижу сценарий как структуру, ")}
+              <span className="dim">{typo("а не набор экранов")}</span>
             </h1>
             <p className={styles.lead}>
-              Продуктовый дизайнер с четырьмя годами коммерческого опыта в AI SaaS,
-              EdTech и e-commerce. Пришёл из архитектуры, из МАРХИ, и привычка
-              осталась: сначала разбираюсь, как устроено целое, потом рисую части.
+              {typo(
+                "Продуктовый дизайнер с четырьмя годами коммерческого опыта в AI SaaS, EdTech и e-commerce. Пришёл из архитектуры, из МАРХИ, и привычка осталась: сначала разбираюсь, как устроено целое, потом рисую части.",
+              )}
             </p>
             <div className={styles.actions}>
               <ButtonLink href={site.resumeFile} variant="primary" size="lg" download>
@@ -45,7 +47,7 @@ export default function AboutPage() {
       <Section>
         <Container>
           <Reveal>
-            <SectionHead kicker="Опыт" title="Где и что я делал" />
+            <SectionHead kicker="Опыт" title={typo("Где и что я делал")} />
           </Reveal>
 
           <div className={styles.list}>
@@ -101,7 +103,7 @@ export default function AboutPage() {
       <Section>
         <Container>
           <Reveal>
-            <SectionHead kicker="Образование" title="Учусь и учился" />
+            <SectionHead kicker="Образование" title={typo("Учусь и учился")} />
           </Reveal>
 
           <div className={styles.list}>
@@ -124,7 +126,7 @@ export default function AboutPage() {
             <div className={styles.langs}>
               <p className="label">Языки</p>
               <p className={styles.langsText}>
-                Русский: родной · Английский: B2, Upper-Intermediate
+                {typo("Русский: родной · Английский: B2, Upper-Intermediate")}
               </p>
             </div>
           </Reveal>

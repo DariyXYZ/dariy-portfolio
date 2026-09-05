@@ -1,18 +1,23 @@
 import type { CaseStudy } from "../types";
+import { typoDeep } from "@/lib/typo";
 import { businessModelLab } from "./business-model-lab";
 import { aiArchitectureRendering } from "./ai-architecture-rendering";
 import { bnplCheckout } from "./bnpl-checkout";
 import { stempsCareer } from "./stemps-career";
 import { drafts } from "./drafts";
 
-/** Порядок в этом массиве и есть порядок кейсов на сайте. */
-export const cases: CaseStudy[] = [
+/**
+ * Порядок в этом массиве и есть порядок кейсов на сайте.
+ * Весь текст прогоняется через микротипографику: короткие слова
+ * не должны висеть в конце строки.
+ */
+export const cases: CaseStudy[] = typoDeep<CaseStudy[]>([
   ...businessModelLab,
   ...aiArchitectureRendering,
   ...bnplCheckout,
   ...stempsCareer,
   ...drafts,
-];
+]);
 
 export const industries = [
   { id: "all", label: "Все" },

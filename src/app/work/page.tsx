@@ -5,6 +5,7 @@ import { Reveal } from "@/components/ui/reveal";
 import { cases, getPublishedCases } from "@/features/cases";
 import { WorkBrowser } from "./_components/work-browser";
 import styles from "./work.module.css";
+import { typo } from "@/lib/typo";
 
 export const metadata: Metadata = {
   title: "Кейсы",
@@ -22,13 +23,13 @@ export default function WorkPage() {
           <header className={styles.head}>
             <p className="label">Кейсы</p>
             <h1 className={styles.title}>
-              {cases.length + " проектов, "}
-              <span className="dim">{published + " разобраны подробно"}</span>
+              {typo(cases.length + " проектов, ")}
+              <span className="dim">{typo(published + " разобраны подробно")}</span>
             </h1>
             <p className={styles.lead}>
-              Каждый кейс отвечает на три вопроса: какая была проблема, что я решил
-              и что из этого проверено на людях. Остальные ещё разбираю, их карточки
-              помечены.
+              {typo(
+                "Каждый кейс отвечает на три вопроса: какая была проблема, что я решил и что из этого проверено на людях. Остальные ещё разбираю, их карточки помечены.",
+              )}
             </p>
           </header>
         </Reveal>

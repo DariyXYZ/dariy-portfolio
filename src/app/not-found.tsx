@@ -1,6 +1,7 @@
 import { Container } from "@/components/ui/container";
 import { ButtonLink } from "@/components/ui/button";
 import { ArrowLink } from "@/components/ui/arrow-link";
+import { typo } from "@/lib/typo";
 
 export default function NotFound() {
   return (
@@ -21,8 +22,7 @@ export default function NotFound() {
           Такой страницы нет
         </h1>
         <p className="lead">
-          Возможно, кейс ещё готовится или ссылка устарела. Начните со списка
-          кейсов.
+          {typo("Возможно, кейс ещё готовится или ссылка устарела. Начните со списка кейсов.")}
         </p>
         <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--s-3)", marginTop: "var(--s-2)" }}>
           <ButtonLink href="/work" variant="primary" size="lg">

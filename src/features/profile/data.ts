@@ -1,3 +1,5 @@
+import { typoDeep } from "@/lib/typo";
+
 export type ExperienceItem = {
   company: string;
   companyUrl?: string;
@@ -8,7 +10,7 @@ export type ExperienceItem = {
   highlights: string[];
 };
 
-export const experience: ExperienceItem[] = [
+const experienceRaw: ExperienceItem[] = [
   {
     company: "IND",
     companyUrl: "https://ind.studio",
@@ -54,7 +56,7 @@ export const experience: ExperienceItem[] = [
   },
 ];
 
-export const education = [
+const educationRaw = [
   {
     school: "Томский государственный университет",
     degree: "Магистратура · прикладная информатика, продуктовый дизайн",
@@ -67,7 +69,7 @@ export const education = [
   },
 ];
 
-export const skillGroups = [
+const skillGroupsRaw = [
   {
     title: "Методологии",
     items: [
@@ -93,7 +95,7 @@ export const skillGroups = [
 ];
 
 /** Как я работаю — три шага для главной. */
-export const process = [
+const processRaw = [
   {
     step: "01",
     title: "Разбираюсь в сценарии, а не в экранах",
@@ -110,3 +112,9 @@ export const process = [
     body: "Спецификация, требования к данным, авторский надзор. Дизайн заканчивается не в Figma, а в проде.",
   },
 ];
+
+/** Весь текст профиля проходит ту же микротипографику, что и кейсы. */
+export const experience = typoDeep(experienceRaw);
+export const education = typoDeep(educationRaw);
+export const skillGroups = typoDeep(skillGroupsRaw);
+export const process = typoDeep(processRaw);
