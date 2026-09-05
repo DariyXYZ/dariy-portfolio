@@ -228,14 +228,15 @@
 }
 
 .wide .coverWrap {
-  aspect-ratio: 21 / 9;
+  aspect-ratio: 2 / 1;
 }
 
 .cover {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: top center;
+  /* По центру: обложки собраны как законченные кадры, край резать нельзя. */
+  object-position: center;
   transition: transform var(--dur-slow) var(--ease);
 }
 
