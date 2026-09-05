@@ -11,7 +11,7 @@ type CaseVisualProps = {
 
 /** Один вход для всех схем и снимков внутри кейса. */
 /** Экраны видны сразу. Всё, что помечено фреймворком, прячем под раскрытие. */
-const ALWAYS_OPEN = new Set(["shot", "screens", "compare"]);
+const ALWAYS_OPEN = new Set(["shot", "band", "screens", "compare"]);
 
 export function CaseVisual({ visual }: CaseVisualProps) {
   const caption = visual.caption ? (
@@ -62,6 +62,8 @@ function Body({ visual }: CaseVisualProps) {
   switch (visual.kind) {
     case "shot":
       return <Shot visual={visual} />;
+    case "band":
+      return <Band visual={visual} />;
     case "screens":
       return <Screens visual={visual} />;
     case "compare":
@@ -128,6 +130,23 @@ function Shot({ visual }: { visual: Extract<Visual, { kind: "shot" }> }) {
         height={1350}
         sizes="(max-width: 900px) 100vw, 780px"
         className={styles.shotImage}
+      />
+    </div>
+  );
+}
+
+/* ---------------- широкий кадр из презентации ---------------- */
+
+function Band({ visual }: { visual: Extract<Visual, { kind: "band" }> }) {
+  return (
+    <div className={visual.dark ? styles.bandDark : styles.band}>
+      <Image
+        src={asset(visual.src)}
+        alt={visual.alt}
+        width={2000}
+        height={1125}
+        sizes="(max-width: 1000px) 100vw, 1320px"
+        className={styles.bandImage}
       />
     </div>
   );

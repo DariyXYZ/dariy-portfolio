@@ -82,6 +82,14 @@ export type CaseVisual = VisualBase &
   (
     | { kind: "shot"; src: string; alt: string; url?: string }
     | {
+        /** Кадр из презентации кейса: шире текстовой колонки, во всю ширину контейнера. */
+        kind: "band";
+        src: string;
+        alt: string;
+        /** Тёмные кадры показываем без рамки, она на них лишняя. */
+        dark?: boolean;
+      }
+    | {
         /** Ряд мобильных экранов: показываем сценарий, а не один кадр. */
         kind: "screens";
         items: { src: string; alt: string; label: string; note?: string }[];

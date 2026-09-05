@@ -152,8 +152,11 @@
 
 @media (min-width: 1000px) {
   .layout {
-    grid-template-columns: 216px minmax(0, 1fr);
-    gap: clamp(48px, 6vw, 104px);
+    /* Ширина рельса и отступ нужны визуалам, которые выходят за колонку текста. */
+    --rail: 216px;
+    --rail-gap: clamp(48px, 6vw, 104px);
+    grid-template-columns: var(--rail) minmax(0, 1fr);
+    gap: var(--rail-gap);
   }
 }
 
@@ -319,11 +322,9 @@
   margin-right: auto;
 }
 
+/* Обложку показываем целиком: кадры лежат на своём фоне и обрезать их нельзя. */
 .cover {
   display: block;
   width: 100%;
   height: auto;
-  max-height: 88vh;
-  object-fit: cover;
-  object-position: center top;
 }

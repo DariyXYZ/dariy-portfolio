@@ -1201,3 +1201,25 @@
   line-height: 1.55;
   text-wrap: pretty;
 }
+
+/* ---------------- широкий кадр из презентации ---------------- */
+
+.band,
+.bandDark {
+  /* Выходим влево до рельса, но не под него: навигация должна оставаться видимой. */
+  margin-left: calc(-1 * var(--rail-gap, 0px));
+  width: calc(100% + var(--rail-gap, 0px));
+  border-radius: var(--r-md);
+  overflow: hidden;
+  line-height: 0;
+}
+
+.band {
+  border: 1px solid var(--line);
+}
+
+.bandImage {
+  width: 100%;
+  height: auto;
+  display: block;
+}
