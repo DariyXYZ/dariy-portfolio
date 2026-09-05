@@ -71,6 +71,7 @@ export const businessModelLab: CaseStudy[] = [
         visuals: [
           {
             kind: "band",
+            dark: true,
             src: `${DIR}/old-ui.webp`,
             alt: "Схема старого интерфейса: экраны в изометрии, три помечены флажками",
           },
