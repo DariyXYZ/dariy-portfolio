@@ -11,6 +11,8 @@ export type CaseMetric = {
 export type FrameworkTag = {
   name: string;
   what: string;
+  /** Что это на самом деле: фреймворк, метод, схема, документ. По умолчанию фреймворк. */
+  label?: string;
 };
 
 export type JourneyStage = {

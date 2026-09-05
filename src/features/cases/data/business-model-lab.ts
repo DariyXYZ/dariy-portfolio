@@ -45,10 +45,6 @@ export const businessModelLab: CaseStudy[] = [
         visual: {
           kind: "plan",
           columns: 3,
-          framework: {
-            name: "План работы",
-            what: "Шесть шагов, о которых договорились на старте. По ним же принимали работу.",
-          },
           groups: [
             {
               title: "Разобраться",
@@ -85,6 +81,7 @@ export const businessModelLab: CaseStudy[] = [
             kind: "principles",
             framework: {
               name: "UX-аудит",
+              label: "Метод",
               what: "Разбор существующего интерфейса по трём срезам: объяснимость, повторяемость, структура результата.",
             },
             items: [

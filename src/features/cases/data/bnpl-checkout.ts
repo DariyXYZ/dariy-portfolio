@@ -65,6 +65,7 @@ export const bnplCheckout: CaseStudy[] = [
           wideFirst: true,
           framework: {
             name: "Конкурентный анализ",
+            label: "Метод",
             what: "Разбор трёх BNPL-сервисов по одному вопросу: помогает ли интерфейс выбрать способ оплаты без перегрузки.",
           },
           columns: ["Сервис", "Сильное место", "Слабое место", "Что беру"],
@@ -107,6 +108,7 @@ export const bnplCheckout: CaseStudy[] = [
           columns: 2,
           framework: {
             name: "Программа исследования",
+            label: "Документ",
             what: "Цель, критерии отбора, метод и маршрут по прототипу, зафиксированные до первой сессии.",
           },
           groups: [
@@ -208,6 +210,7 @@ export const bnplCheckout: CaseStudy[] = [
           columns: 3,
           framework: {
             name: "Гипотезы с критериями проверки",
+            label: "Метод",
             what: "Формулировка, метрика, порог успеха и риск. Без последних трёх строк гипотеза остаётся мнением.",
           },
           groups: [
@@ -345,6 +348,7 @@ export const bnplCheckout: CaseStudy[] = [
           kind: "transcript",
           framework: {
             name: "Коридорное юзабилити-тестирование",
+            label: "Метод",
             what: "Протокол «думай вслух», 15–20 минут на человека, один и тот же маршрут по прототипу.",
           },
           sessions: [
@@ -483,6 +487,7 @@ export const bnplCheckout: CaseStudy[] = [
             kind: "quotes",
             framework: {
               name: "Разбор наблюдений",
+              label: "Метод",
               what: "Реплика, вывод из неё и правка, которая из вывода следует.",
             },
             items: [
@@ -637,6 +642,7 @@ export const bnplCheckout: CaseStudy[] = [
             wideFirst: true,
             framework: {
               name: "Матрица состояний",
+              label: "Документ",
               what: "Экран, условие показа, источник данных и переход. Отвечает на вопросы, которые иначе придут в личку через неделю после передачи.",
             },
             columns: ["Экран", "Когда показываем", "Откуда данные", "Куда ведёт"],

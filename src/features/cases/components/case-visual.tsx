@@ -37,7 +37,7 @@ export function CaseVisual({ visual }: CaseVisualProps) {
             <span className={styles.foldName}>{visual.framework.name}</span>
             <span className={styles.foldWhat}>{visual.framework.what}</span>
           </span>
-          <span className={styles.foldTag}>Фреймворк</span>
+          <span className={styles.foldTag}>{visual.framework.label ?? "Фреймворк"}</span>
         </summary>
         <div className={styles.foldBody}>
           <Body visual={visual} />
@@ -51,7 +51,7 @@ export function CaseVisual({ visual }: CaseVisualProps) {
 function FrameworkHead({ tag }: { tag: FrameworkTag }) {
   return (
     <div className={styles.fw}>
-      <span className={styles.fwBadge}>Фреймворк</span>
+      <span className={styles.fwBadge}>{tag.label ?? "Фреймворк"}</span>
       <p className={styles.fwName}>{tag.name}</p>
       <p className={styles.fwWhat}>{tag.what}</p>
     </div>
