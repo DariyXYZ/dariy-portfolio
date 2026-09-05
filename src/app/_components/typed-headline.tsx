@@ -85,10 +85,18 @@ export function TypedHeadline() {
         Дарий Назаров, продуктовый дизайнер: UX-исследования, B2B-интерфейсы, ИИ-инструменты
       </span>
       <span className={styles.root} aria-hidden="true">
-        {/* Невидимая распорка по самой длинной реплике: высота не скачет при наборе. */}
+        {/* Невидимая распорка по самой длинной реплике: высота и ширина не скачут
+            при наборе. Курсор считаем тоже, иначе строка переносится в момент,
+            когда он стоит в её конце. */}
         <span className={styles.sizer}>
-          <span className={styles.line}>{LONGEST[0]}</span>
-          <span className={styles.line}>{LONGEST[1]}</span>
+          <span className={styles.line}>
+            {LONGEST[0]}
+            <i className={styles.caret} />
+          </span>
+          <span className={styles.line}>
+            {LONGEST[1]}
+            <i className={styles.caret} />
+          </span>
         </span>
 
         <span className={styles.text}>
