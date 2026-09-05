@@ -1,0 +1,56 @@
+.root {
+  display: block;
+}
+
+/* Обе строки существуют всегда, иначе первый экран прыгает при наборе. */
+.line {
+  display: block;
+  min-height: 1.01em;
+}
+
+.caret {
+  display: inline-block;
+  width: 0.055em;
+  height: 0.78em;
+  margin-left: 0.06em;
+  vertical-align: baseline;
+  background: currentColor;
+  animation: blink 1.05s steps(1, end) infinite;
+}
+
+@keyframes blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  50.01%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .caret {
+    animation: none;
+    opacity: 0;
+  }
+}
+
+/* ---------- распорка ---------- */
+
+.root {
+  position: relative;
+}
+
+.sizer {
+  display: block;
+  visibility: hidden;
+}
+
+.text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

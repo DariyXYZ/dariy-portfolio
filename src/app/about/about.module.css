@@ -150,3 +150,46 @@
   margin-top: var(--s-3);
   color: var(--ink-2);
 }
+
+/* ---------- шапка с портретом ---------- */
+
+.heroGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--s-7);
+  align-items: start;
+}
+
+@media (min-width: 900px) {
+  .heroGrid {
+    grid-template-columns: minmax(0, 1fr) 340px;
+    gap: clamp(40px, 5vw, 88px);
+  }
+}
+
+.heroText {
+  min-width: 0;
+}
+
+/* Портрет вырезан по белому, поэтому кладём его на песочную плашку
+   и убираем белый через multiply: остаётся только растр. */
+.portraitFrame {
+  margin: 0;
+  width: 100%;
+  max-width: 340px;
+  aspect-ratio: 1;
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  background: var(--sand-2);
+  overflow: hidden;
+  display: grid;
+  place-items: end center;
+}
+
+.portrait {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  mix-blend-mode: multiply;
+}

@@ -5,7 +5,8 @@ import { Reveal } from "@/components/ui/reveal";
 import { ButtonLink } from "@/components/ui/button";
 import { Pill } from "@/components/ui/pill";
 import { experience, education, skillGroups } from "@/features/profile";
-import { site } from "@/config/site";
+import Image from "next/image";
+import { site, asset } from "@/config/site";
 import styles from "./about.module.css";
 import { typo } from "@/lib/typo";
 
@@ -21,23 +22,49 @@ export default function AboutPage() {
       <section className={styles.hero}>
         <Container>
           <Reveal>
-            <p className="label">Обо мне</p>
-            <h1 className={styles.title}>
-              {typo("Вижу сценарий как структуру, ")}
-              <span className="dim">{typo("а не набор экранов")}</span>
-            </h1>
-            <p className={styles.lead}>
-              {typo(
-                "Продуктовый дизайнер с четырьмя годами коммерческого опыта в AI SaaS, EdTech и e-commerce. Пришёл из архитектуры, из МАРХИ, и привычка осталась: сначала разбираюсь, как устроено целое, потом рисую части.",
-              )}
-            </p>
-            <div className={styles.actions}>
-              <ButtonLink href={site.resumeFile} variant="primary" size="lg" download>
-                Скачать резюме PDF
-              </ButtonLink>
-              <ButtonLink href={"mailto:" + site.email} variant="secondary" size="lg" external>
-                Написать
-              </ButtonLink>
+            <div className={styles.heroGrid}>
+              <div className={styles.heroText}>
+                <p className="label">Обо мне</p>
+                <h1 className={styles.title}>
+                  {typo("Вижу сценарий как структуру, ")}
+                  <span className="dim">{typo("а не набор экранов")}</span>
+                </h1>
+                <p className={styles.lead}>
+                  {typo(
+                    "Продуктовый дизайнер с четырьмя годами коммерческого опыта в AI SaaS, EdTech и e-commerce. Пришёл из архитектуры, из МАРХИ, и привычка осталась: сначала разбираюсь, как устроено целое, потом рисую части.",
+                  )}
+                </p>
+                <div className={styles.actions}>
+                  <ButtonLink
+                    href={site.resumeFile}
+                    variant="primary"
+                    size="lg"
+                    download
+                  >
+                    Скачать резюме PDF
+                  </ButtonLink>
+                  <ButtonLink
+                    href={"mailto:" + site.email}
+                    variant="secondary"
+                    size="lg"
+                    external
+                  >
+                    Написать
+                  </ButtonLink>
+                </div>
+              </div>
+
+              <figure className={styles.portraitFrame}>
+                <Image
+                  src={asset("/about/portrait.webp")}
+                  alt="Портрет Дария Назарова"
+                  width={1400}
+                  height={1400}
+                  priority
+                  sizes="(max-width: 900px) 70vw, 360px"
+                  className={styles.portrait}
+                />
+              </figure>
             </div>
           </Reveal>
         </Container>

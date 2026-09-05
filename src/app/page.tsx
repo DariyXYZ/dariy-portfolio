@@ -9,6 +9,7 @@ import { CaseCard, cases, getFeaturedCases } from "@/features/cases";
 import { process, experience } from "@/features/profile";
 import { site, facts, asset } from "@/config/site";
 import { HeroArc } from "./_components/hero-arc";
+import { TypedHeadline } from "./_components/typed-headline";
 import styles from "./page.module.css";
 import { typo } from "@/lib/typo";
 
@@ -28,8 +29,7 @@ export default function HomePage() {
             </div>
 
             <h1 className={styles.heroTitle + " " + styles.fadeUp + " " + styles.d2}>
-              Сложное&nbsp;решение{" "}
-              <span className="dim">за&nbsp;один&nbsp;экран</span>
+              <TypedHeadline />
             </h1>
 
             <p className={styles.heroLead + " " + styles.fadeUp + " " + styles.d3}>

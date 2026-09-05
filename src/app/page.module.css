@@ -19,10 +19,11 @@
 }
 
 .heroTitle {
-  font-size: var(--fs-display);
+  /* Реплики длиннее прежнего заголовка, поэтому кегль ниже: строка не переносится. */
+  font-size: clamp(1.75rem, 4.6vw, 4rem);
   letter-spacing: var(--ls-display);
   line-height: 1.01;
-  max-width: 16ch;
+  max-width: 22ch;
   margin-top: var(--s-2);
 }
 
