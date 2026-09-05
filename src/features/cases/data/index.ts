@@ -3,6 +3,7 @@ import { typoDeep } from "@/lib/typo";
 import { businessModelLab } from "./business-model-lab";
 import { aiArchitectureRendering } from "./ai-architecture-rendering";
 import { bnplCheckout } from "./bnpl-checkout";
+import { compDesignBot } from "./comp-design-bot";
 import { stempsCareer } from "./stemps-career";
 import { drafts } from "./drafts";
 
@@ -14,6 +15,7 @@ import { drafts } from "./drafts";
 export const cases: CaseStudy[] = typoDeep<CaseStudy[]>([
   ...businessModelLab,
   ...aiArchitectureRendering,
+  ...compDesignBot,
   ...bnplCheckout,
   ...stempsCareer,
   ...drafts,
