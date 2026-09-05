@@ -152,11 +152,8 @@
 
 @media (min-width: 1000px) {
   .layout {
-    /* Ширина рельса и отступ нужны визуалам, которые выходят за колонку текста. */
-    --rail: 216px;
-    --rail-gap: clamp(48px, 6vw, 104px);
-    grid-template-columns: var(--rail) minmax(0, 1fr);
-    gap: var(--rail-gap);
+    grid-template-columns: 216px minmax(0, 1fr);
+    gap: clamp(48px, 6vw, 104px);
   }
 }
 

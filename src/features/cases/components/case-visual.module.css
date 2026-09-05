@@ -1206,9 +1206,8 @@
 
 .band,
 .bandDark {
-  /* Выходим влево до рельса, но не под него: навигация должна оставаться видимой. */
-  margin-left: calc(-1 * var(--rail-gap, 0px));
-  width: calc(100% + var(--rail-gap, 0px));
+  /* Ширина как у всего остального контента: колонка одна на весь кейс. */
+  width: 100%;
   border-radius: var(--r-md);
   overflow: hidden;
   line-height: 0;
