@@ -124,25 +124,23 @@ export default async function CasePage({ params }: PageProps) {
         </Container>
       </div>
 
-      {/* ---------- Ключевой визуал ---------- */}
+      {/* ---------- Обложка во всю ширину ---------- */}
       <div className={styles.coverWrap}>
-        <Container>
-          <Reveal>
-            {item.cover ? (
-              <Image
-                src={asset(item.cover.src)}
-                alt={item.cover.alt}
-                width={2400}
-                height={1500}
-                priority
-                sizes="(max-width: 1200px) 100vw, 1200px"
-                className={styles.cover}
-              />
-            ) : (
-              <BrowserFrame url={item.slug + ".product"} />
-            )}
-          </Reveal>
-        </Container>
+        {item.cover ? (
+          <Image
+            src={asset(item.cover.src)}
+            alt={item.cover.alt}
+            width={2400}
+            height={1500}
+            priority
+            sizes="100vw"
+            className={styles.cover}
+          />
+        ) : (
+          <Container>
+            <BrowserFrame url={item.slug + ".product"} />
+          </Container>
+        )}
       </div>
 
       {/* ---------- Тело кейса с навигацией ---------- */}

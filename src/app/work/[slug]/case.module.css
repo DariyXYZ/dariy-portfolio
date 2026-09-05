@@ -135,7 +135,7 @@
 /* ---------- обложка ---------- */
 
 .coverWrap {
-  padding-block: clamp(48px, 6vw, 88px);
+  padding-bottom: clamp(48px, 6vw, 88px);
 }
 
 /* ---------- тело с навигацией ---------- */
@@ -323,5 +323,7 @@
   display: block;
   width: 100%;
   height: auto;
-  border-radius: var(--r-lg);
+  max-height: 88vh;
+  object-fit: cover;
+  object-position: center top;
 }
