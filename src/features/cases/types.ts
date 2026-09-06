@@ -95,8 +95,10 @@ export type CaseVisual = VisualBase &
         /** Ряд мобильных экранов: показываем сценарий, а не один кадр. */
         kind: "screens";
         items: { src: string; alt: string; label: string; note?: string }[];
-        /** sm для плотных рядов, md для мобильных, wide для десктопных экранов. */
-        size?: "sm" | "md" | "wide";
+        /** sm плотный ряд, md мобильные, lg два крупных, wide десктопные. */
+        size?: "sm" | "md" | "lg" | "wide";
+        /** Снимок уже со скруглёнными углами: рамку от сайта не рисуем. */
+        bare?: boolean;
       }
     | {
         /** Было и стало по одному экрану. */

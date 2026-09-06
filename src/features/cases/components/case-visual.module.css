@@ -1222,3 +1222,36 @@
   height: auto;
   display: block;
 }
+
+/* Два крупных экрана в ряд: интерфейс видно, а не угадываешь. */
+.scRowLg {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--s-6);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+@media (min-width: 700px) {
+  .scRowLg {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Снимок со своими скруглениями: вместо рамки мягкая тень по контуру. */
+.phoneBare {
+  line-height: 0;
+  filter: drop-shadow(0 1px 1px rgba(27, 26, 24, 0.06))
+    drop-shadow(0 24px 40px rgba(27, 26, 24, 0.14));
+}
+
+.scRowLg .scLabel {
+  margin-top: var(--s-4);
+  font-size: var(--fs-sm);
+}
+
+.scRowLg .scNote {
+  font-size: var(--fs-sm);
+  max-width: 46ch;
+}

@@ -154,21 +154,34 @@ function Band({ visual }: { visual: Extract<Visual, { kind: "band" }> }) {
 
 /* ---------------- ряд мобильных экранов ---------------- */
 
+const SCREEN_ROWS = {
+  sm: styles.scRowSm,
+  lg: styles.scRowLg,
+  wide: styles.scRowWide,
+} as const;
+
 function Screens({ visual }: { visual: Extract<Visual, { kind: "screens" }> }) {
   const wide = visual.size === "wide";
-  const cls = wide ? styles.scRowWide : visual.size === "sm" ? styles.scRowSm : styles.scRow;
+  const cls = (visual.size && SCREEN_ROWS[visual.size as keyof typeof SCREEN_ROWS]) ?? styles.scRow;
+  const frame = wide ? styles.screenFrame : visual.bare ? styles.phoneBare : styles.phone;
 
   return (
     <ul className={cls}>
       {visual.items.map((item) => (
         <li key={item.src} className={styles.scItem}>
-          <div className={wide ? styles.screenFrame : styles.phone}>
+          <div className={frame}>
             <Image
               src={asset(item.src)}
               alt={item.alt}
-              width={wide ? 1440 : 780}
-              height={wide ? 1024 : 1688}
-              sizes={wide ? "(max-width: 900px) 100vw, 1100px" : "(max-width: 700px) 45vw, 220px"}
+              width={wide ? 1440 : 900}
+              height={wide ? 1024 : 1968}
+              sizes={
+                wide
+                  ? "(max-width: 900px) 100vw, 1100px"
+                  : visual.size === "lg"
+                    ? "(max-width: 700px) 90vw, 500px"
+                    : "(max-width: 700px) 45vw, 240px"
+              }
               className={styles.phoneImage}
             />
           </div>
