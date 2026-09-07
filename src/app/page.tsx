@@ -8,6 +8,7 @@ import Image from "next/image";
 import { CaseCard, cases, getFeaturedCases } from "@/features/cases";
 import { process, experience } from "@/features/profile";
 import { site, facts, asset } from "@/config/site";
+import { StatStrip } from "@/components/ui/stat-strip";
 import { HeroArc } from "./_components/hero-arc";
 import { TypedHeadline } from "./_components/typed-headline";
 import styles from "./page.module.css";
@@ -70,20 +71,7 @@ export default function HomePage() {
       </section>
 
       {/* ---------- Полоса фактов ---------- */}
-      <div className={styles.facts}>
-        <Container>
-          <div className={styles.factsGrid}>
-            {facts.map((fact, i) => (
-              <Reveal key={fact.value} delay={i * 60}>
-                <div className={styles.fact}>
-                  <p className={styles.factValue}>{fact.value}</p>
-                  <p className={styles.factCaption}>{fact.caption}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </Container>
-      </div>
+      <StatStrip items={facts.map((fact) => ({ value: fact.value, caption: fact.caption }))} />
 
       {/* ---------- Кейсы ---------- */}
       <Section id="cases">

@@ -100,57 +100,6 @@
    ПОЛОСА ФАКТОВ
    ========================================================= */
 
-.facts {
-  border-block: 1px solid var(--line);
-  background: var(--paper);
-}
-
-.factsGrid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-}
-
-@media (min-width: 900px) {
-  .factsGrid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-.fact {
-  padding: var(--s-6) var(--s-5);
-  border-right: 1px solid var(--line-2);
-  border-bottom: 1px solid var(--line-2);
-}
-
-.fact:last-child {
-  border-right: none;
-}
-
-@media (min-width: 900px) {
-  .fact {
-    border-bottom: none;
-    padding-block: var(--s-7);
-  }
-}
-
-.fact:first-child {
-  padding-left: 0;
-}
-
-.factValue {
-  font-size: clamp(1.6rem, 2.6vw, 2.1rem);
-  letter-spacing: -0.03em;
-  line-height: 1.1;
-}
-
-.factCaption {
-  margin-top: var(--s-2);
-  font-size: var(--fs-sm);
-  color: var(--ink-3);
-  max-width: 24ch;
-  line-height: 1.45;
-}
-
 /* =========================================================
    КЕЙСЫ
    ========================================================= */

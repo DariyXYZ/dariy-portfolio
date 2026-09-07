@@ -8,6 +8,7 @@ import { ButtonLink } from "@/components/ui/button";
 import { Pill } from "@/components/ui/pill";
 import { BrowserFrame } from "@/components/ui/browser-frame";
 import { ArrowLink } from "@/components/ui/arrow-link";
+import { StatStrip } from "@/components/ui/stat-strip";
 import { getCase, getPublishedCases, CaseVisual } from "@/features/cases";
 import { site, asset } from "@/config/site";
 import { CaseNav } from "./_components/case-nav";
@@ -111,18 +112,7 @@ export default async function CasePage({ params }: PageProps) {
       </section>
 
       {/* ---------- Метрики ---------- */}
-      <div className={styles.metricsBand}>
-        <Container>
-          <ul className={styles.metrics}>
-            {item.metrics.map((metric, i) => (
-              <Reveal key={metric.label} as="li" delay={i * 60} className={styles.metric}>
-                <span className={styles.metricValue}>{metric.value}</span>
-                <span className={styles.metricLabel}>{metric.label}</span>
-              </Reveal>
-            ))}
-          </ul>
-        </Container>
-      </div>
+      <StatStrip items={item.metrics.map((metric) => ({ value: metric.value, caption: metric.label }))} />
 
       {/* ---------- Обложка во всю ширину ---------- */}
       <div className={styles.coverWrap}>

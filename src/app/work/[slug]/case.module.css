@@ -92,46 +92,6 @@
   line-height: 1.45;
 }
 
-/* ---------- метрики ---------- */
-
-.metricsBand {
-  background: var(--ink);
-  color: var(--paper);
-  padding-block: clamp(32px, 4vw, 56px);
-}
-
-.metrics {
-  display: grid;
-  gap: var(--s-6);
-  grid-template-columns: 1fr;
-}
-
-@media (min-width: 760px) {
-  .metrics {
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--s-7);
-  }
-}
-
-.metric {
-  display: flex;
-  flex-direction: column;
-  gap: var(--s-2);
-}
-
-.metricValue {
-  font-size: clamp(1.8rem, 3.4vw, 2.9rem);
-  letter-spacing: -0.035em;
-  line-height: 1;
-}
-
-.metricLabel {
-  font-size: var(--fs-sm);
-  color: rgba(255, 255, 255, 0.62);
-  max-width: 30ch;
-  line-height: 1.45;
-}
-
 /* ---------- обложка ---------- */
 
 .coverWrap {
