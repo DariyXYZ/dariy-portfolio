@@ -84,7 +84,7 @@
   font-family: var(--font-sans);
   font-size: 12px;
   font-weight: 500;
-  fill: var(--ink-3);
+  fill: var(--ink-2);
 }
 
 /* ---------- легенда ---------- */
@@ -142,33 +142,23 @@
   fill: var(--ink-3);
 }
 
-/* ---------- порты, значки, номера ---------- */
+/* ---------- значки и номера ---------- */
 
-.port {
-  fill: var(--paper);
-  stroke: var(--ink-4);
-  stroke-width: 1.25;
-}
-
+/* Схема чёрно-белая: у значков ветвей нет своего цвета. */
 .badgeRing {
   fill: var(--paper);
-  stroke-width: 2;
+  stroke: var(--ink);
+  stroke-width: 1.4;
 }
 
-.badgeYes .badgeRing {
-  stroke: var(--live);
+.badgeMark {
+  stroke: var(--ink);
 }
 
-.badgeNo .badgeRing {
-  stroke: var(--stop);
-}
-
-.badgeYes .badgeMark {
-  stroke: var(--live);
-}
-
-.badgeNo .badgeMark {
-  stroke: var(--stop);
+/* Подложка под ярлыком связи, чтобы текст не читался поверх линии. */
+.labelPlate {
+  fill: var(--paper);
+  stroke: none;
 }
 
 .indexRing {

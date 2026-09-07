@@ -13,10 +13,15 @@ type DiagramProps = {
 type Point = { x: number; y: number };
 type Side = "right" | "bottom" | "left" | "top";
 
-const CORNER = 16;
-const ARROW = 10;
+const CORNER = 14;
+/** Стрелка в пользовательских единицах: не растёт и не тает при масштабе. */
+const ARROW = 9;
+/** Кончик не влезает в обводку блока, а касается её. */
+const TOUCH = 1;
 /** Запас вокруг холста, иначе рамки и стрелки срезает краем. */
-const PAD = 16;
+const PAD = 18;
+/** Разбег параллельных ветвей, выходящих из одного блока. */
+const FAN_STEP = 18;
 
 function anchor(node: DiagramNode, side: Side): Point {
   switch (side) {
@@ -31,63 +36,149 @@ function anchor(node: DiagramNode, side: Side): Point {
   }
 }
 
-/** Ортогональный маршрут с одним мягким поворотом. */
-function routePath(a: Point, b: Point, fromSide: Side, toSide: Side, bend: number) {
-  const gap = 5;
-  const end: Point =
-    toSide === "left"
-      ? { x: b.x - gap, y: b.y }
-      : toSide === "right"
-        ? { x: b.x + gap, y: b.y }
-        : toSide === "top"
-          ? { x: b.x, y: b.y - gap }
-          : { x: b.x, y: b.y + gap };
+/** Точка входа: отодвинута от границы ровно на толщину касания. */
+function landing(p: Point, side: Side): Point {
+  switch (side) {
+    case "left":
+      return { x: p.x - TOUCH, y: p.y };
+    case "right":
+      return { x: p.x + TOUCH, y: p.y };
+    case "top":
+      return { x: p.x, y: p.y - TOUCH };
+    case "bottom":
+      return { x: p.x, y: p.y + TOUCH };
+  }
+}
 
+type Route = {
+  d: string;
+  /** Середина последнего отрезка: там ярлык и значок не пересекают другие линии. */
+  mark: Point;
+  /** Начало последнего отрезка, чтобы понять, сколько места под ярлык. */
+  tail: Point;
+};
+
+/**
+ * Ортогональный маршрут с двумя мягкими поворотами и общим стволом.
+ * `trunk` задаёт положение поворота, чтобы ветви одного блока шли параллельно,
+ * а не ложились одна на другую.
+ */
+function route(a: Point, b: Point, fromSide: Side, toSide: Side, trunk: number): Route {
+  const end = landing(b, toSide);
   const horizontal = fromSide === "right" || fromSide === "left";
-  const dirX = fromSide === "right" ? 1 : -1;
-  const dirY = fromSide === "bottom" ? 1 : -1;
 
   if (horizontal) {
-    if (Math.abs(a.y - end.y) < 1) {
-      return { d: `M ${a.x} ${a.y} L ${end.x} ${end.y}`, mid: { x: (a.x + end.x) / 2, y: a.y } };
+    if (Math.abs(a.y - end.y) < 0.5) {
+      return {
+        d: `M ${a.x} ${a.y} L ${end.x} ${end.y}`,
+        mark: { x: a.x + (end.x - a.x) * 0.62, y: a.y },
+        tail: { x: a.x, y: a.y },
+      };
     }
-    const mx = a.x + (end.x - a.x) * bend;
-    const down = end.y > a.y ? 1 : -1;
-    const r = Math.min(CORNER, Math.abs(end.y - a.y) / 2, Math.abs(mx - a.x), Math.abs(end.x - mx));
+    const t = trunk;
+    const stepX = t > a.x ? 1 : -1;
+    const stepY = end.y > a.y ? 1 : -1;
+    const r = Math.min(
+      CORNER,
+      Math.abs(end.y - a.y) / 2,
+      Math.abs(t - a.x),
+      Math.abs(end.x - t) || CORNER,
+    );
     return {
       d: [
         `M ${a.x} ${a.y}`,
-        `L ${mx - r * dirX} ${a.y}`,
-        `Q ${mx} ${a.y} ${mx} ${a.y + r * down}`,
-        `L ${mx} ${end.y - r * down}`,
-        `Q ${mx} ${end.y} ${mx + r * dirX} ${end.y}`,
+        `L ${t - r * stepX} ${a.y}`,
+        `Q ${t} ${a.y} ${t} ${a.y + r * stepY}`,
+        `L ${t} ${end.y - r * stepY}`,
+        `Q ${t} ${end.y} ${t + r * stepX} ${end.y}`,
         `L ${end.x} ${end.y}`,
       ].join(" "),
-      mid: { x: mx, y: (a.y + end.y) / 2 },
+      mark: { x: t + (end.x - t) * 0.55, y: end.y },
+      tail: { x: t, y: end.y },
     };
   }
 
-  if (Math.abs(a.x - end.x) < 1) {
-    return { d: `M ${a.x} ${a.y} L ${end.x} ${end.y}`, mid: { x: a.x, y: (a.y + end.y) / 2 } };
+  if (Math.abs(a.x - end.x) < 0.5) {
+    return {
+      d: `M ${a.x} ${a.y} L ${end.x} ${end.y}`,
+      mark: { x: a.x, y: a.y + (end.y - a.y) * 0.62 },
+      tail: { x: a.x, y: a.y },
+    };
   }
-  const my = a.y + (end.y - a.y) * bend;
-  const right = end.x > a.x ? 1 : -1;
-  const r = Math.min(CORNER, Math.abs(end.x - a.x) / 2, Math.abs(my - a.y), Math.abs(end.y - my));
+  const t = trunk;
+  const stepY = t > a.y ? 1 : -1;
+  const stepX = end.x > a.x ? 1 : -1;
+  const r = Math.min(
+    CORNER,
+    Math.abs(end.x - a.x) / 2,
+    Math.abs(t - a.y),
+    Math.abs(end.y - t) || CORNER,
+  );
   return {
     d: [
       `M ${a.x} ${a.y}`,
-      `L ${a.x} ${my - r * dirY}`,
-      `Q ${a.x} ${my} ${a.x + r * right} ${my}`,
-      `L ${end.x - r * right} ${my}`,
-      `Q ${end.x} ${my} ${end.x} ${my + r * dirY}`,
+      `L ${a.x} ${t - r * stepY}`,
+      `Q ${a.x} ${t} ${a.x + r * stepX} ${t}`,
+      `L ${end.x - r * stepX} ${t}`,
+      `Q ${end.x} ${t} ${end.x} ${t + r * stepY}`,
       `L ${end.x} ${end.y}`,
     ].join(" "),
-    mid: { x: (a.x + end.x) / 2, y: my },
+    mark: { x: end.x, y: t + (end.y - t) * 0.55 },
+    tail: { x: end.x, y: t },
   };
+}
+
+/**
+ * Считаем положение ствола для каждой связи. Ветви, выходящие из одной стороны
+ * одного блока, получают разные стволы: линии идут рядом, а не сливаются в одну.
+ */
+function trunks(nodes: Map<string, DiagramNode>, edges: DiagramEdge[]): number[] {
+  const groups = new Map<string, number[]>();
+  edges.forEach((edge, i) => {
+    const key = `${edge.from}|${edge.fromSide ?? "right"}`;
+    const list = groups.get(key);
+    if (list) list.push(i);
+    else groups.set(key, [i]);
+  });
+
+  const result = new Array<number>(edges.length).fill(0);
+
+  groups.forEach((indices) => {
+    const bent = indices.filter((i) => {
+      const edge = edges[i];
+      const from = nodes.get(edge.from);
+      const to = nodes.get(edge.to);
+      if (!from || !to) return false;
+      const a = anchor(from, edge.fromSide ?? "right");
+      const b = anchor(to, edge.toSide ?? "left");
+      const horizontal = (edge.fromSide ?? "right") === "right" || edge.fromSide === "left";
+      return horizontal ? Math.abs(a.y - b.y) >= 0.5 : Math.abs(a.x - b.x) >= 0.5;
+    });
+
+    bent.forEach((i, order) => {
+      const edge = edges[i];
+      const from = nodes.get(edge.from);
+      const to = nodes.get(edge.to);
+      if (!from || !to) return;
+      const side = edge.fromSide ?? "right";
+      const a = anchor(from, side);
+      const b = anchor(to, edge.toSide ?? "left");
+      const horizontal = side === "right" || side === "left";
+      const span = horizontal ? Math.abs(b.x - a.x) : Math.abs(b.y - a.y);
+      const dir = side === "right" || side === "bottom" ? 1 : -1;
+      // База берётся от заданного bend, разбег — от порядка ветви в группе.
+      const base = span * (edge.bend ?? 0.42);
+      const off = Math.max(28, Math.min(span - 28, base + order * FAN_STEP));
+      result[i] = (horizontal ? a.x : a.y) + dir * off;
+    });
+  });
+
+  return result;
 }
 
 export function Diagram({ id, width, height, nodes, edges, legend }: DiagramProps) {
   const byId = new Map(nodes.map((n) => [n.id, n]));
+  const trunkAt = trunks(byId, edges);
 
   return (
     <div className={styles.scroll}>
@@ -103,7 +194,7 @@ export function Diagram({ id, width, height, nodes, edges, legend }: DiagramProp
               key={tone}
               id={`${id}-${tone}`}
               viewBox="0 0 10 10"
-              refX="8"
+              refX="9"
               refY="5"
               markerWidth={ARROW}
               markerHeight={ARROW}
@@ -111,7 +202,7 @@ export function Diagram({ id, width, height, nodes, edges, legend }: DiagramProp
               orient="auto-start-reverse"
             >
               <path
-                d="M 1.5 1.5 L 9 5 L 1.5 8.5 z"
+                d="M 0.5 1.2 L 9 5 L 0.5 8.8 z"
                 fill={tone === "muted" ? "var(--ink-4)" : "var(--ink)"}
               />
             </marker>
@@ -126,13 +217,11 @@ export function Diagram({ id, width, height, nodes, edges, legend }: DiagramProp
           const fromSide = edge.fromSide ?? "right";
           const toSide = edge.toSide ?? "left";
           const muted = edge.tone === "muted";
-          const { d, mid } = routePath(
-            anchor(from, fromSide),
-            anchor(to, toSide),
-            fromSide,
-            toSide,
-            edge.bend ?? 0.5,
-          );
+          const a = anchor(from, fromSide);
+          const { d, mark, tail } = route(a, anchor(to, toSide), fromSide, toSide, trunkAt[i]);
+          const label = edge.label
+            ? labelSpot(edge.label, a, mark, tail, fromSide === "right" || fromSide === "left")
+            : null;
 
           return (
             <g key={`e-${i}`}>
@@ -141,22 +230,17 @@ export function Diagram({ id, width, height, nodes, edges, legend }: DiagramProp
                 fill="none"
                 stroke={muted ? "var(--ink-4)" : "var(--ink)"}
                 strokeWidth={muted ? 1.25 : 1.5}
-                strokeLinecap="round"
+                strokeLinecap="butt"
                 strokeDasharray={edge.dashed ? "6 6" : undefined}
                 markerEnd={`url(#${id}-${muted ? "muted" : "default"})`}
               />
-              {/* точка выхода, как на инженерных схемах */}
-              <circle
-                cx={anchor(from, fromSide).x}
-                cy={anchor(from, fromSide).y}
-                r={3}
-                className={styles.port}
-              />
-              {edge.badge ? <Badge x={mid.x} y={mid.y} kind={edge.badge} /> : null}
-              {edge.label ? (
-                <text x={mid.x} y={mid.y - 14} textAnchor="middle" className={styles.edgeLabel}>
-                  {edge.label}
-                </text>
+              {edge.badge ? <Badge x={mark.x} y={mark.y} kind={edge.badge} /> : null}
+              {label ? (
+                <EdgeLabel
+                  x={label.x}
+                  y={label.y - (edge.badge && label.onTail ? 26 : 13)}
+                  text={edge.label as string}
+                />
               ) : null}
             </g>
           );
@@ -181,25 +265,62 @@ export function Diagram({ id, width, height, nodes, edges, legend }: DiagramProp
   );
 }
 
-function Badge({ x, y, kind }: { x: number; y: number; kind: "yes" | "no" }) {
-  const yes = kind === "yes";
+/** Ширина подложки под ярлык при кегле 12. */
+function labelWidth(text: string) {
+  return text.length * 6.6 + 14;
+}
+
+/**
+ * Ярлык ставим на просвет последнего отрезка. Если там не хватает места,
+ * уводим его на первый отрезок: иначе текст залезает на блок.
+ */
+function labelSpot(
+  text: string,
+  a: Point,
+  mark: Point,
+  tail: Point,
+  horizontal: boolean,
+): { x: number; y: number; onTail: boolean } {
+  const w = labelWidth(text);
+  const room = horizontal ? Math.abs(mark.x - tail.x) * 2 : Math.abs(mark.y - tail.y) * 2;
+  if (room >= w + 12) return { x: mark.x, y: mark.y, onTail: true };
+  return horizontal
+    ? { x: (a.x + tail.x) / 2, y: a.y, onTail: false }
+    : { x: a.x, y: (a.y + tail.y) / 2, onTail: false };
+}
+
+/** Ярлык на белой подложке: текст не ложится на линию. */
+function EdgeLabel({ x, y, text }: { x: number; y: number; text: string }) {
+  const w = labelWidth(text);
   return (
-    <g className={yes ? styles.badgeYes : styles.badgeNo}>
-      <circle cx={x} cy={y} r={11} className={styles.badgeRing} />
-      {yes ? (
+    <g>
+      <rect x={x - w / 2} y={y - 11} width={w} height={18} rx={5} className={styles.labelPlate} />
+      <text x={x} y={y + 2} textAnchor="middle" className={styles.edgeLabel}>
+        {text}
+      </text>
+    </g>
+  );
+}
+
+/** Значок ветви: тот же чёрно-белый язык, что и вся схема. */
+function Badge({ x, y, kind }: { x: number; y: number; kind: "yes" | "no" }) {
+  return (
+    <g className={styles.badge}>
+      <circle cx={x} cy={y} r={10} className={styles.badgeRing} />
+      {kind === "yes" ? (
         <path
-          d={`M ${x - 4.5} ${y} L ${x - 1} ${y + 3.5} L ${x + 5} ${y - 3.5}`}
+          d={`M ${x - 4} ${y} L ${x - 1} ${y + 3} L ${x + 4.5} ${y - 3.2}`}
           fill="none"
-          strokeWidth="2"
+          strokeWidth="1.6"
           strokeLinecap="round"
           strokeLinejoin="round"
           className={styles.badgeMark}
         />
       ) : (
         <path
-          d={`M ${x - 3.8} ${y - 3.8} L ${x + 3.8} ${y + 3.8} M ${x + 3.8} ${y - 3.8} L ${x - 3.8} ${y + 3.8}`}
+          d={`M ${x - 3.4} ${y - 3.4} L ${x + 3.4} ${y + 3.4} M ${x + 3.4} ${y - 3.4} L ${x - 3.4} ${y + 3.4}`}
           fill="none"
-          strokeWidth="2"
+          strokeWidth="1.6"
           strokeLinecap="round"
           className={styles.badgeMark}
         />
@@ -234,7 +355,7 @@ function Node({ node }: { node: DiagramNode }) {
           y={node.y}
           width={node.w}
           height={node.h}
-          rx={shape === "pill" ? node.h / 2 : 14}
+          rx={shape === "pill" ? node.h / 2 : 12}
           className={styles.box}
         />
       )}
@@ -248,10 +369,7 @@ function Node({ node }: { node: DiagramNode }) {
         </>
       ) : null}
 
-      <text
-        textAnchor={isLabel || hasIndex ? "start" : "middle"}
-        className={styles.text}
-      >
+      <text textAnchor={isLabel || hasIndex ? "start" : "middle"} className={styles.text}>
         {node.lines.map((line, i) => (
           <tspan key={line} x={textX} y={startY + i * lineH}>
             {line}

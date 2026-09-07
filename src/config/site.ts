@@ -34,6 +34,6 @@ export const site = {
 export const facts = [
   { value: "4 года", caption: "в коммерческом продуктовом дизайне" },
   { value: "3 отрасли", caption: "AI SaaS · EdTech · e-commerce" },
-  { value: "40+", caption: "экранов B2B-платформы с нуля до релиза" },
+  { value: "10 → 4", caption: "попытки на рабочий кадр в ИИ-платформе" },
   { value: "−30%", caption: "времени ключевых операций пользователя" },
 ] as const;
