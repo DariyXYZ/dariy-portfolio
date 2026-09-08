@@ -13,11 +13,11 @@ type DiagramProps = {
 type Point = { x: number; y: number };
 type Side = "right" | "bottom" | "left" | "top";
 
-const CORNER = 14;
+const CORNER = 18;
 /** Стрелка в пользовательских единицах: не растёт и не тает при масштабе. */
-const ARROW = 9;
-/** Кончик не влезает в обводку блока, а касается её. */
-const TOUCH = 1;
+const ARROW = 11;
+/** Воздух между наконечником и блоком: стрелка не прилипает к рамке. */
+const TOUCH = 9;
 /** Запас вокруг холста, иначе рамки и стрелки срезает краем. */
 const PAD = 18;
 /** Разбег параллельных ветвей, выходящих из одного блока. */
@@ -36,7 +36,7 @@ function anchor(node: DiagramNode, side: Side): Point {
   }
 }
 
-/** Точка входа: отодвинута от границы ровно на толщину касания. */
+/** Точка входа: отодвинута от границы, чтобы перед блоком оставался зазор. */
 function landing(p: Point, side: Side): Point {
   switch (side) {
     case "left":
@@ -63,7 +63,9 @@ type Route = {
  * `trunk` задаёт положение поворота, чтобы ветви одного блока шли параллельно,
  * а не ложились одна на другую.
  */
-function route(a: Point, b: Point, fromSide: Side, toSide: Side, trunk: number): Route {
+function route(rawA: Point, b: Point, fromSide: Side, toSide: Side, trunk: number): Route {
+  // Зазор с обеих сторон: линия не касается ни блока-источника, ни блока-цели.
+  const a = landing(rawA, fromSide);
   const end = landing(b, toSide);
   const horizontal = fromSide === "right" || fromSide === "left";
 
@@ -194,16 +196,21 @@ export function Diagram({ id, width, height, nodes, edges, legend }: DiagramProp
               key={tone}
               id={`${id}-${tone}`}
               viewBox="0 0 10 10"
-              refX="9"
+              refX="8.6"
               refY="5"
               markerWidth={ARROW}
               markerHeight={ARROW}
               markerUnits="userSpaceOnUse"
               orient="auto-start-reverse"
             >
+              {/* Шеврон со скруглёнными концами читается мягче залитого шипа. */}
               <path
-                d="M 0.5 1.2 L 9 5 L 0.5 8.8 z"
-                fill={tone === "muted" ? "var(--ink-4)" : "var(--ink)"}
+                d="M 3.6 2 L 8.4 5 L 3.6 8"
+                fill="none"
+                stroke={tone === "muted" ? "var(--ink-4)" : "var(--ink)"}
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
             </marker>
           ))}
@@ -219,8 +226,14 @@ export function Diagram({ id, width, height, nodes, edges, legend }: DiagramProp
           const muted = edge.tone === "muted";
           const a = anchor(from, fromSide);
           const { d, mark, tail } = route(a, anchor(to, toSide), fromSide, toSide, trunkAt[i]);
+          const horizontal = fromSide === "right" || fromSide === "left";
+          const end = landing(anchor(to, toSide), toSide);
+          // Значок садится у цели, ярлык у источника: так они не спорят за место.
+          const badge = edge.badge ? nearEnd(end, tail, horizontal) : null;
           const label = edge.label
-            ? labelSpot(edge.label, a, mark, tail, fromSide === "right" || fromSide === "left")
+            ? edge.badge
+              ? { x: horizontal ? (a.x + tail.x) / 2 : a.x, y: horizontal ? a.y : (a.y + tail.y) / 2 }
+              : labelSpot(edge.label, a, mark, tail, horizontal)
             : null;
 
           return (
@@ -229,18 +242,14 @@ export function Diagram({ id, width, height, nodes, edges, legend }: DiagramProp
                 d={d}
                 fill="none"
                 stroke={muted ? "var(--ink-4)" : "var(--ink)"}
-                strokeWidth={muted ? 1.25 : 1.5}
+                strokeWidth={muted ? 1.1 : 1.4}
                 strokeLinecap="butt"
                 strokeDasharray={edge.dashed ? "6 6" : undefined}
                 markerEnd={`url(#${id}-${muted ? "muted" : "default"})`}
               />
-              {edge.badge ? <Badge x={mark.x} y={mark.y} kind={edge.badge} /> : null}
+              {badge && edge.badge ? <Badge x={badge.x} y={badge.y} kind={edge.badge} /> : null}
               {label ? (
-                <EdgeLabel
-                  x={label.x}
-                  y={label.y - (edge.badge && label.onTail ? 26 : 13)}
-                  text={edge.label as string}
-                />
+                <EdgeLabel x={label.x} y={label.y - 13} text={edge.label as string} />
               ) : null}
             </g>
           );
@@ -271,22 +280,38 @@ function labelWidth(text: string) {
 }
 
 /**
- * Ярлык ставим на просвет последнего отрезка. Если там не хватает места,
- * уводим его на первый отрезок: иначе текст залезает на блок.
+ * Подпись ставим на просвет последнего отрезка. Если там не хватает места,
+ * уводим на первый отрезок: иначе она залезает на блок или на наконечник.
  */
-function labelSpot(
-  text: string,
+function spot(
+  need: number,
   a: Point,
   mark: Point,
   tail: Point,
   horizontal: boolean,
 ): { x: number; y: number; onTail: boolean } {
-  const w = labelWidth(text);
   const room = horizontal ? Math.abs(mark.x - tail.x) * 2 : Math.abs(mark.y - tail.y) * 2;
-  if (room >= w + 12) return { x: mark.x, y: mark.y, onTail: true };
+  if (room >= need + 12) return { x: mark.x, y: mark.y, onTail: true };
   return horizontal
     ? { x: (a.x + tail.x) / 2, y: a.y, onTail: false }
     : { x: a.x, y: (a.y + tail.y) / 2, onTail: false };
+}
+
+function labelSpot(text: string, a: Point, mark: Point, tail: Point, horizontal: boolean) {
+  return spot(labelWidth(text), a, mark, tail, horizontal);
+}
+
+/** Значок ветви: фиксированный отступ от цели, чтобы не лечь на наконечник. */
+function nearEnd(end: Point, tail: Point, horizontal: boolean): Point {
+  const BACK = 25;
+  if (horizontal) {
+    const dir = end.x > tail.x ? -1 : 1;
+    const reach = Math.abs(end.x - tail.x);
+    return { x: end.x + dir * Math.min(BACK, reach * 0.55), y: end.y };
+  }
+  const dir = end.y > tail.y ? -1 : 1;
+  const reach = Math.abs(end.y - tail.y);
+  return { x: end.x, y: end.y + dir * Math.min(BACK, reach * 0.55) };
 }
 
 /** Ярлык на белой подложке: текст не ложится на линию. */

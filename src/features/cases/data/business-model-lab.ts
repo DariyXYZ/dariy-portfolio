@@ -369,7 +369,8 @@ export const businessModelLab: CaseStudy[] = [
                 w: 150,
                 h: 70,
                 lines: ["Ввод данных", "о бизнесе"],
-                tone: "outline",
+                tone: "terminal",
+                shape: "pill",
               },
               {
                 id: "gen",
@@ -414,7 +415,8 @@ export const businessModelLab: CaseStudy[] = [
                 w: 150,
                 h: 70,
                 lines: ["Выгрузка"],
-                tone: "muted",
+                tone: "terminal",
+                shape: "pill",
               },
             ],
             edges: [
@@ -443,7 +445,7 @@ export const businessModelLab: CaseStudy[] = [
                 h: 70,
                 lines: ["Выбор точности", "и цена расчёта"],
                 shape: "pill",
-                tone: "muted",
+                tone: "terminal",
               },
               {
                 id: "form",
@@ -479,7 +481,8 @@ export const businessModelLab: CaseStudy[] = [
                 w: 160,
                 h: 70,
                 lines: ["Экспорт плана", "и первых шагов"],
-                tone: "accent",
+                tone: "terminal",
+                shape: "pill",
               },
               {
                 id: "refine",
@@ -522,9 +525,9 @@ export const businessModelLab: CaseStudy[] = [
               },
             ],
             legend: [
-              { tone: "outline", label: "шаг сценария" },
+              { tone: "terminal", label: "вход и выход" },
               { tone: "solid", label: "ключевой экран" },
-              { tone: "accent", label: "результат" },
+              { tone: "outline", label: "шаг сценария" },
               { tone: "dashed", label: "возврат к правкам" },
               { tone: "muted", label: "вход сбоку" },
             ],
