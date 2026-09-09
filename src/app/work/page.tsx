@@ -10,7 +10,7 @@ import { typo } from "@/lib/typo";
 export const metadata: Metadata = {
   title: "Кейсы",
   description:
-    "Продуктовые кейсы: AI SaaS, EdTech и e-commerce. В заголовке каждого стоит результат, а не название проекта.",
+    "Продуктовые кейсы в AI SaaS, EdTech и e-commerce: задачи, исследования, решения и результаты.",
 };
 
 export default function WorkPage() {
@@ -28,7 +28,7 @@ export default function WorkPage() {
             </h1>
             <p className={styles.lead}>
               {typo(
-                "Каждый кейс отвечает на три вопроса: в чём была проблема, что я решил, что проверено на людях.",
+                "Каждый кейс показывает проблему, мою роль, принятые решения и то, что удалось проверить.",
               )}
             </p>
           </header>

@@ -21,10 +21,10 @@ const experienceRaw: ExperienceItem[] = [
       "Два продукта параллельно: B2B-платформа ИИ-визуализаций и B2C-платформа онлайн-образования.",
     highlights: [
       "AI-платформа с нуля: 40 экранов от концепции до релиза за три месяца",
-      "Дизайн-система и UI Kit: time-to-market новых фич −25%",
+      "Дизайн-система и UI Kit: Time to Market новых функций −25%",
       "Сервисы собраны в один поток: ключевые операции быстрее на 30–40%",
-      "UX-исследование в EdTech: LTV +20–25%, retention +15%",
-      "Авторский надзор на разработке до прода",
+      "UX-исследование в EdTech: LTV +20–25%, Retention +15%",
+      "Design QA: проверка реализации до релиза",
     ],
   },
   {
@@ -50,7 +50,7 @@ const experienceRaw: ExperienceItem[] = [
     highlights: [
       "Дизайн-система и UI Kit для B2B-продуктов бюро",
       "Гайдлайны для маркетинга: единый визуальный стандарт",
-      "Time-to-market сайта −20%, материалы быстрее на 35%",
+      "Time to Market сайта −20%, материалы быстрее на 35%",
     ],
   },
 ];
@@ -70,11 +70,15 @@ const educationRaw = [
 
 const skillGroupsRaw = [
   {
-    title: "Методологии",
+    title: "Методы и практики",
     items: [
       "Product Design",
       "UX Research",
-      "CJM",
+      "Jobs to Be Done (JTBD)",
+      "User Stories",
+      "Job Stories",
+      "Customer Journey Mapping",
+      "Information Architecture",
       "User Flow",
       "Wireframing",
       "Prototyping",
@@ -88,7 +92,7 @@ const skillGroupsRaw = [
     items: ["Figma", "FigJam", "Maze", "Miro", "Notion", "Jira"],
   },
   {
-    title: "Отрасли",
+    title: "Продукты и рынки",
     items: ["AI Products", "B2B SaaS", "B2C", "EdTech", "E-commerce", "Mobile"],
   },
 ];
@@ -97,8 +101,8 @@ const skillGroupsRaw = [
 const quickFactsRaw = [
   { term: "Роль", value: "Продуктовый дизайнер, senior-уровень задач" },
   { term: "Опыт", value: "4 года в продукте, из них 2 года в B2B и AI" },
-  { term: "Отрасли", value: "AI SaaS, EdTech, e-commerce, внутренние B2B-продукты" },
-  { term: "Сильные стороны", value: "Исследование, IA, дизайн-системы, работа с разработкой" },
+  { term: "Продукты и рынки", value: "AI SaaS, EdTech, e-commerce, внутренние B2B-продукты" },
+  { term: "Сильные стороны", value: "UX Research, Information Architecture, Design Systems, Design QA" },
   { term: "Формат", value: "Москва или удалённо, full-time или контракт" },
   { term: "Английский", value: "B2, работаю с англоязычной документацией" },
 ];
@@ -107,18 +111,18 @@ const quickFactsRaw = [
 const processRaw = [
   {
     step: "01",
-    title: "Разбираюсь в сценарии, а не в экранах",
-    body: "Исследование, CJM, разговоры с пользователями. На выходе формулировка проблемы, из которой видно, что делать.",
+    title: "Определяю проблему и критерии успеха",
+    body: "UX Research и JTBD помогают сформулировать Problem Statement. Связываю потребности пользователей с бизнес-целью и критериями проверки.",
   },
   {
     step: "02",
-    title: "Собираю систему, а не набор макетов",
-    body: "Компоненты, токены, состояния, краевые случаи. Структуру вижу раньше, чем интерфейс.",
+    title: "Проектирую сценарии и интерфейс",
+    body: "User Stories, Information Architecture и User Flow задают логику продукта. Затем собираю прототип, компоненты и состояния интерфейса.",
   },
   {
     step: "03",
     title: "Довожу до релиза",
-    body: "Спецификация, требования к данным, авторский надзор. Дизайн заканчивается в проде, а не в Figma.",
+    body: "Developer Handoff и Design QA: описываю требования и состояния, проверяю реализацию вместе с разработкой.",
   },
 ];
 

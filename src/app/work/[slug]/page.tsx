@@ -55,7 +55,7 @@ export default async function CasePage({ params }: PageProps) {
   ];
 
   const navItems = [
-    ...(item.businessGoal ? [{ id: "goal", label: "Зачем это бизнесу" }] : []),
+    ...(item.businessGoal ? [{ id: "goal", label: "Бизнес-цель" }] : []),
     ...item.blocks.map((block) => ({
       id: "s-" + block.kicker,
       label: block.title,
@@ -142,15 +142,15 @@ export default async function CasePage({ params }: PageProps) {
             <div className={styles.content}>
               {item.businessGoal ? (
                 <section id="goal" className={styles.section}>
-                  <p className="label">Зачем это бизнесу</p>
+                  <p className="label">Бизнес-цель</p>
                   <h2 className={styles.goalTitle}>{item.businessGoal.goal}</h2>
                   <div className={styles.goalGrid}>
                     <div className={styles.goalCard}>
-                      <span className="label">Где деньги</span>
+                      <span className="label">Экономический эффект</span>
                       <p>{item.businessGoal.money}</p>
                     </div>
                     <div className={styles.goalCardAccent}>
-                      <span className="label">На что жму</span>
+                      <span className="label">Продуктовый фокус</span>
                       <p>{item.businessGoal.lever}</p>
                     </div>
                   </div>

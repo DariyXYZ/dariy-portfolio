@@ -254,7 +254,13 @@ function Compare({ visual }: { visual: Extract<Visual, { kind: "compare" }> }) {
 function Journey({ visual }: { visual: Extract<Visual, { kind: "journey" }> }) {
   const { stages } = visual;
   const step = 100 / stages.length;
-  const points = stages.map((s, i) => `${step * i + step / 2},${s.mood}`).join(" ");
+  // Horizontal tangents keep the curve smooth without inventing peaks between stages.
+  const path = stages.map((stage, i) => {
+    const x = step * i + step / 2;
+    if (i === 0) return `M ${x},${stage.mood}`;
+    const controlX = x - step / 2;
+    return `C ${controlX},${stages[i - 1].mood} ${controlX},${stage.mood} ${x},${stage.mood}`;
+  }).join(" ");
 
   return (
     <div className={styles.panel}>
@@ -268,11 +274,11 @@ function Journey({ visual }: { visual: Extract<Visual, { kind: "journey" }> }) {
 
       <div className={styles.jCurve}>
         <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-          <polyline
-            points={points}
+          <path
+            d={path}
             fill="none"
             stroke="var(--ink)"
-            strokeWidth="1.5"
+            strokeWidth="2"
             vectorEffect="non-scaling-stroke"
             strokeLinejoin="round"
             strokeLinecap="round"

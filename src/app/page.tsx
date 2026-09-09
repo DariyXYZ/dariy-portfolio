@@ -35,7 +35,7 @@ export default function HomePage() {
 
             <p className={styles.heroLead + " " + styles.fadeUp + " " + styles.d3}>
               {typo(
-                "Четыре года в AI SaaS, EdTech и e-commerce. Полный цикл: исследование, сценарий, дизайн-система, надзор на разработке.",
+                "Четыре года в AI SaaS, EdTech и e-commerce. Полный цикл: UX Research, сценарии, дизайн-система и проверка реализации.",
               )}
             </p>
 
@@ -86,7 +86,7 @@ export default function HomePage() {
                 </>
               }
               lead={typo(
-                "В заголовке результат, а не название проекта. Внутри решения и отвергнутые альтернативы.",
+                "В каждом кейсе: задача, моя роль, принятые решения и результаты проверки.",
               )}
               action={<ArrowLink href="/work">Все кейсы</ArrowLink>}
             />
@@ -116,8 +116,8 @@ export default function HomePage() {
               kicker="Как я работаю"
               title={
                 <>
-                  {typo("Дизайн заканчивается не в Figma, ")}
-                  <span className="dim">{typo("а в проде")}</span>
+                  {typo("От исследования ")}
+                  <span className="dim">{typo("до запуска продукта")}</span>
                 </>
               }
             />
@@ -177,7 +177,7 @@ export default function HomePage() {
               </h2>
               <p className={styles.contactLead}>
                 {typo(
-                  "Ищу команду, где дизайнер отвечает за сценарий целиком, а не отрисовывает макеты по чужому ТЗ.",
+                  "Ищу команду, где смогу отвечать за пользовательский сценарий от исследования до запуска и оценки результата.",
                 )}
               </p>
               <div className={styles.contactActions}>

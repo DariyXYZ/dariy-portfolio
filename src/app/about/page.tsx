@@ -13,7 +13,7 @@ import { typo } from "@/lib/typo";
 export const metadata: Metadata = {
   title: "Обо мне",
   description:
-    "Продуктовый дизайнер: AI SaaS, EdTech, e-commerce. Четыре года в продукте, полный цикл от исследования до надзора на разработке.",
+    "Продуктовый дизайнер: AI SaaS, EdTech, e-commerce. Четыре года в продукте: UX Research, сценарии, дизайн-системы и Design QA.",
 };
 
 export default function AboutPage() {
@@ -31,7 +31,7 @@ export default function AboutPage() {
                 </h1>
                 <p className={styles.lead}>
                   {typo(
-                    "Беру задачу с первого интервью и держу до прода: исследование, сценарий, архитектура, дизайн-система, надзор на разработке.",
+                    "Веду задачу от исследования до релиза: UX Research, User Flow, Information Architecture, дизайн-система и Design QA.",
                   )}
                 </p>
 
@@ -115,7 +115,7 @@ export default function AboutPage() {
       <Section tone="sand">
         <Container>
           <Reveal>
-            <SectionHead kicker="Инструменты" title="Чем работаю" />
+            <SectionHead kicker="Компетенции" title="Методы, инструменты и рынки" />
           </Reveal>
 
           <div className={styles.skills}>
