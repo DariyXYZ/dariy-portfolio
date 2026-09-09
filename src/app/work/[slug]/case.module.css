@@ -47,16 +47,16 @@
 
 .project {
   margin-top: var(--s-4);
-  font-size: var(--fs-lead);
+  font-size: var(--fs-body);
   color: var(--ink-3);
 }
 
 .summary {
   margin-top: var(--s-5);
   color: var(--ink-2);
-  max-width: 62ch;
+  max-width: 66ch;
   font-size: var(--fs-lead);
-  line-height: 1.55;
+  line-height: 1.5;
   text-wrap: pretty;
 }
 
@@ -136,7 +136,7 @@
 
 .blockTitle {
   margin-top: var(--s-4);
-  font-size: clamp(1.5rem, 2.7vw, 2.1rem);
+  font-size: clamp(1.3rem, 2.1vw, 1.7rem);
   font-weight: 400;
   letter-spacing: var(--ls-head);
   line-height: 1.14;
@@ -147,7 +147,7 @@
   margin-top: var(--s-5);
   margin-bottom: var(--s-6);
   color: var(--ink-2);
-  max-width: 64ch;
+  max-width: 68ch;
   font-size: var(--fs-body);
   line-height: 1.6;
   text-wrap: pretty;
@@ -157,7 +157,7 @@
 
 .goalTitle {
   margin-top: var(--s-4);
-  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-size: clamp(1.4rem, 2.3vw, 1.9rem);
   font-weight: 400;
   letter-spacing: var(--ls-display);
   line-height: 1.1;
@@ -230,7 +230,7 @@
 
 .nextTitle {
   margin-top: var(--s-3);
-  font-size: clamp(1.25rem, 2.2vw, 1.75rem);
+  font-size: clamp(1.15rem, 1.8vw, 1.45rem);
   letter-spacing: var(--ls-head);
   line-height: 1.15;
   max-width: 24ch;

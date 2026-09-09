@@ -15,7 +15,7 @@ export const site = {
   url: "https://dariyxyz.github.io/dariy-portfolio",
   /** Одна строка позиционирования — то, что рекрутер читает первым. */
   positioning:
-    "Проектирую продукты, где сложное решение принимается за один экран. AI SaaS, EdTech и e-commerce.",
+    "Проектирую продукты, где сложное решение принимается за один экран.",
   location: "Москва · удалённо",
   timezone: "UTC+3",
   availability: {
@@ -32,8 +32,8 @@ export const site = {
 
 /** Цифры для полосы фактов под первым экраном. */
 export const facts = [
-  { value: "4 года", caption: "в коммерческом продуктовом дизайне" },
+  { value: "4 года", caption: "в продуктовом дизайне" },
   { value: "3 отрасли", caption: "AI SaaS · EdTech · e-commerce" },
-  { value: "10 → 4", caption: "попытки на рабочий кадр в ИИ-платформе" },
-  { value: "−30%", caption: "времени ключевых операций пользователя" },
+  { value: "10 → 4", caption: "попытки на рабочий кадр" },
+  { value: "−30%", caption: "времени ключевых операций" },
 ] as const;

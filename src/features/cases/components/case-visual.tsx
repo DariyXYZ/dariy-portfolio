@@ -179,8 +179,8 @@ function Screens({ visual }: { visual: Extract<Visual, { kind: "screens" }> }) {
                 wide
                   ? "(max-width: 900px) 100vw, 1100px"
                   : visual.size === "lg"
-                    ? "(max-width: 700px) 90vw, 500px"
-                    : "(max-width: 700px) 45vw, 240px"
+                    ? "(max-width: 900px) 84vw, 440px"
+                    : "(max-width: 640px) 45vw, 300px"
               }
               className={styles.phoneImage}
             />
@@ -213,7 +213,7 @@ function Compare({ visual }: { visual: Extract<Visual, { kind: "compare" }> }) {
                   alt={`До правки: ${pair.label}`}
                   width={780}
                   height={1688}
-                  sizes="(max-width: 700px) 40vw, 200px"
+                  sizes="(max-width: 560px) 78vw, 360px"
                   className={styles.phoneImage}
                 />
               </div>
@@ -237,7 +237,7 @@ function Compare({ visual }: { visual: Extract<Visual, { kind: "compare" }> }) {
                   alt={`После правки: ${pair.label}`}
                   width={780}
                   height={1688}
-                  sizes="(max-width: 700px) 40vw, 200px"
+                  sizes="(max-width: 560px) 78vw, 360px"
                   className={styles.phoneImage}
                 />
               </div>
@@ -547,8 +547,14 @@ function Metrics({ visual }: { visual: Extract<Visual, { kind: "metrics" }> }) {
 /* ---------------- артефакт исследования ---------------- */
 
 function Artifact({ visual }: { visual: Extract<Visual, { kind: "artifact" }> }) {
+  /* tall: вытянутый документ держим уже, иначе он распухает на широком экране. */
+  const cls =
+    visual.scale === "tall"
+      ? `${styles.artifact} ${styles.artifactTall}`
+      : styles.artifact;
+
   return (
-    <div className={styles.artifact}>
+    <div className={cls}>
       <p className={styles.artifactTitle}>{visual.title}</p>
       <Zoomable src={asset(visual.src)} alt={visual.alt} />
     </div>

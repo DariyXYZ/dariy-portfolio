@@ -39,6 +39,12 @@
   padding: var(--s-5);
 }
 
+/* Обложка без рамки: кадр занимает всю ширину карточки. */
+.visual.full {
+  padding: 0;
+  border-bottom-color: var(--line);
+}
+
 .visualInner {
   aspect-ratio: 16 / 9;
   border-radius: var(--r-md);
@@ -220,15 +226,20 @@
 /* ---------- реальная обложка ---------- */
 
 .coverWrap {
-  border-radius: var(--r-md);
   overflow: hidden;
-  border: 1px solid var(--line-2);
   background: var(--paper);
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 16 / 10;
 }
 
 .wide .coverWrap {
-  aspect-ratio: 2 / 1;
+  aspect-ratio: 21 / 9;
+}
+
+@media (max-width: 640px) {
+  .coverWrap,
+  .wide .coverWrap {
+    aspect-ratio: 4 / 3;
+  }
 }
 
 .cover {

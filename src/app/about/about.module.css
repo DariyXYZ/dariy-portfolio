@@ -11,12 +11,48 @@
 }
 
 .lead {
-  margin-top: var(--s-5);
-  font-size: var(--fs-lead);
+  margin-top: var(--s-4);
+  font-size: var(--fs-body);
   line-height: 1.55;
   color: var(--ink-2);
-  max-width: 44ch;
+  max-width: 48ch;
   text-wrap: pretty;
+}
+
+/* Быстрые факты: рекрутер снимает нужное за пару секунд, не читая абзац. */
+.facts {
+  margin-top: var(--s-6);
+  border-top: 1px solid var(--line);
+  max-width: 56ch;
+}
+
+.factRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2px;
+  padding-block: var(--s-3);
+  border-bottom: 1px solid var(--line);
+}
+
+@media (min-width: 560px) {
+  .factRow {
+    grid-template-columns: 150px minmax(0, 1fr);
+    gap: var(--s-4);
+    align-items: baseline;
+  }
+}
+
+.factTerm {
+  font-size: var(--fs-xs);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-label);
+  color: var(--ink-3);
+}
+
+.factValue {
+  font-size: var(--fs-sm);
+  line-height: 1.45;
+  color: var(--ink);
 }
 
 .actions {
@@ -65,7 +101,7 @@
 }
 
 .company {
-  font-size: clamp(1.25rem, 2vw, 1.55rem);
+  font-size: clamp(1.15rem, 1.7vw, 1.4rem);
   font-weight: 500;
   letter-spacing: -0.024em;
 }

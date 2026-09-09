@@ -4,7 +4,7 @@ import { Section, SectionHead } from "@/components/ui/section";
 import { Reveal } from "@/components/ui/reveal";
 import { ButtonLink } from "@/components/ui/button";
 import { Pill } from "@/components/ui/pill";
-import { experience, education, skillGroups } from "@/features/profile";
+import { experience, education, skillGroups, quickFacts } from "@/features/profile";
 import Image from "next/image";
 import { site, asset } from "@/config/site";
 import styles from "./about.module.css";
@@ -13,7 +13,7 @@ import { typo } from "@/lib/typo";
 export const metadata: Metadata = {
   title: "Обо мне",
   description:
-    "Продуктовый дизайнер: AI SaaS, EdTech и e-commerce. Исследование, сценарий, информационная архитектура, дизайн-система, авторский надзор на разработке.",
+    "Продуктовый дизайнер: AI SaaS, EdTech, e-commerce. Четыре года в продукте, полный цикл от исследования до надзора на разработке.",
 };
 
 export default function AboutPage() {
@@ -26,14 +26,23 @@ export default function AboutPage() {
               <div className={styles.heroText}>
                 <p className="label">Обо мне</p>
                 <h1 className={styles.title}>
-                  {typo("Проектирую сценарии, ")}
-                  <span className="dim">{typo("которые доходят до релиза")}</span>
+                  {typo("Продуктовый дизайнер, ")}
+                  <span className="dim">{typo("довожу до релиза")}</span>
                 </h1>
                 <p className={styles.lead}>
                   {typo(
-                    "Четыре года в продукте: AI SaaS, EdTech и e-commerce. Беру задачу с первого интервью и держу до релиза: исследование, сценарий, информационная архитектура, дизайн-система, авторский надзор на разработке. Читаю фронтенд, поэтому с командой говорим на одном языке.",
+                    "Беру задачу с первого интервью и держу до прода: исследование, сценарий, архитектура, дизайн-система, надзор на разработке.",
                   )}
                 </p>
+
+                <dl className={styles.facts}>
+                  {quickFacts.map((fact) => (
+                    <div key={fact.term} className={styles.factRow}>
+                      <dt className={styles.factTerm}>{fact.term}</dt>
+                      <dd className={styles.factValue}>{fact.value}</dd>
+                    </div>
+                  ))}
+                </dl>
                 <div className={styles.actions}>
                   <ButtonLink
                     href={site.resumeFile}

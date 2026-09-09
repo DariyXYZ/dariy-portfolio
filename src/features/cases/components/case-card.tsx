@@ -20,7 +20,7 @@ export function CaseCard({ item, wide, index }: CaseCardProps) {
 
   const inner = (
     <>
-      <div className={styles.visual}>
+      <div className={item.cover ? styles.visual + " " + styles.full : styles.visual}>
         {item.cover ? (
           <div className={styles.coverWrap}>
             <Image
@@ -28,7 +28,7 @@ export function CaseCard({ item, wide, index }: CaseCardProps) {
               alt={item.cover.alt}
               width={2162}
               height={1350}
-              sizes={wide ? "(max-width: 900px) 100vw, 1140px" : "(max-width: 900px) 100vw, 560px"}
+              sizes={wide ? "(max-width: 900px) 100vw, 1180px" : "(max-width: 900px) 100vw, 580px"}
               className={styles.cover}
             />
           </div>
