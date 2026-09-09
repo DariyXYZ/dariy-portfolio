@@ -476,12 +476,12 @@ function Transcript({ visual }: { visual: Extract<Visual, { kind: "transcript" }
       {visual.sessions.map((session) => (
         <article key={session.who} className={styles.session}>
           <header className={styles.sHead}>
-            <p className={styles.sWho}>{session.who}</p>
+            <h3 className={styles.sWho}>{session.who}</h3>
             <span className={styles.sTag}>{session.tag}</span>
           </header>
           {session.sections.map((section) => (
             <div key={section.title} className={styles.sSection}>
-              <p className="label">{section.title}</p>
+              <h4 className={styles.sSectionTitle}>{section.title}</h4>
               <ul className={styles.sLines}>
                 {section.lines.map((line, i) => (
                   <li key={i}>{line}</li>
@@ -489,6 +489,16 @@ function Transcript({ visual }: { visual: Extract<Visual, { kind: "transcript" }
               </ul>
             </div>
           ))}
+          {session.insights?.length ? (
+            <section className={styles.sInsights}>
+              <h4 className={styles.sSectionTitle}>Инсайты</h4>
+              <ul className={styles.sInsightList}>
+                {session.insights.map((insight) => (
+                  <li key={insight}>{insight}</li>
+                ))}
+              </ul>
+            </section>
+          ) : null}
         </article>
       ))}
     </div>

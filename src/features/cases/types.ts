@@ -162,6 +162,7 @@ export type CaseVisual = VisualBase &
           who: string;
           tag: string;
           sections: { title: string; lines: string[] }[];
+          insights?: string[];
         }[];
       }
     | {
