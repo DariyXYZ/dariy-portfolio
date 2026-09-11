@@ -26,7 +26,7 @@ export function SiteHeader() {
     <header className={[styles.root, scrolled ? styles.scrolled : ""].join(" ")}>
       <div className={styles.inner}>
         <Link href="/" className={styles.brand}>
-          <span className={styles.mark} aria-hidden="true" />
+          <img className={styles.mark} src={site.logoFile} alt="" aria-hidden="true" />
           <span>{site.name}</span>
         </Link>
 

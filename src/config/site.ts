@@ -28,6 +28,7 @@ export const site = {
   telegram: "https://t.me/dariy_nazarov",
   instagram: "https://www.instagram.com/dariy_nazarov/",
   resumeFile: basePath + "/dariy-nazarov-cv.pdf",
+  logoFile: basePath + "/logo.svg",
 } as const;
 
 /** Цифры для полосы фактов под первым экраном. */
