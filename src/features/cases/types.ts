@@ -196,8 +196,6 @@ export type CaseStudy = {
   slug: string;
   /** Название проекта. */
   title: string;
-  /** Заголовок карточки: результат, а не имя проекта. */
-  outcome: string;
   client: string;
   type: string;
   industry: CaseIndustry;

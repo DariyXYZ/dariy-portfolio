@@ -45,12 +45,6 @@
   max-width: 20ch;
 }
 
-.project {
-  margin-top: var(--s-4);
-  font-size: var(--fs-body);
-  color: var(--ink-3);
-}
-
 .summary {
   margin-top: var(--s-5);
   color: var(--ink-2);
@@ -234,12 +228,6 @@
   letter-spacing: var(--ls-head);
   line-height: 1.15;
   max-width: 24ch;
-}
-
-.nextProject {
-  margin-top: var(--s-2);
-  font-size: var(--fs-sm);
-  color: var(--ink-3);
 }
 
 .nextArrow {

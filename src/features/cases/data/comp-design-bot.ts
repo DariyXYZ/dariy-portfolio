@@ -7,7 +7,6 @@ export const compDesignBot: CaseStudy[] = [
   {
     slug: "comp-design-bot",
     title: "Solutions Hub для отдела вычислительного проектирования",
-    outcome: "Заявка в отдел перестала быть письмом в пустоту",
     client: "IND · отдел вычислительного проектирования",
     type: "Внутренний продукт · Telegram Mini App",
     industry: "b2b",

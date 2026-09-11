@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!item) return {};
   return {
     title: item.title,
-    description: item.outcome,
+    description: item.summary,
   };
 }
 
@@ -88,8 +88,7 @@ export default async function CasePage({ params }: PageProps) {
             <span className={styles.heroType}>{item.year}</span>
           </div>
 
-          <h1 className={styles.title}>{item.outcome}</h1>
-          <p className={styles.project}>{item.title}</p>
+          <h1 className={styles.title}>{item.title}</h1>
           <p className={styles.summary}>{item.summary}</p>
 
           {item.liveUrl ? (
@@ -178,8 +177,7 @@ export default async function CasePage({ params }: PageProps) {
                 <Link href={"/work/" + next.slug} className={styles.next}>
                   <div>
                     <p className="label">Следующий кейс</p>
-                    <p className={styles.nextTitle}>{next.outcome}</p>
-                    <p className={styles.nextProject}>{next.title}</p>
+                    <p className={styles.nextTitle}>{next.title}</p>
                   </div>
                   <span className={styles.nextArrow} aria-hidden="true">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">

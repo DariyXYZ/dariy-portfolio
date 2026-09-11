@@ -7,8 +7,6 @@ export const businessModelLab: CaseStudy[] = [
   {
     slug: "business-model-lab",
     title: "Business Model Lab",
-    outcome:
-      "Анкета из 40 полей стала разговором, где виден смысл каждого ответа",
     client: "Сибирский центр ИИ, ТГУ",
     type: "B2B SaaS · редизайн",
     industry: "ai-saas",

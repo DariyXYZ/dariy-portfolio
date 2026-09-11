@@ -7,7 +7,6 @@ export const aiArchitectureRendering: CaseStudy[] = [
   {
     slug: "ai-architecture-rendering",
     title: "AI Rendering для архитекторов",
-    outcome: "Десять попыток на один рабочий кадр превратились в четыре",
     client: "IND Architects",
     type: "B2B · ИИ-платформа",
     industry: "ai-saas",

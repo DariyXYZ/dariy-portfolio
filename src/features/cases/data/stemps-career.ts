@@ -5,7 +5,6 @@ export const stempsCareer: CaseStudy[] = [
   {
     slug: "stemps-career",
     title: "STEMPS Career",
-    outcome: "Карьерный раздел связал обучение с консультациями и подготовкой к найму",
     client: "STEMPS · IND",
     type: "B2C · EdTech",
     industry: "edtech",

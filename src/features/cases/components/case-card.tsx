@@ -52,8 +52,7 @@ export function CaseCard({ item, wide, index }: CaseCardProps) {
           {draft ? <Pill tone="outline">Готовлю</Pill> : null}
         </div>
 
-        <h3 className={styles.outcome}>{item.outcome}</h3>
-        <p className={styles.project}>{item.title}</p>
+        <h3 className={styles.outcome}>{item.title}</h3>
 
         <ul className={styles.metrics}>
           {item.metrics.slice(0, 3).map((metric) => (

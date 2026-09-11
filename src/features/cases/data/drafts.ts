@@ -5,7 +5,6 @@ export const drafts: CaseStudy[] = [
   {
     slug: "edtech-learning-paths",
     title: "Карьерные траектории в EdTech",
-    outcome: "Разрозненные курсы стали связными карьерными траекториями",
     client: "IND",
     type: "B2C · EdTech",
     industry: "edtech",
@@ -33,7 +32,6 @@ export const drafts: CaseStudy[] = [
   {
     slug: "salini-checkout",
     title: "Премиальная мебель: воронка покупки",
-    outcome: "Конверсия ключевых этапов выросла на 10–15%",
     client: "Salini SRL",
     type: "E-commerce · оптимизация",
     industry: "ecommerce",
@@ -61,7 +59,6 @@ export const drafts: CaseStudy[] = [
   {
     slug: "raum-design-system",
     title: "RAUM: единый внутренний продукт",
-    outcome: "Разрозненные digital-решения команд собраны в одну систему",
     client: "RAUM",
     type: "B2B · дизайн-система",
     industry: "b2b",

@@ -124,12 +124,6 @@
   max-width: 20ch;
 }
 
-.project {
-  font-size: var(--fs-sm);
-  color: var(--ink-3);
-  margin-top: -8px;
-}
-
 /* ---------- метрики ---------- */
 
 .metrics {

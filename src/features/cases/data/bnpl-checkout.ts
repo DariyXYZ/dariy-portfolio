@@ -8,7 +8,6 @@ export const bnplCheckout: CaseStudy[] = [
   {
     slug: "bnpl-checkout",
     title: "Оплата долями",
-    outcome: "Семь экранов оформления рассрочки свелись к четырём",
     client: "Учебно-исследовательский проект",
     type: "Mobile · финтех и e-commerce",
     industry: "ecommerce",
