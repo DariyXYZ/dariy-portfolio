@@ -26,8 +26,8 @@ export function CaseCard({ item, wide, index }: CaseCardProps) {
             <Image
               src={asset(item.cover.src)}
               alt={item.cover.alt}
-              width={2162}
-              height={1350}
+              width={1920}
+              height={1080}
               sizes={wide ? "(max-width: 900px) 100vw, 1180px" : "(max-width: 900px) 100vw, 580px"}
               className={styles.cover}
             />

@@ -120,7 +120,7 @@ export default async function CasePage({ params }: PageProps) {
             src={asset(item.cover.src)}
             alt={item.cover.alt}
             width={2400}
-            height={1500}
+            height={1350}
             priority
             sizes="100vw"
             className={styles.cover}

@@ -74,7 +74,7 @@
 }
 
 .wide .visualInner {
-  aspect-ratio: 21 / 9;
+  aspect-ratio: 16 / 9;
 }
 
 /* ---------- содержимое ---------- */
@@ -222,29 +222,13 @@
 .coverWrap {
   overflow: hidden;
   background: var(--paper);
-  aspect-ratio: 16 / 10;
-}
-
-.wide .coverWrap {
-  aspect-ratio: 21 / 9;
-}
-
-@media (max-width: 640px) {
-  .coverWrap,
-  .wide .coverWrap {
-    aspect-ratio: 4 / 3;
-  }
+  aspect-ratio: 16 / 9;
 }
 
 .cover {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   /* По центру: обложки собраны как законченные кадры, край резать нельзя. */
   object-position: center;
-  transition: transform var(--dur-slow) var(--ease);
-}
-
-.card:not(.draft):hover .cover {
-  transform: scale(1.014);
 }
