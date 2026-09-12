@@ -33,10 +33,8 @@ export default function HomePage() {
               <TypedHeadline />
             </h1>
 
-            <p className={styles.heroLead + " " + styles.fadeUp + " " + styles.d3}>
-              {typo(
-                "Четыре года в AI SaaS, EdTech и e-commerce. Полный цикл: UX Research, сценарии, дизайн-система и проверка реализации.",
-              )}
+            <p className={styles.heroPlace + " " + styles.fadeUp + " " + styles.d3}>
+              {site.location} · {site.timezone} · {site.availability.detail}
             </p>
 
             <div className={styles.heroActions + " " + styles.fadeUp + " " + styles.d4}>
@@ -48,9 +46,6 @@ export default function HomePage() {
               </ButtonLink>
             </div>
 
-            <p className={styles.heroPlace + " " + styles.fadeUp + " " + styles.d5}>
-              {site.location} · {site.timezone} · {site.availability.detail}
-            </p>
           </div>
 
           <div className={styles.heroShot + " " + styles.fadeUp + " " + styles.d6}>

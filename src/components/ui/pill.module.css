@@ -23,16 +23,19 @@
 }
 
 .live {
-  background: var(--live-soft);
-  color: var(--live);
-  border: 1px solid rgba(21, 127, 69, 0.18);
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid #ccc;
+  gap: 14px;
+  padding: 9px 16px;
+  font-weight: 400;
 }
 
 .live::before {
   content: "";
-  width: 6px;
-  height: 6px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
-  background: var(--live);
+  background: #00ed00;
   flex: none;
 }
