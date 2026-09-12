@@ -5,11 +5,10 @@ import styles from "./typed-headline.module.css";
 
 /** Каждая реплика в две строки: верхняя обычная, нижняя приглушённая. */
 const LINES: [string, string][] = [
-  ["Привет!", "Меня зовут Дарий"],
-  ["Я продуктовый дизайнер", "UX-исследования"],
-  ["Я продуктовый дизайнер", "B2B-интерфейсы"],
-  ["Я продуктовый дизайнер", "ИИ-инструменты"],
-  ["Я продуктовый дизайнер", "+Fullstack-разработка"],
+  ["Я делаю", "UX-исследования"],
+  ["Я делаю", "интерфейсы продуктов"],
+  ["Я делаю", "AI-инструменты"],
+  ["Я делаю", "работающие прототипы"],
 ];
 
 const PHRASES = LINES.map(([a, b]) => a + "\n" + b);
@@ -32,17 +31,16 @@ function commonPrefix(a: string, b: string): number {
 }
 
 export function TypedHeadline() {
-  const [shown, setShown] = useState("");
+  const [shown, setShown] = useState(PHRASES[0]);
   const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   useEffect(() => {
     let index = 0;
-    let length = 0;
+    let length = PHRASES[0].length;
     let erasing = false;
-    const stop = false;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const tick = () => {
-      if (stop) return;
       const target = PHRASES[index];
 
       if (!erasing) {
@@ -82,7 +80,7 @@ export function TypedHeadline() {
   return (
     <>
       <span className="visually-hidden">
-        Дарий Назаров, продуктовый дизайнер: UX-исследования, B2B-интерфейсы, ИИ-инструменты
+        Дарий Назаров, продуктовый дизайнер: UX-исследования, интерфейсы продуктов, AI-инструменты, работающие прототипы
       </span>
       <span className={styles.root} aria-hidden="true">
         {/* Невидимая распорка по самой длинной реплике: высота и ширина не скачут

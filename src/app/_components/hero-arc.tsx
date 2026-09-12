@@ -1,70 +1,38 @@
 import styles from "./hero-arc.module.css";
 
-const DOT_COUNT = 54;
-const RADIUS = 470;
-const CENTER_X = 600;
-const CENTER_Y = 520;
-
-/**
- * Пунктирная дуга за первым экраном.
- * Несколько точек ближе к вершине подсвечены — взгляд ловит центр.
- */
-export function HeroArc() {
-  const dots = Array.from({ length: DOT_COUNT }, (_, i) => {
-    const t = i / (DOT_COUNT - 1);
-    const angle = Math.PI + t * Math.PI;
-    const x = CENTER_X + Math.cos(angle) * RADIUS;
-    const y = CENTER_Y + Math.sin(angle) * RADIUS;
-    const distanceFromTop = Math.abs(t - 0.5);
-    const accent = distanceFromTop < 0.07;
-    const r = accent ? 3.2 : 2;
-    const opacity = accent ? 1 : 0.26 + (0.5 - distanceFromTop) * 0.5;
-    return { x, y, r, opacity, accent };
-  });
-
-  const ticks = Array.from({ length: 9 }, (_, i) => {
-    const t = 0.16 + (i / 8) * 0.68;
-    const angle = Math.PI + t * Math.PI;
-    const inner = RADIUS - 44;
-    const outer = RADIUS - 16;
-    return {
-      x1: CENTER_X + Math.cos(angle) * inner,
-      y1: CENTER_Y + Math.sin(angle) * inner,
-      x2: CENTER_X + Math.cos(angle) * outer,
-      y2: CENTER_Y + Math.sin(angle) * outer,
-    };
-  });
-
+/** Separate geometry keeps the arc visible around the mobile hero. */
+function Arc({ mobile = false }: { mobile?: boolean }) {
+  const cx = mobile ? 210 : 600;
+  const cy = mobile ? 405 : 520;
+  const rx = mobile ? 202 : 470;
+  const ry = mobile ? 370 : 470;
+  const count = mobile ? 38 : 54;
   return (
-    <svg
-      className={styles.arc}
-      viewBox="0 0 1200 540"
-      fill="none"
-      aria-hidden="true"
-      focusable="false"
-    >
-      {ticks.map((tick, i) => (
-        <line
-          key={"t" + i}
-          x1={tick.x1}
-          y1={tick.y1}
-          x2={tick.x2}
-          y2={tick.y2}
-          stroke="var(--line)"
-          strokeWidth="1"
-          strokeLinecap="round"
-        />
-      ))}
-      {dots.map((dot, i) => (
-        <circle
-          key={"d" + i}
-          cx={dot.x}
-          cy={dot.y}
-          r={dot.r}
-          fill={dot.accent ? "var(--ink)" : "var(--ink-4)"}
-          opacity={dot.opacity}
-        />
-      ))}
+    <svg className={mobile ? styles.mobile : styles.desktop}
+      viewBox={mobile ? "0 0 420 430" : "0 0 1200 540"}
+      fill="none" aria-hidden="true" focusable="false">
+      {Array.from({ length: count }, (_, i) => {
+        const t = i / (count - 1);
+        const angle = Math.PI + t * Math.PI;
+        const accent = Math.abs(t - 0.5) < 0.07;
+        return (
+          <g key={i} className={styles.mark} style={{ animationDelay: (100 + t * 650) + "ms" }}>
+            <circle cx={cx + Math.cos(angle) * rx} cy={cy + Math.sin(angle) * ry}
+              r={accent ? (mobile ? 2.5 : 3.2) : (mobile ? 1.8 : 2)}
+              fill={accent ? "var(--ink)" : "var(--ink-4)"} opacity={accent ? 1 : 0.55} />
+            {i % (mobile ? 6 : 7) === 0 && t > 0.1 && t < 0.9 ? (
+              <line x1={cx + Math.cos(angle) * (rx - 14)} y1={cy + Math.sin(angle) * (ry - 14)}
+                x2={cx + Math.cos(angle) * (rx - (mobile ? 25 : 38))}
+                y2={cy + Math.sin(angle) * (ry - (mobile ? 25 : 38))}
+                stroke="var(--line)" strokeLinecap="round" />
+            ) : null}
+          </g>
+        );
+      })}
     </svg>
   );
+}
+
+export function HeroArc() {
+  return <><Arc /><Arc mobile /></>;
 }
