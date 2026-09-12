@@ -52,6 +52,7 @@ function landing(p: Point, side: Side): Point {
 
 type Route = {
   d: string;
+  badge?: Point;
   /** Середина последнего отрезка: там ярлык и значок не пересекают другие линии. */
   mark: Point;
   /** Начало последнего отрезка, чтобы понять, сколько места под ярлык. */
@@ -68,6 +69,22 @@ function route(rawA: Point, b: Point, fromSide: Side, toSide: Side, trunk: numbe
   const a = landing(rawA, fromSide);
   const end = landing(b, toSide);
   const horizontal = fromSide === "right" || fromSide === "left";
+  const endHorizontal = toSide === "right" || toSide === "left";
+
+  // При входе в перпендикулярную грань последний отрезок идёт по её нормали.
+  if (horizontal !== endHorizontal) {
+    const corner = horizontal ? { x: end.x, y: a.y } : { x: a.x, y: end.y };
+    const first = Math.hypot(corner.x - a.x, corner.y - a.y);
+    const last = Math.hypot(end.x - corner.x, end.y - corner.y);
+    const r = Math.min(CORNER, first / 2, last / 2);
+    const before = { x: corner.x + (a.x - corner.x) * r / (first || 1), y: corner.y + (a.y - corner.y) * r / (first || 1) };
+    const after = { x: corner.x + (end.x - corner.x) * r / (last || 1), y: corner.y + (end.y - corner.y) * r / (last || 1) };
+    return {
+      d: `M ${a.x} ${a.y} L ${before.x} ${before.y} Q ${corner.x} ${corner.y} ${after.x} ${after.y} L ${end.x} ${end.y}`,
+      mark: { x: (after.x + end.x) / 2, y: (after.y + end.y) / 2 },
+      tail: after,
+    };
+  }
 
   if (horizontal) {
     if (Math.abs(a.y - end.y) < 0.5) {
@@ -97,6 +114,7 @@ function route(rawA: Point, b: Point, fromSide: Side, toSide: Side, trunk: numbe
       ].join(" "),
       mark: { x: t + (end.x - t) * 0.55, y: end.y },
       tail: { x: t, y: end.y },
+      badge: Math.abs(end.x - t) < 56 ? { x: t, y: (a.y + end.y) / 2 } : undefined,
     };
   }
 
@@ -127,6 +145,7 @@ function route(rawA: Point, b: Point, fromSide: Side, toSide: Side, trunk: numbe
     ].join(" "),
     mark: { x: end.x, y: t + (end.y - t) * 0.55 },
     tail: { x: end.x, y: t },
+    badge: Math.abs(end.y - t) < 56 ? { x: (a.x + end.x) / 2, y: t } : undefined,
   };
 }
 
@@ -170,7 +189,8 @@ function trunks(nodes: Map<string, DiagramNode>, edges: DiagramEdge[]): number[]
       const dir = side === "right" || side === "bottom" ? 1 : -1;
       // База берётся от заданного bend, разбег — от порядка ветви в группе.
       const base = span * (edge.bend ?? 0.42);
-      const off = Math.max(28, Math.min(span - 28, base + order * FAN_STEP));
+      const margin = Math.min(28, span / 2);
+      const off = Math.max(margin, Math.min(span - margin, base + order * FAN_STEP));
       result[i] = (horizontal ? a.x : a.y) + dir * off;
     });
   });
@@ -187,7 +207,7 @@ export function Diagram({ id, width, height, nodes, edges, legend }: DiagramProp
       <svg
         className={styles.svg}
         viewBox={`${-PAD} ${-PAD} ${width + PAD * 2} ${height + PAD * 2}`}
-        style={{ minWidth: Math.min(width, 640) }}
+        style={{ minWidth: Math.min(width, 900) }}
         role="img"
       >
         <defs>
@@ -225,11 +245,11 @@ export function Diagram({ id, width, height, nodes, edges, legend }: DiagramProp
           const toSide = edge.toSide ?? "left";
           const muted = edge.tone === "muted";
           const a = anchor(from, fromSide);
-          const { d, mark, tail } = route(a, anchor(to, toSide), fromSide, toSide, trunkAt[i]);
-          const horizontal = fromSide === "right" || fromSide === "left";
+          const { d, mark, tail, badge: routeBadge } = route(a, anchor(to, toSide), fromSide, toSide, trunkAt[i]);
+          const horizontal = toSide === "right" || toSide === "left";
           const end = landing(anchor(to, toSide), toSide);
           // Значок садится у цели, ярлык у источника: так они не спорят за место.
-          const badge = edge.badge ? nearEnd(end, tail, horizontal) : null;
+          const badge = edge.badge ? routeBadge ?? nearEnd(end, tail, horizontal) : null;
           const label = edge.label
             ? edge.badge
               ? { x: horizontal ? (a.x + tail.x) / 2 : a.x, y: horizontal ? a.y : (a.y + tail.y) / 2 }
