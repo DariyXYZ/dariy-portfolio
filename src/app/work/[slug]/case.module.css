@@ -267,11 +267,11 @@
   margin-right: auto;
 }
 
-/* Обложку показываем целиком: кадры лежат на своём фоне и обрезать их нельзя. */
+/* Обложка заполняет кадр 16:9 без боковых полей. */
 .cover {
   display: block;
   width: 100%;
   height: auto;
   aspect-ratio: 16 / 9;
-  object-fit: contain;
+  object-fit: cover;
 }

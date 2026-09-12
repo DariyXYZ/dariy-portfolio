@@ -58,7 +58,7 @@ export default function HomePage() {
               src={asset("/cases/ai-architecture-rendering/cover.webp")}
               alt="Платформа ИИ-визуализаций для архитекторов"
               width={2400}
-              height={1500}
+              height={1340}
               priority
               sizes="(max-width: 1200px) 100vw, 1200px"
               className={styles.heroImage}
