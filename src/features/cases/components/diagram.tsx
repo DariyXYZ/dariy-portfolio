@@ -248,8 +248,8 @@ export function Diagram({ id, width, height, nodes, edges, legend }: DiagramProp
           const { d, mark, tail, badge: routeBadge } = route(a, anchor(to, toSide), fromSide, toSide, trunkAt[i]);
           const horizontal = toSide === "right" || toSide === "left";
           const end = landing(anchor(to, toSide), toSide);
-          // Значок садится у цели, ярлык у источника: так они не спорят за место.
-          const badge = edge.badge ? routeBadge ?? nearEnd(end, tail, horizontal) : null;
+          // Значок занимает середину свободного отрезка, отдельно от наконечника.
+          const badge = edge.badge ? routeBadge ?? centeredBadge(end, tail, horizontal) : null;
           const label = edge.label
             ? edge.badge
               ? { x: horizontal ? (a.x + tail.x) / 2 : a.x, y: horizontal ? a.y : (a.y + tail.y) / 2 }
@@ -321,17 +321,11 @@ function labelSpot(text: string, a: Point, mark: Point, tail: Point, horizontal:
   return spot(labelWidth(text), a, mark, tail, horizontal);
 }
 
-/** Значок ветви: фиксированный отступ от цели, чтобы не лечь на наконечник. */
-function nearEnd(end: Point, tail: Point, horizontal: boolean): Point {
-  const BACK = 25;
-  if (horizontal) {
-    const dir = end.x > tail.x ? -1 : 1;
-    const reach = Math.abs(end.x - tail.x);
-    return { x: end.x + dir * Math.min(BACK, reach * 0.55), y: end.y };
-  }
-  const dir = end.y > tail.y ? -1 : 1;
-  const reach = Math.abs(end.y - tail.y);
-  return { x: end.x, y: end.y + dir * Math.min(BACK, reach * 0.55) };
+/** Значок ветви по центру последнего прямого отрезка. */
+function centeredBadge(end: Point, tail: Point, horizontal: boolean): Point {
+  return horizontal
+    ? { x: (end.x + tail.x) / 2, y: end.y }
+    : { x: end.x, y: (end.y + tail.y) / 2 };
 }
 
 /** Ярлык на белой подложке: текст не ложится на линию. */
@@ -385,7 +379,7 @@ function Node({ node }: { node: DiagramNode }) {
   const textX = isLabel ? node.x : hasIndex ? node.x + 46 : cx;
   const total = node.lines.length + (node.note ? 1 : 0);
   const lineH = 19;
-  const startY = cy - ((total - 1) * lineH) / 2 + 6;
+  const startY = cy - ((total - 1) * lineH) / 2;
 
   return (
     <g className={styles[tone]}>
@@ -408,13 +402,13 @@ function Node({ node }: { node: DiagramNode }) {
       {hasIndex ? (
         <>
           <circle cx={node.x + 26} cy={cy} r={13} className={styles.indexRing} />
-          <text x={node.x + 26} y={cy + 5} textAnchor="middle" className={styles.indexText}>
+          <text x={node.x + 26} y={cy} dominantBaseline="central" textAnchor="middle" className={styles.indexText}>
             {node.index}
           </text>
         </>
       ) : null}
 
-      <text textAnchor={isLabel || hasIndex ? "start" : "middle"} className={styles.text}>
+      <text dominantBaseline="central" textAnchor={isLabel || hasIndex ? "start" : "middle"} className={styles.text}>
         {node.lines.map((line, i) => (
           <tspan key={line} x={textX} y={startY + i * lineH}>
             {line}
