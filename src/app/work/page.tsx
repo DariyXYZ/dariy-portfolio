@@ -23,7 +23,8 @@ export default function WorkPage() {
           <header className={styles.head}>
             <p className="label">Кейсы</p>
             <h1 className={styles.title}>
-              {typo(cases.length + " проектов, ")}
+              {typo(cases.length + " проектов,")}
+              <br />
               <span className="dim">{typo(published + " разобраны подробно")}</span>
             </h1>
             <p className={styles.lead}>

@@ -16,7 +16,7 @@ export const drafts: CaseStudy[] = [
     summary:
       "Исследование барьеров в онбординге, переработка архитектуры контента, персональные образовательные пути внутри существующей дизайн-системы.",
     cover: {
-      src: "/cases/edtech-learning-paths/cover.webp",
+      src: "/cases/in-progress.webp",
       alt: "Карьерные траектории в EdTech: обложка кейса в работе",
     },
     metrics: [
@@ -43,7 +43,7 @@ export const drafts: CaseStudy[] = [
     summary:
       "Каталог, карточка товара, онбординг и checkout премиального мебельного бренда с высокой долей повторных покупок.",
     cover: {
-      src: "/cases/salini-checkout/cover.webp",
+      src: "/cases/in-progress.webp",
       alt: "Воронка покупки премиальной мебели: обложка кейса в работе",
     },
     metrics: [
@@ -70,7 +70,7 @@ export const drafts: CaseStudy[] = [
     summary:
       "Дизайн-система и UI Kit для внутренних и внешних B2B-продуктов, формализация визуальных стандартов, гайдлайны для маркетинга.",
     cover: {
-      src: "/cases/raum-design-system/cover.webp",
+      src: "/cases/in-progress.webp",
       alt: "Единая дизайн-система RAUM: обложка кейса в работе",
     },
     metrics: [

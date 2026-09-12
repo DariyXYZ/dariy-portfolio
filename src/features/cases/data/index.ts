@@ -14,10 +14,10 @@ import { drafts } from "./drafts";
  */
 export const cases: CaseStudy[] = typoDeep<CaseStudy[]>([
   ...businessModelLab,
-  ...aiArchitectureRendering,
-  ...compDesignBot,
   ...bnplCheckout,
   ...stempsCareer,
+  ...aiArchitectureRendering,
+  ...compDesignBot,
   ...drafts,
 ]);
 
