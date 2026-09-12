@@ -231,6 +231,11 @@ export const compDesignBot: CaseStudy[] = [
           {
             kind: "artifact",
             title: "Impact–Effort Matrix",
+            framework: {
+              name: "Impact–Effort Matrix",
+              label: "Матрица",
+              what: "Приоритеты решений по влиянию и трудозатратам.",
+            },
             src: `${DIR}/fw-impact-effort.webp`,
             alt: "Матрица impact и effort: решения разведены по четырём углам",
             scale: "tall",
@@ -288,11 +293,6 @@ export const compDesignBot: CaseStudy[] = [
           {
             kind: "artifact",
             title: "Wireframes · MVP",
-            framework: {
-              name: "Wireframes · MVP",
-              label: "Макеты",
-              what: "Шесть экранов и переходы между ними: от каталога до работы с заявкой.",
-            },
             src: `${DIR}/fw-wireframes-cropped.webp`,
             alt: "Шесть вайрфреймов: каталог, карточка инструмента, форма заявки, профиль, действия с заявкой, лента",
             scale: "wide",

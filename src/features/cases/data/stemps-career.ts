@@ -22,7 +22,7 @@ export const stempsCareer: CaseStudy[] = [
       lever:
         "Работаю с конверсией от просмотра раздела до записи на консультацию. Вход через карьерную задачу и понятное сравнение пакетов должны помочь аудитории курсов выбрать следующую услугу.",
     },
-    liveUrl: "https://stemps.ru/career",
+    liveUrl: "https://stemps.ru/#stemps",
     cover: {
       src: "/cases/stemps-career/cover.webp",
       alt: "Карьерный раздел STEMPS: первый экран и планы",

@@ -35,6 +35,6 @@ export const site = {
 export const facts = [
   { value: "4 года", caption: "в продуктовом дизайне" },
   { value: "3 отрасли", caption: "AI SaaS · EdTech · e-commerce" },
-  { value: "10 → 4", caption: "попытки на рабочий кадр" },
-  { value: "−30%", caption: "времени ключевых операций" },
+  { value: "3 компании", caption: "IND · Salini · RAUM" },
+  { value: "5 кейсов", caption: "от исследований до интерфейсов" },
 ] as const;

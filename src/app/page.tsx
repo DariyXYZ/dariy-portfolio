@@ -43,8 +43,8 @@ export default function HomePage() {
               <ButtonLink href="/work" variant="primary" size="lg">
                 Смотреть кейсы
               </ButtonLink>
-              <ButtonLink href={site.resumeFile} variant="secondary" size="lg" download>
-                Резюме PDF
+              <ButtonLink href="/about" variant="secondary" size="lg">
+                Обо мне
               </ButtonLink>
             </div>
 
