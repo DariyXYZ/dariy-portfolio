@@ -1,3 +1,4 @@
+import { AnimatedIcon } from "@/components/ui/animated-icon";
 import Link from "next/link";
 import Image from "next/image";
 import type { CaseStudy } from "../types";
@@ -67,15 +68,7 @@ export function CaseCard({ item, wide, index }: CaseCardProps) {
           <span className={styles.cta}>
             {draft ? "Скоро" : "Смотреть кейс"}
             {!draft ? (
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                <path
-                  d="M3 11L11 3M11 3H5M11 3V9"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+              <AnimatedIcon name="external" size={16} />
             ) : null}
           </span>
           <span className={styles.tags}>{item.tags.slice(0, 2).join(" · ")}</span>

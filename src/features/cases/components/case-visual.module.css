@@ -1317,3 +1317,13 @@
   font-size: var(--fs-sm);
   max-width: 52ch;
 }
+
+.caption { margin: 0 0 var(--s-4); }
+.visualTitle { font-size: var(--fs-h3); font-weight: 500; margin-bottom: var(--s-3); }
+.scLabel, .scRowLg .scLabel { margin-top: 0; }
+.scRowSm .scLabel { min-height: 2.8em; }
+.phone, .phoneBare { border-radius: 28px; overflow: hidden; }
+.phoneBare { filter: none; border: 1px solid var(--line); }
+.foldIcon { flex: none; transition: transform 180ms ease; }
+.fold[open] .foldIcon { transform: rotate(180deg); }
+@media(min-width: 900px) { .fourColumns { grid-template-columns: repeat(4, minmax(0, 1fr)); } }

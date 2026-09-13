@@ -7,6 +7,7 @@ import { Pill } from "./pill";
 import { ButtonLink } from "./button";
 import buttons from "./button.module.css";
 import styles from "./contact-dialog.module.css";
+import { AnimatedIcon } from "./animated-icon";
 
 const ContactContext = createContext<() => void>(() => {});
 
@@ -29,7 +30,7 @@ export function ContactProvider({ children }: { children: ReactNode }) {
           const rect = event.currentTarget.getBoundingClientRect();
           if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) dialog.current?.close();
         }}>
-        <button type="button" className={styles.close} aria-label="Закрыть окно контактов" onClick={() => dialog.current?.close()}>×</button>
+        <button type="button" className={styles.close} aria-label="Закрыть окно контактов" onClick={() => dialog.current?.close()}><AnimatedIcon name="close" size={24} /></button>
         <Pill tone="live">{typo(site.availability.label)}</Pill>
         <h2 id="contact-title" className={styles.title}>{typo("Расскажите о задаче.")}<br /><span className="dim">{typo("Отвечу за день")}</span></h2>
         <p className={styles.lead}>{typo("Ищу команду, где смогу отвечать за пользовательский сценарий от исследования до запуска и оценки результата.")}</p>
@@ -48,7 +49,7 @@ export function ContactProvider({ children }: { children: ReactNode }) {
 
 export function ContactTrigger({ badge = false, className, onOpen }: { badge?: boolean; className?: string; onOpen?: () => void }) {
   const show = useContext(ContactContext);
-  return <button type="button" aria-haspopup="dialog" className={badge ? styles.badge : className || [buttons.root, buttons.primary, buttons.md].join(" ")}
+  return <button type="button" aria-haspopup="dialog" className={badge ? styles.badge : className || [buttons.root, buttons.secondary, buttons.md].join(" ")}
     onClick={() => { show(); onOpen?.(); }}>
     {badge ? <Pill tone="live">{typo(site.availability.label)}</Pill> : "Связаться"}
   </button>;

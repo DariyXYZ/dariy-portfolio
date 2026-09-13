@@ -7,6 +7,7 @@ import { primaryNav } from "@/config/navigation";
 import { site } from "@/config/site";
 import { ContactTrigger } from "@/components/ui/contact-dialog";
 import styles from "./site-header.module.css";
+import { AnimatedIcon } from "@/components/ui/animated-icon";
 
 export function SiteHeader() {
   const pathname = usePathname();
@@ -55,6 +56,7 @@ export function SiteHeader() {
         <div className={styles.actions}>
           <a className={styles.resume} href={site.resumeFile} download>
             Резюме PDF
+            <AnimatedIcon name="download" size={16} />
           </a>
           <ContactTrigger />
         </div>
@@ -66,8 +68,7 @@ export function SiteHeader() {
           aria-label={open ? "Закрыть меню" : "Открыть меню"}
           onClick={() => setOpen((v) => !v)}
         >
-          <span className={open ? styles.barTop : ""} />
-          <span className={open ? styles.barBottom : ""} />
+          <AnimatedIcon name="menu" size={22} />
         </button>
       </div>
 

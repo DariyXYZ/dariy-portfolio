@@ -1,0 +1,14 @@
+.icon { display: inline-block; flex: none; vertical-align: middle; overflow: visible; }
+.external { overflow: visible; }
+.moving { transform-origin: 12px 12px; transition: transform 300ms ease-in-out; }
+:global(a:hover) .arrow .moving, :global(a:focus-visible) .arrow .moving,
+:global(a:hover) .external .moving, :global(a:focus-visible) .external .moving,
+:global(button:hover) .external .moving { transform: translateX(3px); }
+:global(a:hover) .download .moving, :global(a:focus-visible) .download .moving { transform: translateY(2px); }
+:global(summary:hover) .chevron .moving, :global(summary:focus-visible) .chevron .moving { transform: translateY(2px); }
+:global(button:hover) .close .moving, :global(button:focus-visible) .close .moving { transform: rotate(90deg); }
+.menu path { transform-origin: 12px 12px; transition: transform 250ms ease, opacity 180ms ease; }
+:global(button[aria-expanded="true"]) .menu path:first-child { transform: translateY(6px) rotate(45deg); transform-origin: 12px 6px; }
+:global(button[aria-expanded="true"]) .menu path:nth-child(2) { opacity: 0; }
+:global(button[aria-expanded="true"]) .menu path:last-child { transform: translateY(-6px) rotate(-45deg); transform-origin: 12px 18px; }
+@media(prefers-reduced-motion: reduce) { .moving, .menu path { transition: none; } }

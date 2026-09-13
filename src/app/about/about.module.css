@@ -220,3 +220,11 @@
   display: block;
   mix-blend-mode: multiply;
 }
+
+/* Compact skill groups; no full-width tinted panel. */
+.skills { grid-template-columns: 1fr; gap: 0; max-width: 980px; }
+.skillGroup { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 24px; border-color: var(--line); padding-block: 20px; }
+.skillTitle { font-size: var(--fs-sm); line-height: 1.5; }
+.chips { margin: 0; gap: 8px 18px; list-style: none; padding: 0; }
+.chips li { font-size: var(--fs-sm); color: var(--ink-2); line-height: 1.5; }
+@media(max-width: 600px) { .skillGroup { grid-template-columns: 1fr; gap: 10px; padding-block: 18px; } }

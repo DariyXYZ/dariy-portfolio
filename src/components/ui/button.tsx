@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import styles from "./button.module.css";
+import { AnimatedIcon } from "./animated-icon";
 
 type Variant = "primary" | "secondary" | "ghost";
 type Size = "md" | "lg";
@@ -38,6 +39,7 @@ export function ButtonLink({
         {...(download ? { download: true } : {})}
       >
         {children}
+        {download ? <AnimatedIcon name="download" /> : external ? <AnimatedIcon name="external" /> : null}
       </a>
     );
   }

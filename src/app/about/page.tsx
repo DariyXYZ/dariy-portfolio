@@ -3,7 +3,6 @@ import { Container } from "@/components/ui/container";
 import { Section, SectionHead } from "@/components/ui/section";
 import { Reveal } from "@/components/ui/reveal";
 import { ButtonLink } from "@/components/ui/button";
-import { Pill } from "@/components/ui/pill";
 import { experience, education, skillGroups, quickFacts } from "@/features/profile";
 import Image from "next/image";
 import { site, asset } from "@/config/site";
@@ -112,7 +111,7 @@ export default function AboutPage() {
       </Section>
 
       {/* ---------- Навыки ---------- */}
-      <Section tone="sand">
+      <Section>
         <Container>
           <Reveal>
             <SectionHead kicker="Компетенции" title="Методы, инструменты и рынки" />
@@ -123,11 +122,11 @@ export default function AboutPage() {
               <Reveal key={group.title} delay={i * 70}>
                 <div className={styles.skillGroup}>
                   <h3 className={styles.skillTitle}>{group.title}</h3>
-                  <div className={styles.chips}>
+                  <ul className={styles.chips}>
                     {group.items.map((skill) => (
-                      <Pill key={skill}>{skill}</Pill>
+                      <li key={skill}>{skill}</li>
                     ))}
-                  </div>
+                  </ul>
                 </div>
               </Reveal>
             ))}

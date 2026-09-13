@@ -3,6 +3,8 @@ import type { CaseVisual as Visual, FrameworkTag } from "../types";
 import { asset } from "@/config/site";
 import { Diagram } from "./diagram";
 import { Zoomable } from "./zoomable";
+import { ScreenCycle } from "./screen-cycle";
+import { AnimatedIcon } from "@/components/ui/animated-icon";
 import styles from "./case-visual.module.css";
 
 type CaseVisualProps = {
@@ -22,8 +24,9 @@ export function CaseVisual({ visual }: CaseVisualProps) {
     return (
       <figure className={styles.figure}>
         {visual.framework ? <FrameworkHead tag={visual.framework} /> : null}
-        <Body visual={visual} />
+        {visual.title && visual.kind === "screens" ? <h3 className={styles.visualTitle}>{visual.title}</h3> : null}
         {caption}
+        <Body visual={visual} />
       </figure>
     );
   }
@@ -32,7 +35,7 @@ export function CaseVisual({ visual }: CaseVisualProps) {
     <figure className={styles.figure}>
       <details className={styles.fold}>
         <summary className={styles.foldHead}>
-          <span className={styles.pm} aria-hidden="true" />
+          <AnimatedIcon name="chevron" className={styles.foldIcon} />
           <span className={styles.foldMain}>
             <span className={styles.foldName}>{visual.framework.name}</span>
             <span className={styles.foldWhat}>{visual.framework.what}</span>
@@ -40,8 +43,8 @@ export function CaseVisual({ visual }: CaseVisualProps) {
           <span className={styles.foldTag}>{visual.framework.label ?? "Фреймворк"}</span>
         </summary>
         <div className={styles.foldBody}>
-          <Body visual={visual} />
           {caption}
+          <Body visual={visual} />
         </div>
       </details>
     </figure>
@@ -166,10 +169,12 @@ function Screens({ visual }: { visual: Extract<Visual, { kind: "screens" }> }) {
   const frame = wide ? styles.screenFrame : visual.bare ? styles.phoneBare : styles.phone;
 
   return (
-    <ul className={cls}>
+    <ul className={[cls, visual.columns === 4 ? styles.fourColumns : ""].join(" ")}>
       {visual.items.map((item) => (
         <li key={item.src} className={styles.scItem}>
-          <div className={frame}>
+          <p className={styles.scLabel}>{item.label}</p>
+          {item.note ? <p className={styles.scNote}>{item.note}</p> : null}
+          {item.variants ? <ScreenCycle variants={item.variants} frameClass={frame} imageClass={styles.phoneImage} /> : <div className={frame}>
             <Image
               src={asset(item.src)}
               alt={item.alt}
@@ -184,9 +189,7 @@ function Screens({ visual }: { visual: Extract<Visual, { kind: "screens" }> }) {
               }
               className={styles.phoneImage}
             />
-          </div>
-          <p className={styles.scLabel}>{item.label}</p>
-          {item.note ? <p className={styles.scNote}>{item.note}</p> : null}
+          </div>}
         </li>
       ))}
     </ul>

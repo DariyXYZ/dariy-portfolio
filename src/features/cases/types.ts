@@ -78,6 +78,7 @@ export type DiagramEdge = {
 };
 
 type VisualBase = {
+  title?: string;
   framework?: FrameworkTag;
   caption?: string;
 };
@@ -96,7 +97,8 @@ export type CaseVisual = VisualBase &
     | {
         /** Ряд мобильных экранов: показываем сценарий, а не один кадр. */
         kind: "screens";
-        items: { src: string; alt: string; label: string; note?: string }[];
+        items: { src: string; alt: string; label: string; note?: string; variants?: { src: string; alt: string; label: string }[] }[];
+        columns?: 4;
         /** sm плотный ряд, md мобильные, lg два крупных, wide десктопные. */
         size?: "sm" | "md" | "lg" | "wide";
         /** Снимок уже со скруглёнными углами: рамку от сайта не рисуем. */
