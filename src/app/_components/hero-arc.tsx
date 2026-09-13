@@ -53,8 +53,9 @@ export function HeroArc() {
     <svg ref={svgRef} className={styles.ring} viewBox="0 0 1200 1200"
       fill="none" aria-hidden="true" focusable="false">
       {DOTS.map((dot, i) => (
-        <g key={i} className={styles.mark} style={{ animationDelay: (150 + i * 18) + "ms" }}>
+        <g key={i} className={styles.mark} style={{ animationDelay: (150 + i * 48) + "ms" }}>
           <circle cx={dot.x} cy={dot.y} r="2.2" fill="var(--ink-4)" opacity="0.65" />
+          <circle cx={dot.x} cy={dot.y} r="3.2" fill="var(--ink)" className={styles.lead} style={{ animationDelay: (150 + i * 48) + "ms" }} />
           <circle data-accent cx={dot.x} cy={dot.y} r="3.2" fill="var(--ink)" className={styles.accent} />
         </g>
       ))}

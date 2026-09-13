@@ -680,6 +680,11 @@ export const bnplCheckout: CaseStudy[] = [
           {
             "kind": "artifact",
             "src": "/cases/bnpl-checkout/uikit.webp",
+            "framework": {
+              "name": "UI Kit",
+              "label": "Компоненты",
+              "what": "Компоненты и состояния интерфейса"
+            },
             "alt": "UI Kit: компоненты и состояния",
             "title": "UI Kit"
           }

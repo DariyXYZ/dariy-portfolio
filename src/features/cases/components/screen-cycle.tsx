@@ -2,7 +2,6 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { asset } from "@/config/site";
-import styles from "./screen-cycle.module.css";
 
 type Variant = { src: string; alt: string; label: string };
 export function ScreenCycle({ variants, frameClass, imageClass }: { variants: Variant[]; frameClass: string; imageClass: string }) {
@@ -30,10 +29,6 @@ export function ScreenCycle({ variants, frameClass, imageClass }: { variants: Va
   return <div ref={root}>
     <div className={frameClass}>
       {variants.map((item, i) => <Image key={item.src} src={asset(item.src)} alt={item.alt} width={900} height={1968} sizes="(max-width: 640px) 45vw, 300px" className={imageClass} style={{ display: index === i ? "block" : "none" }} />)}
-    </div>
-    <div className={styles.controls}>
-      <button type="button" aria-label="Показать другое состояние ошибки" onClick={() => { setPaused(true); setIndex(i => (i + 1) % variants.length); }}>{variants[index].label} ↔</button>
-      <button type="button" aria-label={paused ? "Запустить смену экранов" : "Остановить смену экранов"} onClick={() => setPaused(v => !v)}>{paused ? "Старт" : "Пауза"}</button>
     </div>
   </div>;
 }

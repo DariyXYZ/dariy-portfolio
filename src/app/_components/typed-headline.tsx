@@ -19,10 +19,19 @@ const LONGEST = LINES.reduce((best, pair) =>
   pair[0].length + pair[1].length > best[0].length + best[1].length ? pair : best,
 );
 
-const TYPE = 52;
-const ERASE = 24;
-const HOLD = 2100;
-const AFTER_ERASE = 260;
+const TYPE = 78;
+const ERASE = 38;
+const HOLD = 2400;
+const AFTER_ERASE = 340;
+
+/** Uneven keystrokes, short word-boundary pauses and occasional hesitation. */
+function keystrokeDelay(character: string, erasing = false): number {
+  const base = erasing ? ERASE : TYPE;
+  const jitter = Math.random() * (erasing ? 48 : 85);
+  const boundary = /[\s,.:—]/.test(character) ? (erasing ? 35 : 110) : 0;
+  const hesitation = Math.random() < 0.08 ? (erasing ? 90 : 170) : 0;
+  return base + jitter + boundary + hesitation;
+}
 
 /** Сколько символов у соседних реплик совпадает: их не перенабираем. */
 function commonPrefix(a: string, b: string): number {
@@ -51,11 +60,11 @@ export function TypedHeadline() {
         if (length < target.length) {
           length += 1;
           setShown(target.slice(0, length));
-          timer.current = setTimeout(tick, TYPE + Math.random() * 45);
+          timer.current = setTimeout(tick, keystrokeDelay(target[length - 1]));
           return;
         }
         erasing = true;
-        timer.current = setTimeout(tick, HOLD);
+        timer.current = setTimeout(tick, HOLD + Math.random() * 500);
         return;
       }
 
@@ -65,13 +74,13 @@ export function TypedHeadline() {
       if (length > keep) {
         length -= 1;
         setShown(target.slice(0, length));
-        timer.current = setTimeout(tick, ERASE);
+        timer.current = setTimeout(tick, keystrokeDelay(target[length], true));
         return;
       }
 
       index = (index + 1) % PHRASES.length;
       erasing = false;
-      timer.current = setTimeout(tick, AFTER_ERASE);
+      timer.current = setTimeout(tick, AFTER_ERASE + Math.random() * 220);
     };
 
     timer.current = setTimeout(tick, 300);

@@ -12,7 +12,17 @@
 
 .mark {
   opacity: 0;
-  animation: markIn 450ms var(--ease) both;
+  animation: markIn 140ms ease-out both;
+}
+
+.lead {
+  opacity: 0;
+  animation: leadOut 520ms ease-out backwards;
+}
+
+@keyframes leadOut {
+  0%, 20% { opacity: 1; }
+  100% { opacity: 0; }
 }
 
 .accent {
@@ -36,4 +46,5 @@
 @media (prefers-reduced-motion: reduce) {
   .mark { opacity: 1; animation: none; }
   .accent { transition: none; }
+  .lead { opacity: 0; animation: none; }
 }
