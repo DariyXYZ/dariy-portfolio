@@ -31,14 +31,17 @@ function commonPrefix(a: string, b: string): number {
 }
 
 export function TypedHeadline() {
-  const [shown, setShown] = useState(PHRASES[0]);
+  const [shown, setShown] = useState(LINES[0][0] + "\n");
   const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   useEffect(() => {
     let index = 0;
-    let length = PHRASES[0].length;
+    let length = LINES[0][0].length + 1;
     let erasing = false;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      timer.current = setTimeout(() => setShown(PHRASES[0]), 0);
+      return () => clearTimeout(timer.current);
+    }
 
     const tick = () => {
       const target = PHRASES[index];
@@ -70,7 +73,7 @@ export function TypedHeadline() {
       timer.current = setTimeout(tick, AFTER_ERASE);
     };
 
-    timer.current = setTimeout(tick, 700);
+    timer.current = setTimeout(tick, 300);
     return () => clearTimeout(timer.current);
   }, []);
 

@@ -17,7 +17,7 @@
 
 .mark {
   opacity: 0;
-  animation: markIn 700ms var(--ease) both;
+  animation: markIn 1100ms var(--ease) both;
 }
 
 @keyframes markIn {

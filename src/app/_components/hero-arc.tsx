@@ -16,7 +16,7 @@ function Arc({ mobile = false }: { mobile?: boolean }) {
         const angle = Math.PI + t * Math.PI;
         const accent = Math.abs(t - 0.5) < 0.07;
         return (
-          <g key={i} className={styles.mark} style={{ animationDelay: (100 + t * 650) + "ms" }}>
+          <g key={i} className={styles.mark} style={{ animationDelay: (150 + t * 1000) + "ms" }}>
             <circle cx={cx + Math.cos(angle) * rx} cy={cy + Math.sin(angle) * ry}
               r={accent ? (mobile ? 2.5 : 3.2) : (mobile ? 1.8 : 2)}
               fill={accent ? "var(--ink)" : "var(--ink-4)"} opacity={accent ? 1 : 0.55} />
