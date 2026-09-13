@@ -62,7 +62,7 @@ export function SiteFooter() {
           <p className={styles.copy}>
             © {new Date().getFullYear()} {site.name}
           </p>
-          <p className={styles.copy}>Собрано на Next.js</p>
+          <p className={styles.copy}>Собрано на&nbsp;Next.js</p>
         </div>
       </Container>
     </footer>

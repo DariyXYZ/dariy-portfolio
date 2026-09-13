@@ -1,23 +1,23 @@
-.desktop,
-.mobile {
+.ring {
   position: absolute;
+  top: -130px;
   left: 50%;
   transform: translateX(-50%);
+  width: min(1400px, 132vw);
   height: auto;
+  aspect-ratio: 1;
   pointer-events: none;
   z-index: 0;
 }
 
-.desktop {
-  top: -40px;
-  width: min(1400px, 132vw);
-}
-
-.mobile { display: none; }
-
 .mark {
   opacity: 0;
-  animation: markIn 1100ms var(--ease) both;
+  animation: markIn 450ms var(--ease) both;
+}
+
+.accent {
+  opacity: 0;
+  transition: opacity 120ms linear;
 }
 
 @keyframes markIn {
@@ -26,14 +26,14 @@
 }
 
 @media (max-width: 720px) {
-  .desktop { display: none; }
-  .mobile {
-    display: block;
-    top: -20px;
-    width: 100%;
+  .ring {
+    top: -38px;
+    width: 124vw;
   }
+  .mark circle { r: 4px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .mark { opacity: 1; animation: none; }
+  .accent { transition: none; }
 }

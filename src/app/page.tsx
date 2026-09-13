@@ -26,7 +26,7 @@ export default function HomePage() {
         <Container>
           <div className={styles.heroInner}>
             <div className={styles.fadeUp + " " + styles.d1}>
-              <Pill tone="live">{site.availability.label}</Pill>
+              <Pill tone="live">{typo(site.availability.label)}</Pill>
             </div>
 
             <h1 className={styles.heroTitle + " " + styles.fadeUp + " " + styles.d2}>
@@ -34,7 +34,7 @@ export default function HomePage() {
             </h1>
 
             <p className={styles.heroPlace + " " + styles.fadeUp + " " + styles.d3}>
-              {site.location} · {site.timezone} · {site.availability.detail}
+              {typo(`${site.location} · ${site.timezone} · ${site.availability.detail}`)}
             </p>
 
             <div className={styles.heroActions + " " + styles.fadeUp + " " + styles.d4}>

@@ -1,4 +1,5 @@
 import type { CSSProperties } from "react";
+import { typo } from "@/lib/typo";
 import { Container } from "./container";
 import { Reveal } from "./reveal";
 import styles from "./stat-strip.module.css";
@@ -22,8 +23,8 @@ export function StatStrip({ items }: StatStripProps) {
         <ul className={styles.grid} style={{ "--cols": cols } as CSSProperties}>
           {items.map((item, i) => (
             <Reveal key={item.value + item.caption} as="li" delay={i * 60} className={styles.item}>
-              <span className={styles.value}>{item.value}</span>
-              <span className={styles.caption}>{item.caption}</span>
+              <span className={styles.value}>{typo(item.value)}</span>
+              <span className={styles.caption}>{typo(item.caption)}</span>
             </Reveal>
           ))}
         </ul>

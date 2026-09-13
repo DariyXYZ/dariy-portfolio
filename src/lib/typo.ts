@@ -37,7 +37,7 @@ export function typo(text: string): string {
   const parts = text.split(/(\s+)/);
 
   for (let i = 0; i < parts.length - 2; i += 2) {
-    if (parts[i + 1] !== " ") continue;
+    if (!/^[ \t]+$/.test(parts[i + 1])) continue;
     const word = parts[i];
     const next = parts[i + 2];
 

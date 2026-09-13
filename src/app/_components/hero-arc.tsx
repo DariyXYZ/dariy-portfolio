@@ -1,38 +1,63 @@
+"use client";
+
+import { useEffect, useRef } from "react";
 import styles from "./hero-arc.module.css";
 
-/** Separate geometry keeps the arc visible around the mobile hero. */
-function Arc({ mobile = false }: { mobile?: boolean }) {
-  const cx = mobile ? 210 : 600;
-  const cy = mobile ? 405 : 520;
-  const rx = mobile ? 202 : 470;
-  const ry = mobile ? 370 : 470;
-  const count = mobile ? 38 : 54;
-  return (
-    <svg className={mobile ? styles.mobile : styles.desktop}
-      viewBox={mobile ? "0 0 420 430" : "0 0 1200 540"}
-      fill="none" aria-hidden="true" focusable="false">
-      {Array.from({ length: count }, (_, i) => {
-        const t = i / (count - 1);
-        const angle = Math.PI + t * Math.PI;
-        const accent = Math.abs(t - 0.5) < 0.07;
-        return (
-          <g key={i} className={styles.mark} style={{ animationDelay: (150 + t * 1000) + "ms" }}>
-            <circle cx={cx + Math.cos(angle) * rx} cy={cy + Math.sin(angle) * ry}
-              r={accent ? (mobile ? 2.5 : 3.2) : (mobile ? 1.8 : 2)}
-              fill={accent ? "var(--ink)" : "var(--ink-4)"} opacity={accent ? 1 : 0.55} />
-            {i % (mobile ? 6 : 7) === 0 && t > 0.1 && t < 0.9 ? (
-              <line x1={cx + Math.cos(angle) * (rx - 14)} y1={cy + Math.sin(angle) * (ry - 14)}
-                x2={cx + Math.cos(angle) * (rx - (mobile ? 25 : 38))}
-                y2={cy + Math.sin(angle) * (ry - (mobile ? 25 : 38))}
-                stroke="var(--line)" strokeLinecap="round" />
-            ) : null}
-          </g>
-        );
-      })}
-    </svg>
-  );
-}
+const COUNT = 96;
+const DOTS = Array.from({ length: COUNT }, (_, i) => {
+  const angle = -Math.PI / 2 + (i / COUNT) * Math.PI * 2;
+  return { x: 600 + Math.cos(angle) * 470, y: 600 + Math.sin(angle) * 470 };
+});
 
 export function HeroArc() {
-  return <><Arc /><Arc mobile /></>;
+  const svgRef = useRef<SVGSVGElement>(null);
+
+  useEffect(() => {
+    const svg = svgRef.current;
+    const hero = svg?.closest("section");
+    if (!svg || !hero) return;
+    const accents = Array.from(svg.querySelectorAll<SVGCircleElement>("[data-accent]"));
+    let frame = 0;
+    let cursor: { x: number; y: number } | null = null;
+    const paint = () => {
+      frame = 0;
+      const matrix = svg.getScreenCTM();
+      if (!matrix) return;
+      accents.forEach((dot, i) => {
+        const point = new DOMPoint(DOTS[i].x, DOTS[i].y).matrixTransform(matrix);
+        const distance = cursor ? Math.hypot(point.x - cursor.x, point.y - cursor.y) : Infinity;
+        dot.style.opacity = String(Math.max(0, 1 - distance / 120));
+      });
+    };
+    const schedule = () => { if (!frame) frame = requestAnimationFrame(paint); };
+    const move = (event: PointerEvent) => {
+      if (event.pointerType !== "mouse") return;
+      cursor = { x: event.clientX, y: event.clientY };
+      schedule();
+    };
+    const clear = () => { cursor = null; schedule(); };
+    hero.addEventListener("pointermove", move);
+    hero.addEventListener("pointerleave", clear);
+    window.addEventListener("scroll", clear, { passive: true });
+    window.addEventListener("blur", clear);
+    return () => {
+      cancelAnimationFrame(frame);
+      hero.removeEventListener("pointermove", move);
+      hero.removeEventListener("pointerleave", clear);
+      window.removeEventListener("scroll", clear);
+      window.removeEventListener("blur", clear);
+    };
+  }, []);
+
+  return (
+    <svg ref={svgRef} className={styles.ring} viewBox="0 0 1200 1200"
+      fill="none" aria-hidden="true" focusable="false">
+      {DOTS.map((dot, i) => (
+        <g key={i} className={styles.mark} style={{ animationDelay: (150 + i * 18) + "ms" }}>
+          <circle cx={dot.x} cy={dot.y} r="2.2" fill="var(--ink-4)" opacity="0.65" />
+          <circle data-accent cx={dot.x} cy={dot.y} r="3.2" fill="var(--ink)" className={styles.accent} />
+        </g>
+      ))}
+    </svg>
+  );
 }

@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { typo } from "@/lib/typo";
 import styles from "./section.module.css";
 
 type SectionProps = {
@@ -33,8 +34,8 @@ export function SectionHead({ kicker, title, lead, action }: SectionHeadProps) {
     <header className={styles.head}>
       <div className={styles.headMain}>
         {kicker ? <p className={`label ${styles.kicker}`}>{kicker}</p> : null}
-        <h2 className="h2">{title}</h2>
-        {lead ? <p className={`lead ${styles.lead}`}>{lead}</p> : null}
+        <h2 className="h2">{typeof title === "string" ? typo(title) : title}</h2>
+        {lead ? <p className={`lead ${styles.lead}`}>{typeof lead === "string" ? typo(lead) : lead}</p> : null}
       </div>
       {action ? <div className={styles.headAction}>{action}</div> : null}
     </header>
