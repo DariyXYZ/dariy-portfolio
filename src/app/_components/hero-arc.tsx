@@ -3,9 +3,9 @@
 import { useEffect, useRef } from "react";
 import styles from "./hero-arc.module.css";
 
-const COUNT = 96;
+const COUNT = 54;
 const DOTS = Array.from({ length: COUNT }, (_, i) => {
-  const angle = -Math.PI / 2 + (i / COUNT) * Math.PI * 2;
+  const angle = Math.PI + (i / (COUNT - 1)) * Math.PI;
   return { x: 600 + Math.cos(angle) * 470, y: 600 + Math.sin(angle) * 470 };
 });
 

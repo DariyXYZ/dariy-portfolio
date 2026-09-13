@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Onest, JetBrains_Mono } from "next/font/google";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
+import { ContactProvider } from "@/components/ui/contact-dialog";
 import { site } from "@/config/site";
 import "./globals.css";
 
@@ -45,9 +46,11 @@ export default function RootLayout({
         <a className="skip-link" href="#main">
           Перейти к содержанию
         </a>
-        <SiteHeader />
-        <main id="main">{children}</main>
-        <SiteFooter />
+        <ContactProvider>
+          <SiteHeader />
+          <main id="main">{children}</main>
+          <SiteFooter />
+        </ContactProvider>
       </body>
     </html>
   );

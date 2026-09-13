@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { primaryNav } from "@/config/navigation";
 import { site } from "@/config/site";
-import { ButtonLink } from "@/components/ui/button";
+import { ContactTrigger } from "@/components/ui/contact-dialog";
 import styles from "./site-header.module.css";
 
 export function SiteHeader() {
@@ -25,7 +25,13 @@ export function SiteHeader() {
   return (
     <header className={[styles.root, scrolled ? styles.scrolled : ""].join(" ")}>
       <div className={styles.inner}>
-        <Link href="/" className={styles.brand}>
+        <Link href="/" className={styles.brand} onClick={(event) => {
+          closeSheet();
+          if (pathname === "/" && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey) {
+            event.preventDefault();
+            window.scrollTo({ top: 0, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
+          }
+        }}>
           <img className={styles.mark} src={site.logoFile} alt="" aria-hidden="true" />
           <span>{site.name}</span>
         </Link>
@@ -50,9 +56,7 @@ export function SiteHeader() {
           <a className={styles.resume} href={site.resumeFile} download>
             Резюме PDF
           </a>
-          <ButtonLink href="#contact" variant="primary" size="md">
-            Связаться
-          </ButtonLink>
+          <ContactTrigger />
         </div>
 
         <button
@@ -87,9 +91,7 @@ export function SiteHeader() {
           >
             Резюме PDF
           </a>
-          <a className={styles.sheetLink} href="#contact" onClick={closeSheet}>
-            Связаться
-          </a>
+          <ContactTrigger className={styles.sheetLink} onOpen={closeSheet} />
         </div>
       ) : null}
     </header>

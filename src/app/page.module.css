@@ -212,47 +212,8 @@
 }
 
 /* =========================================================
-   КОНТАКТ
+   ОБЛОЖКА
    ========================================================= */
-
-.contact {
-  border-radius: var(--r-lg);
-  border: 1px solid var(--line);
-  background: var(--sand);
-  padding: clamp(32px, 5vw, 72px);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: var(--s-5);
-}
-
-.contactTitle {
-  font-size: clamp(1.7rem, 3.2vw, 2.5rem);
-  letter-spacing: var(--ls-display);
-  line-height: 1.05;
-  max-width: 18ch;
-}
-
-.contactLead {
-  color: var(--ink-2);
-  max-width: 48ch;
-  text-wrap: pretty;
-}
-
-.contactActions {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: var(--s-3);
-  margin-top: var(--s-2);
-}
-
-.contactMeta {
-  margin-top: var(--s-4);
-  font-size: var(--fs-sm);
-  color: var(--ink-3);
-}
 
 .heroImage {
   display: block;

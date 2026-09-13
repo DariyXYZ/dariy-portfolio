@@ -1,7 +1,7 @@
 import { Container } from "@/components/ui/container";
 import { Section, SectionHead } from "@/components/ui/section";
 import { ButtonLink } from "@/components/ui/button";
-import { Pill } from "@/components/ui/pill";
+import { ContactTrigger } from "@/components/ui/contact-dialog";
 import { Reveal } from "@/components/ui/reveal";
 import { ArrowLink } from "@/components/ui/arrow-link";
 import Image from "next/image";
@@ -26,7 +26,7 @@ export default function HomePage() {
         <Container>
           <div className={styles.heroInner}>
             <div className={styles.fadeUp + " " + styles.d1}>
-              <Pill tone="live">{typo(site.availability.label)}</Pill>
+              <ContactTrigger badge />
             </div>
 
             <h1 className={styles.heroTitle + " " + styles.fadeUp + " " + styles.d2}>
@@ -157,37 +157,6 @@ export default function HomePage() {
               </Reveal>
             ))}
           </div>
-        </Container>
-      </Section>
-
-      {/* ---------- Контакт ---------- */}
-      <Section id="contact" tone="paper">
-        <Container>
-          <Reveal>
-            <div className={styles.contact}>
-              <Pill tone="live">{site.availability.label}</Pill>
-              <h2 className={styles.contactTitle}>
-                {typo("Расскажите о задаче. ")}
-                <span className="dim">{typo("Отвечу за день")}</span>
-              </h2>
-              <p className={styles.contactLead}>
-                {typo(
-                  "Ищу команду, где смогу отвечать за пользовательский сценарий от исследования до запуска и оценки результата.",
-                )}
-              </p>
-              <div className={styles.contactActions}>
-                <ButtonLink href={"mailto:" + site.email} variant="primary" size="lg" external>
-                  Написать на почту
-                </ButtonLink>
-                <ButtonLink href={site.telegram} variant="secondary" size="lg" external>
-                  Telegram
-                </ButtonLink>
-              </div>
-              <p className={styles.contactMeta}>
-                {site.email} · {site.phone}
-              </p>
-            </div>
-          </Reveal>
         </Container>
       </Section>
     </>
