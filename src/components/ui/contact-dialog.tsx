@@ -50,7 +50,7 @@ export function ContactProvider({ children }: { children: ReactNode }) {
 export function ContactTrigger({ badge = false, className, onOpen }: { badge?: boolean; className?: string; onOpen?: () => void }) {
   const show = useContext(ContactContext);
   return <button type="button" aria-haspopup="dialog" className={badge ? styles.badge : className || [buttons.root, buttons.secondary, buttons.md].join(" ")}
-    onClick={() => { show(); onOpen?.(); }}>
+    onClick={() => { onOpen?.(); show(); }}>
     {badge ? <Pill tone="live">{typo(site.availability.label)}</Pill> : "Связаться"}
   </button>;
 }

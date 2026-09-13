@@ -119,12 +119,31 @@
 }
 
 .sheet {
-  display: none;
-  flex-direction: column;
-  padding: var(--s-2) var(--gutter) var(--s-5);
-  border-top: 1px solid var(--line-2);
-  background: var(--paper);
+  position: fixed;
+  inset: 0 0 auto;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: none;
+  max-height: calc(100dvh - 24px);
+  overflow-y: auto;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0 0 20px 20px;
+  background: #fff;
+  color: var(--ink);
 }
+.sheet::backdrop {
+  background: rgb(255 255 255 / 50%);
+  backdrop-filter: blur(14px);
+}
+.sheet[open] { animation: menuIn 280ms cubic-bezier(0.2, 0.8, 0.2, 1); }
+.sheetLinks { display: flex; flex-direction: column; padding: 8px var(--gutter) 24px; border-top: 1px solid var(--line-2); }
+@keyframes menuIn {
+  from { opacity: 0; transform: translateY(-14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media(prefers-reduced-motion: reduce) { .sheet[open] { animation: none; } }
 
 .sheetLink {
   padding: 14px 0;
@@ -146,8 +165,8 @@
     display: flex;
   }
 
-  .sheet {
-    display: flex;
+  .sheet[open] {
+    display: block;
   }
 }
 

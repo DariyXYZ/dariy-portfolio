@@ -38,4 +38,11 @@
   border-radius: 50%;
   background: #00ed00;
   flex: none;
+  transition: box-shadow 220ms ease, background-color 220ms ease;
+}
+
+:global(button:hover) .live::before,
+:global(button:focus-visible) .live::before {
+  background: #00ff19;
+  box-shadow: 0 0 0 4px rgb(0 237 0 / 12%), 0 0 14px rgb(0 237 0 / 60%);
 }

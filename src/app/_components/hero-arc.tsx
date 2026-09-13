@@ -26,7 +26,7 @@ export function HeroArc() {
       accents.forEach((dot, i) => {
         const point = new DOMPoint(DOTS[i].x, DOTS[i].y).matrixTransform(matrix);
         const distance = cursor ? Math.hypot(point.x - cursor.x, point.y - cursor.y) : Infinity;
-        dot.style.opacity = String(Math.max(0, 1 - distance / 120));
+        dot.style.opacity = String(Math.max(0, 1 - distance / 220));
       });
     };
     const schedule = () => { if (!frame) frame = requestAnimationFrame(paint); };
