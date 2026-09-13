@@ -1,18 +1,12 @@
-/** Сайт живёт в подпапке GitHub Pages, поэтому все прямые ссылки на файлы идут через префикс. */
-export const basePath = "/dariy-portfolio";
-
-/**
- * next/image с unoptimized не подставляет basePath сам,
- * поэтому все пути к файлам из public прогоняем через эту функцию.
- */
+/** Файлы из public доступны из корня собственного домена. */
 export function asset(path: string): string {
-  return path.startsWith("/") ? basePath + path : path;
+  return path;
 }
 
 export const site = {
   name: "Дарий Назаров",
   role: "Продуктовый дизайнер",
-  url: "https://dariyxyz.github.io/dariy-portfolio",
+  url: "https://dariy-nazarov.ru",
   /** Одна строка позиционирования — то, что рекрутер читает первым. */
   positioning:
     "Помогаю пользователям принимать сложные решения: исследую задачу, проектирую сценарий и довожу интерфейс до запуска.",
@@ -27,8 +21,8 @@ export const site = {
   phone: "+7 985 884-37-27",
   telegram: "https://t.me/dariy_nazarov",
   instagram: "https://www.instagram.com/dariy_nazarov/",
-  resumeFile: basePath + "/dariy-nazarov-cv.pdf",
-  logoFile: basePath + "/logo.svg",
+  resumeFile: "/dariy-nazarov-cv.pdf",
+  logoFile: "/logo.svg",
 } as const;
 
 /** Цифры для полосы фактов под первым экраном. */
