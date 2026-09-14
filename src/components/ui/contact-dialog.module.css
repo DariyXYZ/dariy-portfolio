@@ -35,7 +35,7 @@
 }
 .lead { margin-top: 24px; color: var(--ink-2); line-height: 1.6; }
 .actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 32px; }
-.actions > a { height: 36px; }
+.actions > a { height: 36px; padding-inline: 14px; }
 .meta { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 20px; margin-top: 32px; font-size: var(--fs-sm); color: var(--ink-3); }
 .meta a { overflow-wrap: anywhere; }
 .badge { padding: 0; display: inline-flex; border-radius: var(--r-pill); }
