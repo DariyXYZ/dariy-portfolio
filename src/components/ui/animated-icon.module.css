@@ -12,3 +12,7 @@
 :global(button[aria-expanded="true"]) .menu path:nth-child(2) { opacity: 0; }
 :global(button[aria-expanded="true"]) .menu path:last-child { transform: translateY(-6px) rotate(-45deg); transform-origin: 12px 18px; }
 @media(prefers-reduced-motion: reduce) { .moving, .menu path { transition: none; } }
+
+.mail .flap { transform-origin: 12px 7px; transition: transform 300ms ease; }
+:global(a:hover) .mail .moving, :global(a:focus-visible) .mail .moving { transform: translateY(-2px) rotate(-7deg); }
+:global(a:hover) .mail .flap, :global(a:focus-visible) .mail .flap { transform: scaleY(-0.6); }

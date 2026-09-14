@@ -37,7 +37,7 @@
 }
 
 .primary:hover {
-  background: #34312d;
+  background: var(--ink-2);
 }
 
 .secondary {

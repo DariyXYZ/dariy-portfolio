@@ -14,7 +14,7 @@ export const site = {
   timezone: "UTC+3",
   availability: {
     open: true,
-    label: "Открыт к предложениям",
+    label: "Я на связи!",
     detail: "Продуктовый дизайн, full-time или контракт",
   },
   email: "dariy.nazarov@gmail.com",

@@ -43,7 +43,7 @@
 }
 
 .chipActive .count {
-  color: rgba(255, 255, 255, 0.55);
+  color: color-mix(in srgb, var(--paper) 70%, transparent);
 }
 
 .grid {

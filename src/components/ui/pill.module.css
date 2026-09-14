@@ -23,11 +23,13 @@
 }
 
 .live {
-  background: #fff;
+  background: var(--paper);
   color: var(--ink);
-  border: 1px solid #ccc;
+  border: 1px solid var(--line);
   gap: 14px;
-  padding: 9px 16px;
+  height: 42px;
+  padding: 0 20px;
+  font-size: var(--fs-sm);
   font-weight: 400;
 }
 

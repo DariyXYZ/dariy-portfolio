@@ -2,7 +2,7 @@
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(255, 255, 255, 0.82);
+  background: color-mix(in srgb, var(--paper) 82%, transparent);
   backdrop-filter: blur(14px);
   border-bottom: 1px solid transparent;
   transition:
@@ -130,11 +130,11 @@
   border: 0;
   border-bottom: 1px solid var(--line);
   border-radius: 0 0 20px 20px;
-  background: #fff;
+  background: var(--paper);
   color: var(--ink);
 }
 .sheet::backdrop {
-  background: rgb(255 255 255 / 50%);
+  background: color-mix(in srgb, var(--paper) 50%, transparent);
   backdrop-filter: blur(14px);
 }
 .sheet[open] { animation: menuIn 280ms cubic-bezier(0.2, 0.8, 0.2, 1); }
@@ -171,3 +171,8 @@
 }
 
 .resume { display: inline-flex; align-items: center; gap: 8px; }
+
+@media (max-width: 860px) {
+  .inner:has(:global(.theme-toggle)) { gap: 8px; }
+  :global(.theme-toggle) + .burger { margin-left: 0; }
+}

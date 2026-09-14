@@ -35,7 +35,7 @@ export function ContactProvider({ children }: { children: ReactNode }) {
         <h2 id="contact-title" className={styles.title}>{typo("Расскажите о задаче.")}<br /><span className="dim">{typo("Отвечу за день")}</span></h2>
         <p className={styles.lead}>{typo("Ищу команду, где смогу отвечать за пользовательский сценарий от исследования до запуска и оценки результата.")}</p>
         <div className={styles.actions}>
-          <ButtonLink href={"mailto:" + site.email} external>Написать на почту</ButtonLink>
+          <a className={[buttons.root, buttons.primary, buttons.md].join(" ")} href={"mailto:" + site.email}><AnimatedIcon name="mail" size={20} />Написать на почту</a>
           <ButtonLink href={site.telegram} variant="secondary" external>Telegram</ButtonLink>
         </div>
         <div className={styles.meta}>

@@ -8,6 +8,7 @@ import { site } from "@/config/site";
 import { ContactTrigger } from "@/components/ui/contact-dialog";
 import styles from "./site-header.module.css";
 import { AnimatedIcon } from "@/components/ui/animated-icon";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 export function SiteHeader() {
   const pathname = usePathname();
@@ -86,6 +87,7 @@ export function SiteHeader() {
           <ContactTrigger />
         </div>
 
+        <ThemeToggle />
         <button
           className={styles.burger}
           type="button"

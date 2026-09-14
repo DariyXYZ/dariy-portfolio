@@ -5,6 +5,7 @@ import { SiteFooter } from "@/components/layout/site-footer";
 import { ContactProvider } from "@/components/ui/contact-dialog";
 import { site } from "@/config/site";
 import "./globals.css";
+import { InvertedCursor } from "@/components/ui/inverted-cursor";
 
 const onest = Onest({
   subsets: ["latin", "cyrillic"],
@@ -41,7 +42,8 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="ru" className={onest.variable + " " + mono.variable}>
+    <html lang="ru" className={onest.variable + " " + mono.variable} suppressHydrationWarning>
+      <head><script dangerouslySetInnerHTML={{ __html: `try{var t=localStorage.getItem('portfolio-theme');document.documentElement.dataset.theme=t==='dark'||t==='light'?t:matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}catch(e){}` }} /></head>
       <body>
         <a className="skip-link" href="#main">
           Перейти к содержанию
@@ -51,6 +53,7 @@ export default function RootLayout({
           <main id="main">{children}</main>
           <SiteFooter />
         </ContactProvider>
+        <InvertedCursor />
       </body>
     </html>
   );
