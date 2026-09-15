@@ -48,3 +48,14 @@
   background: #00ff19;
   box-shadow: 0 0 0 4px rgb(0 237 0 / 12%), 0 0 14px rgb(0 237 0 / 60%);
 }
+
+/* В тёмной теме точка статуса того же цвета, что и акцент. */
+:global([data-theme="dark"]) .live::before {
+  background: var(--accent);
+}
+
+:global([data-theme="dark"] button:hover) .live::before,
+:global([data-theme="dark"] button:focus-visible) .live::before {
+  background: #ff8a66;
+  box-shadow: 0 0 0 4px var(--accent-soft), 0 0 14px rgb(255 106 61 / 60%);
+}
