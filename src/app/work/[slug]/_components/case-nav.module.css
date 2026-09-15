@@ -31,7 +31,7 @@
 
 .active {
   color: var(--ink);
-  border-left-color: var(--ink);
+  border-left-color: var(--accent);
 }
 
 .num {
@@ -42,7 +42,7 @@
 }
 
 .active .num {
-  color: var(--ink-3);
+  color: var(--accent-text);
 }
 
 .label {

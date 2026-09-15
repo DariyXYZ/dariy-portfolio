@@ -15,7 +15,7 @@
   padding-inline: 16px;
   border-radius: var(--r-pill);
   border: 1px solid var(--line);
-  background: var(--paper);
+  background: var(--surface);
   font-size: var(--fs-sm);
   font-weight: 500;
   color: var(--ink-2);
@@ -26,7 +26,7 @@
 }
 
 .chip:hover {
-  border-color: var(--ink-4);
+  border-color: var(--accent);
   color: var(--ink);
 }
 

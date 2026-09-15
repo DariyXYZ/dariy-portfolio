@@ -4,7 +4,7 @@
   grid-template-rows: auto 1fr;
   border: 1px solid var(--line);
   border-radius: var(--r-lg);
-  background: var(--paper);
+  background: var(--surface);
   overflow: hidden;
   transition:
     border-color var(--dur) var(--ease),
@@ -13,9 +13,11 @@
 }
 
 .card:hover {
-  border-color: var(--ink-4);
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--line));
   transform: translateY(-3px);
-  box-shadow: 0 24px 50px -38px rgba(27, 26, 24, 0.55);
+  box-shadow:
+    0 24px 50px -38px rgba(27, 26, 24, 0.55),
+    0 30px 80px -40px var(--accent-glow);
 }
 
 .draft:hover {
@@ -95,7 +97,7 @@
 
 .num {
   font-size: var(--fs-xs);
-  color: var(--ink-4);
+  color: var(--accent-text);
 }
 
 .type {
@@ -183,6 +185,11 @@
   font-size: var(--fs-sm);
   font-weight: 500;
   color: var(--ink);
+  transition: color var(--dur-fast) var(--ease);
+}
+
+.card:not(.draft):hover .cta {
+  color: var(--accent);
 }
 
 .card:not(.draft):hover .cta svg {

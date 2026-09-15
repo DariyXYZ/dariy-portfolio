@@ -8,6 +8,21 @@
   overflow: hidden;
 }
 
+/* Тёплое свечение за дугой — только в тёмной теме, на белом оно грязнит. */
+:global([data-theme="dark"]) .hero::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -12%;
+  width: min(1100px, 120vw);
+  aspect-ratio: 1.6;
+  transform: translateX(-50%);
+  background: radial-gradient(closest-side, var(--accent-glow), transparent 72%);
+  opacity: 0.9;
+  pointer-events: none;
+  z-index: 0;
+}
+
 .heroInner {
   position: relative;
   z-index: 1;
@@ -136,13 +151,15 @@
 }
 
 .step {
-  border-top: 1px solid var(--ink);
+  /* Линия начинается акцентным отрезком и уходит в волосяную. */
+  border-top: 1px solid var(--line);
+  border-image: linear-gradient(90deg, var(--accent) 0 40px, var(--line) 40px) 1;
   padding-top: var(--s-5);
 }
 
 .stepNum {
   font-size: var(--fs-xs);
-  color: var(--ink-3);
+  color: var(--accent-text);
 }
 
 .stepTitle {
@@ -186,9 +203,18 @@
 }
 
 .expPeriod {
-  font-size: var(--fs-sm);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
   color: var(--ink-3);
-  padding-top: 4px;
+  padding-top: 6px;
+}
+
+.expItem:hover .expCompany {
+  color: var(--accent);
+}
+
+.expCompany {
+  transition: color var(--dur-fast) var(--ease);
 }
 
 .expCompany {
@@ -222,6 +248,11 @@
   aspect-ratio: 16 / 9;
   object-fit: cover;
   border-radius: var(--r-lg);
+  border: 1px solid var(--line);
+}
+
+:global([data-theme="dark"]) .heroImage {
+  box-shadow: 0 40px 120px -40px var(--accent-glow);
 }
 
 .heroShotCaption {

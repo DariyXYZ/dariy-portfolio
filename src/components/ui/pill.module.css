@@ -23,7 +23,7 @@
 }
 
 .live {
-  background: var(--paper);
+  background: var(--surface);
   color: var(--ink);
   border: 1px solid var(--line);
   gap: 14px;

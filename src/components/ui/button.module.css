@@ -37,18 +37,19 @@
 }
 
 .primary:hover {
-  background: var(--ink-2);
+  background: color-mix(in srgb, var(--accent) 84%, var(--paper));
+  color: var(--paper);
 }
 
 .secondary {
-  background: var(--paper);
+  background: var(--surface);
   color: var(--ink);
   border-color: var(--line);
 }
 
 .secondary:hover {
-  background: var(--sand);
-  border-color: var(--ink-4);
+  background: var(--sand-2);
+  border-color: var(--accent);
 }
 
 .ghost {

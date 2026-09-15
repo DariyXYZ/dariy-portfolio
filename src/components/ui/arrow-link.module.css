@@ -5,6 +5,11 @@
   font-size: var(--fs-sm);
   font-weight: 500;
   color: var(--ink);
+  transition: color var(--dur-fast) var(--ease);
+}
+
+.root:hover {
+  color: var(--accent);
 }
 
 .text {

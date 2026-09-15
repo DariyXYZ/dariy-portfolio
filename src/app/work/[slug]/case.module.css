@@ -125,7 +125,7 @@
 
 .blockNum {
   font-size: var(--fs-xs);
-  color: var(--ink-4);
+  color: var(--accent-text);
 }
 
 .blockTitle {

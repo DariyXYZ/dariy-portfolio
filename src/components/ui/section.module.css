@@ -10,6 +10,15 @@
   background: var(--sand);
 }
 
+/* На чёрном плоская плашка не читается — даём сетку точек, гаснущую книзу. */
+:global([data-theme="dark"]) .sand {
+  background-image:
+    linear-gradient(180deg, transparent 0%, var(--sand) 80%),
+    radial-gradient(var(--line) 1px, transparent 1.4px);
+  background-size: 100% 100%, 26px 26px;
+  border-block: 1px solid var(--line-2);
+}
+
 .head {
   display: flex;
   flex-wrap: wrap;
@@ -25,6 +34,18 @@
 
 .kicker {
   margin-bottom: var(--s-4);
+  color: var(--accent-text);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.kicker::before {
+  content: "";
+  width: 18px;
+  height: 1px;
+  background: currentColor;
+  flex: none;
 }
 
 .lead {
