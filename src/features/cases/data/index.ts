@@ -13,8 +13,8 @@ import { drafts } from "./drafts";
  * не должны висеть в конце строки.
  */
 export const cases: CaseStudy[] = typoDeep<CaseStudy[]>([
-  ...businessModelLab,
   ...bnplCheckout,
+  ...businessModelLab,
   ...stempsCareer,
   ...aiArchitectureRendering,
   ...compDesignBot,
