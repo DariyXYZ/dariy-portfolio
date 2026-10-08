@@ -151,10 +151,32 @@
 }
 
 .step {
-  /* Линия начинается акцентным отрезком и уходит в волосяную. */
-  border-top: 1px solid var(--line);
-  border-image: linear-gradient(90deg, var(--accent) 0 40px, var(--line) 40px) 1;
+  /* Волосяная линия, поверх неё акцентная полоса заполняется при прокрутке
+     (--fill от 0 до 1 пишет ProcessTrack). */
+  position: relative;
   padding-top: var(--s-5);
+}
+
+.step::before,
+.step::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.step::before {
+  height: 1px;
+  background: var(--line);
+}
+
+.step::after {
+  top: -0.5px;
+  height: 2px;
+  background: var(--accent);
+  transform-origin: left center;
+  transform: scaleX(var(--fill, 0));
 }
 
 .stepNum {

@@ -11,6 +11,7 @@ import { site, facts, asset } from "@/config/site";
 import { StatStrip } from "@/components/ui/stat-strip";
 import { HeroArc } from "./_components/hero-arc";
 import { TypedHeadline } from "./_components/typed-headline";
+import { ProcessTrack } from "./_components/process-track";
 import styles from "./page.module.css";
 import { typo } from "@/lib/typo";
 
@@ -118,17 +119,17 @@ export default function HomePage() {
             />
           </Reveal>
 
-          <div className={styles.process}>
+          <ProcessTrack className={styles.process}>
             {process.map((step, i) => (
               <Reveal key={step.step} delay={i * 80}>
-                <article className={styles.step}>
+                <article className={styles.step} data-step>
                   <p className={"mono " + styles.stepNum}>{step.step}</p>
                   <h3 className={styles.stepTitle}>{step.title}</h3>
                   <p className={styles.stepBody}>{step.body}</p>
                 </article>
               </Reveal>
             ))}
-          </div>
+          </ProcessTrack>
         </Container>
       </Section>
 
