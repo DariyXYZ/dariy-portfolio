@@ -105,6 +105,14 @@ export type CaseVisual = VisualBase &
         bare?: boolean;
       }
     | {
+        /** Короткая запись работы приложения в рамке телефона, рядом шаги сценария. */
+        kind: "video";
+        src: string;
+        poster: string;
+        alt: string;
+        steps?: { title: string; body: string }[];
+      }
+    | {
         /** Было и стало по одному экрану. */
         kind: "compare";
         pairs: { before: string; after: string; label: string; note: string }[];

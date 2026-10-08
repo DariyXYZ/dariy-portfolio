@@ -1327,3 +1327,70 @@
 .foldIcon { flex: none; transition: transform 180ms ease; }
 .fold[open] .foldIcon { transform: rotate(180deg); }
 @media(min-width: 900px) { .fourColumns { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+
+/* ---------------- запись работы приложения ---------------- */
+
+.video {
+  display: grid;
+  gap: var(--s-6);
+  justify-items: center;
+}
+
+.videoPhone {
+  width: min(340px, 78vw);
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  overflow: hidden;
+  background: #f2f2f0;
+  line-height: 0;
+}
+
+.videoMedia {
+  width: 100%;
+  height: auto;
+}
+
+.videoSteps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--s-5);
+  width: 100%;
+  max-width: 52ch;
+}
+
+.videoStep {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--s-3);
+  align-items: baseline;
+}
+
+.videoNum {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--accent-text);
+}
+
+.videoTitle {
+  display: block;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.videoBody {
+  display: block;
+  margin-top: var(--s-1);
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+}
+
+@media (min-width: 900px) {
+  .video {
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    justify-items: start;
+    gap: var(--s-8);
+  }
+}

@@ -13,7 +13,7 @@ type CaseVisualProps = {
 
 /** Один вход для всех схем и снимков внутри кейса. */
 /** Экраны видны сразу. Всё, что помечено фреймворком, прячем под раскрытие. */
-const ALWAYS_OPEN = new Set(["shot", "band", "screens", "compare"]);
+const ALWAYS_OPEN = new Set(["shot", "band", "screens", "compare", "video"]);
 
 export function CaseVisual({ visual }: CaseVisualProps) {
   const caption = visual.caption ? (
@@ -69,6 +69,8 @@ function Body({ visual }: CaseVisualProps) {
       return <Band visual={visual} />;
     case "screens":
       return <Screens visual={visual} />;
+    case "video":
+      return <Video visual={visual} />;
     case "compare":
       return <Compare visual={visual} />;
     case "artifact":
@@ -193,6 +195,43 @@ function Screens({ visual }: { visual: Extract<Visual, { kind: "screens" }> }) {
         </li>
       ))}
     </ul>
+  );
+}
+
+/* ---------------- запись работы приложения ---------------- */
+
+function Video({ visual }: { visual: Extract<Visual, { kind: "video" }> }) {
+  return (
+    <div className={styles.video}>
+      <div className={styles.videoPhone}>
+        <video
+          src={asset(visual.src)}
+          poster={asset(visual.poster)}
+          aria-label={visual.alt}
+          width={780}
+          height={1688}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          className={styles.videoMedia}
+        />
+      </div>
+      {visual.steps ? (
+        <ol className={styles.videoSteps}>
+          {visual.steps.map((step, i) => (
+            <li key={step.title} className={styles.videoStep}>
+              <span className={styles.videoNum}>{String(i + 1).padStart(2, "0")}</span>
+              <span>
+                <span className={styles.videoTitle}>{step.title}</span>
+                <span className={styles.videoBody}>{step.body}</span>
+              </span>
+            </li>
+          ))}
+        </ol>
+      ) : null}
+    </div>
   );
 }
 
