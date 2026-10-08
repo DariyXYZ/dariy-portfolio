@@ -192,6 +192,13 @@ function Screens({ visual }: { visual: Extract<Visual, { kind: "screens" }> }) {
               className={styles.phoneImage}
             />
           </div>}
+          {item.points ? (
+            <ul className={styles.scPoints}>
+              {item.points.map((point) => (
+                <li key={point}>{point}</li>
+              ))}
+            </ul>
+          ) : null}
         </li>
       ))}
     </ul>

@@ -1394,3 +1394,30 @@
     gap: var(--s-8);
   }
 }
+
+/* Тезисы под экраном: коротко, чтобы читали вместо абзаца. */
+.scPoints {
+  list-style: none;
+  margin: var(--s-3) 0 0;
+  padding: 0;
+  display: grid;
+  gap: var(--s-2);
+  font-size: var(--fs-sm);
+  line-height: 1.4;
+  color: var(--ink-2);
+}
+
+.scPoints li {
+  position: relative;
+  padding-left: 14px;
+}
+
+.scPoints li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 6px;
+  height: 1.5px;
+  background: var(--accent);
+}
