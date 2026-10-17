@@ -5,6 +5,7 @@ import { aiArchitectureRendering } from "./ai-architecture-rendering";
 import { bnplCheckout } from "./bnpl-checkout";
 import { compDesignBot } from "./comp-design-bot";
 import { stempsCareer } from "./stemps-career";
+import { antiplagiatAiAssistant } from "./antiplagiat-ai-assistant";
 import { drafts } from "./drafts";
 
 /**
@@ -18,6 +19,7 @@ export const cases: CaseStudy[] = typoDeep<CaseStudy[]>([
   ...stempsCareer,
   ...aiArchitectureRendering,
   ...compDesignBot,
+  ...antiplagiatAiAssistant,
   ...drafts,
 ]);
 
