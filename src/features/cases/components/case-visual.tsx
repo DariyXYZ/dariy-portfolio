@@ -565,18 +565,25 @@ function Transcript({ visual }: { visual: Extract<Visual, { kind: "transcript" }
 function Decisions({ visual }: { visual: Extract<Visual, { kind: "decisions" }> }) {
   return (
     <div className={styles.decisions}>
-      {visual.rows.map((row) => (
+      <div className={styles.forkHead} aria-hidden="true">
+        <span />
+        <span>Взял</span>
+        <span>Отверг</span>
+        <span>Чем плачу</span>
+      </div>
+      {visual.rows.map((row, i) => (
         <div key={row.took} className={styles.fork}>
+          <span className={styles.forkIndex}>{String(i + 1).padStart(2, "0")}</span>
           <div className={styles.forkTook}>
-            <span className="label">Взял</span>
+            <span className={styles.forkLabel}>Взял</span>
             <p>{row.took}</p>
           </div>
           <div className={styles.forkDrop}>
-            <span className="label">Отверг</span>
+            <span className={styles.forkLabel}>Отверг</span>
             <p>{row.rejected}</p>
           </div>
           <div className={styles.forkCost}>
-            <span className="label">Чем плачу</span>
+            <span className={styles.forkLabel}>Чем плачу</span>
             <p>{row.cost}</p>
           </div>
         </div>
