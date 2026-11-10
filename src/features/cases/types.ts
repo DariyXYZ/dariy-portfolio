@@ -225,6 +225,8 @@ export type CaseStudy = {
   liveUrl?: string;
   /** Обложка для карточки и шапки кейса. */
   cover?: { src: string; alt: string };
+  /** Короткое видео с работой интерфейса в начале кейса. */
+  previewVideo?: { src: string; poster: string; title: string; caption: string };
   metrics: CaseMetric[];
   tags: string[];
   /** Черновики показываются с пометкой и без ссылки внутрь. */

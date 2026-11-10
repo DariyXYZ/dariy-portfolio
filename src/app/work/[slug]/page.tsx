@@ -132,6 +132,32 @@ export default async function CasePage({ params }: PageProps) {
         )}
       </div>
 
+      {item.previewVideo ? (
+        <section className={styles.preview} aria-labelledby="case-preview-title">
+          <Container size="wide">
+            <div className={styles.previewHeader}>
+              <h2 id="case-preview-title" className={styles.previewTitle}>
+                {item.previewVideo.title}
+              </h2>
+              <p className={styles.previewCaption}>{item.previewVideo.caption}</p>
+            </div>
+            <video
+              className={styles.previewVideo}
+              poster={asset(item.previewVideo.poster)}
+              aria-label={item.previewVideo.title}
+              autoPlay
+              muted
+              loop
+              playsInline
+              controls
+              preload="metadata"
+            >
+              <source src={asset(item.previewVideo.src)} type="video/mp4" />
+            </video>
+          </Container>
+        </section>
+      ) : null}
+
       {/* ---------- Тело кейса с навигацией ---------- */}
       <div className={styles.body}>
         <Container size="wide">
