@@ -643,19 +643,31 @@ export const businessModelLab: CaseStudy[] = [
             "size": "wide",
             "items": [
               {
-                "src": "/cases/business-model-lab/s-unit-economics.webp",
+                "src": "/cases/business-model-lab/frame-home.webp",
+                "alt": "Главная страница Business Model Lab с приглашением рассчитать экономику кофейни",
+                "label": "Главная страница",
+                "note": "С первого экрана виден сценарий: ответить на вопросы, получить расчёт и проверить риски."
+              }
+            ]
+          },
+          {
+            "kind": "screens",
+            "size": "wide",
+            "items": [
+              {
+                "src": "/cases/business-model-lab/frame-economics.webp",
                 "alt": "Расчёт экономики",
                 "label": "Расчёт экономики",
                 "note": "Стоимость напитка считается рядом с ответами: видно, как каждое допущение влияет на результат."
               },
               {
-                "src": "/cases/business-model-lab/s-team.webp",
+                "src": "/cases/business-model-lab/frame-team.webp",
                 "alt": "Команда и фонд оплаты",
                 "label": "Команда и фонд оплаты",
                 "note": "Состав команды и зарплаты складываются в ежемесячные расходы."
               },
               {
-                "src": "/cases/business-model-lab/s-selfcheck.webp",
+                "src": "/cases/business-model-lab/frame-self-check.webp",
                 "alt": "Самопроверка перед расчётом",
                 "label": "Самопроверка перед расчётом",
                 "note": "Уверенные ответы и предположения отмечены раздельно: пользователь видит, какие данные ещё уточнить."
@@ -670,26 +682,26 @@ export const businessModelLab: CaseStudy[] = [
         "body": "Три состояния: текущий план с рисками, оптимизированная версия и правки. Пользователь уточняет данные и запускает повторный расчёт.",
         "visuals": [
           {
-            "kind": "band",
-            "dark": true,
-            "src": "/cases/business-model-lab/deck-states.webp",
-            "alt": "Три состояния плана: текущий, оптимизация, внесение правок"
-          },
-          {
             "kind": "screens",
             "size": "wide",
             "items": [
               {
-                "src": "/cases/business-model-lab/s-plan.webp",
-                "alt": "Текущий бизнес-план с оценкой прибыли и списком рисков",
+                "src": "/cases/business-model-lab/frame-plan-current.webp",
+                "alt": "Текущий бизнес-план с запасом прочности, показателями и рисками",
                 "label": "Текущий план",
                 "note": "Индикатор риска и пояснения показывают запас до безубыточности и уязвимые допущения."
               },
               {
-                "src": "/cases/business-model-lab/s-edits.webp",
-                "alt": "Режим внесения правок: комментарий слева, план в центре, результат справа",
+                "src": "/cases/business-model-lab/frame-plan-optimized.webp",
+                "alt": "Оптимизированный бизнес-план со сравнением показателей",
+                "label": "Оптимизация",
+                "note": "Следующая версия показывает улучшенный запас прочности и разницу с исходным расчётом."
+              },
+              {
+                "src": "/cases/business-model-lab/frame-plan-edits.webp",
+                "alt": "Режим правок к бизнес-плану с текстовым полем и сравнением показателей",
                 "label": "Внести правки",
-                "note": "Комментарий слева, план в центре, результат справа. Человек видит, что именно изменилось от его реплики, и не гадает."
+                "note": "Пользователь описывает изменение своими словами и пересчитывает план на основе оптимизированной версии."
               }
             ]
           }
@@ -704,13 +716,13 @@ export const businessModelLab: CaseStudy[] = [
           "size": "wide",
           "items": [
             {
-              "src": "/cases/business-model-lab/s-project.webp",
+              "src": "/cases/business-model-lab/frame-new-project.webp",
               "alt": "Новый проект",
               "label": "Новый проект",
               "note": "Новый расчёт создаётся отдельно от существующих моделей."
             },
             {
-              "src": "/cases/business-model-lab/s-projects.webp",
+              "src": "/cases/business-model-lab/frame-projects.webp",
               "alt": "Все проекты",
               "label": "Все проекты",
               "note": "Сохранённые модели доступны для повторного открытия и сравнения."
