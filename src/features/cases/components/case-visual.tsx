@@ -148,8 +148,8 @@ function Band({ visual }: { visual: Extract<Visual, { kind: "band" }> }) {
       <Image
         src={asset(visual.src)}
         alt={visual.alt}
-        width={2000}
-        height={1125}
+        width={visual.width ?? 2000}
+        height={visual.height ?? 1125}
         sizes="(max-width: 1000px) 100vw, 1320px"
         className={styles.bandImage}
       />

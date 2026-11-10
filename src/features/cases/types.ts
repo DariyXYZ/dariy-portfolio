@@ -91,6 +91,8 @@ export type CaseVisual = VisualBase &
         kind: "band";
         src: string;
         alt: string;
+        width?: number;
+        height?: number;
         /** Тёмные кадры показываем без рамки, она на них лишняя. */
         dark?: boolean;
       }
