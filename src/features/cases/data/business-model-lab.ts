@@ -19,8 +19,8 @@ export const businessModelLab: CaseStudy[] = [
       "lever": "Пошаговая анкета снижает сложность ввода. Редактирование и сравнение версий поддерживают повторные расчёты."
     },
     "cover": {
-      "src": "/cases/business-model-lab/cover-mockup-2026.webp",
-      "alt": "Business Model Lab: главная страница сервиса на ноутбуке"
+      "src": "/cases/business-model-lab/cover-frame-11y5.webp",
+      "alt": "Business Model Lab: экран правок бизнес-плана на ноутбуке"
     },
     "metrics": [
       {
