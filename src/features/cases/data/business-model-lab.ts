@@ -769,7 +769,7 @@ export const businessModelLab: CaseStudy[] = [
           {
             "kind": "band",
             "dark": true,
-            "src": "/cases/business-model-lab/result-mockup-final.jpg",
+            "src": "/cases/business-model-lab/result-mockup-final-2026-11-12.jpg",
             "alt": "Business Model Lab: главный экран сервиса на ноутбуке",
             "width": 4500,
             "height": 3000
