@@ -649,7 +649,7 @@ export const businessModelLab: CaseStudy[] = [
             "size": "wide",
             "items": [
               {
-                "src": "/cases/business-model-lab/screen-home.webp",
+                "src": "/cases/business-model-lab/screen-home-2026-11-11.webp",
                 "alt": "Главная страница Business Model Lab с приглашением рассчитать экономику кофейни",
                 "label": "Главная страница",
                 "note": "С первого экрана виден сценарий: ответить на вопросы, получить расчёт и проверить риски."
@@ -661,19 +661,19 @@ export const businessModelLab: CaseStudy[] = [
             "size": "wide",
             "items": [
               {
-                "src": "/cases/business-model-lab/screen-economics.webp",
+                "src": "/cases/business-model-lab/screen-economics-2026-11-11.webp",
                 "alt": "Расчёт экономики",
                 "label": "Расчёт экономики",
                 "note": "Стоимость напитка считается рядом с ответами: видно, как каждое допущение влияет на результат."
               },
               {
-                "src": "/cases/business-model-lab/screen-team.webp",
+                "src": "/cases/business-model-lab/screen-team-2026-11-11.webp",
                 "alt": "Команда и фонд оплаты",
                 "label": "Команда и фонд оплаты",
                 "note": "Состав команды и зарплаты складываются в ежемесячные расходы."
               },
               {
-                "src": "/cases/business-model-lab/screen-self-check.webp",
+                "src": "/cases/business-model-lab/screen-self-check-2026-11-11.webp",
                 "alt": "Самопроверка перед расчётом",
                 "label": "Самопроверка перед расчётом",
                 "note": "Уверенные ответы и предположения отмечены раздельно: пользователь видит, какие данные ещё уточнить."
@@ -692,19 +692,19 @@ export const businessModelLab: CaseStudy[] = [
             "size": "wide",
             "items": [
               {
-                "src": "/cases/business-model-lab/screen-plan-current.webp",
+                "src": "/cases/business-model-lab/screen-plan-current-2026-11-11.webp",
                 "alt": "Текущий бизнес-план с запасом прочности, показателями и рисками",
                 "label": "Текущий план",
                 "note": "Индикатор риска и пояснения показывают запас до безубыточности и уязвимые допущения."
               },
               {
-                "src": "/cases/business-model-lab/screen-plan-optimized.webp",
+                "src": "/cases/business-model-lab/screen-plan-optimized-2026-11-11.webp",
                 "alt": "Оптимизированный бизнес-план со сравнением показателей",
                 "label": "Оптимизация",
                 "note": "Следующая версия показывает улучшенный запас прочности и разницу с исходным расчётом."
               },
               {
-                "src": "/cases/business-model-lab/screen-plan-edits.webp",
+                "src": "/cases/business-model-lab/screen-plan-edits-2026-11-11.webp",
                 "alt": "Режим правок к бизнес-плану с текстовым полем и сравнением показателей",
                 "label": "Внести правки",
                 "note": "Пользователь описывает изменение своими словами и пересчитывает план на основе оптимизированной версии."
@@ -722,13 +722,13 @@ export const businessModelLab: CaseStudy[] = [
           "size": "wide",
           "items": [
             {
-              "src": "/cases/business-model-lab/screen-new-project.webp",
+              "src": "/cases/business-model-lab/screen-new-project-2026-11-11.webp",
               "alt": "Новый проект",
               "label": "Новый проект",
               "note": "Новый расчёт создаётся отдельно от существующих моделей."
             },
             {
-              "src": "/cases/business-model-lab/screen-projects.webp",
+              "src": "/cases/business-model-lab/screen-projects-2026-11-11.webp",
               "alt": "Все проекты",
               "label": "Все проекты",
               "note": "Сохранённые модели доступны для повторного открытия и сравнения."
