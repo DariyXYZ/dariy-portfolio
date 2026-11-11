@@ -23,10 +23,10 @@ export const businessModelLab: CaseStudy[] = [
       "alt": "Business Model Lab: экран правок бизнес-плана на ноутбуке"
     },
     "previewVideo": {
-      "src": "/cases/business-model-lab/preview-animations-2026-v3.mp4",
-      "poster": "/cases/business-model-lab/preview-poster-2026-v3.webp",
+      "src": "/cases/business-model-lab/preview-animations-2026-v4.mp4",
+      "poster": "/cases/business-model-lab/preview-poster-2026-v4.webp",
       "title": "Интерфейс в движении",
-      "caption": "От первого расчёта до правок и сохранённых проектов · 44 секунды"
+      "caption": "От первого расчёта до правок и сохранённых проектов · 43 секунды"
     },
     "metrics": [
       {

@@ -117,7 +117,7 @@
 .previewVideo {
   display: block;
   width: 100%;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 8 / 5;
   background: #f8f9fa;
   border: 1px solid var(--line);
 }
