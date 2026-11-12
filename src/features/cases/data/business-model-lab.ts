@@ -197,8 +197,9 @@ export const businessModelLab: CaseStudy[] = [
           {
             "kind": "band",
             "dark": true,
-            "src": "/cases/business-model-lab/old-ui.webp",
-            "alt": "Схема старого интерфейса: экраны в изометрии, три помечены флажками"
+            "src": "/cases/business-model-lab/old-ui-audit-poster-2026-11-12.webp",
+            "video": "/cases/business-model-lab/old-ui-audit-2026-11-12.mp4",
+            "alt": "Путь пользователя по старому интерфейсу: ввод данных, генерация плана, оценка и оптимизация, три проблемы отмечены по ходу"
           },
           {
             "kind": "principles",

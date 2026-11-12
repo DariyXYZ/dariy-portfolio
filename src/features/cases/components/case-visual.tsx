@@ -145,14 +145,30 @@ function Shot({ visual }: { visual: Extract<Visual, { kind: "shot" }> }) {
 function Band({ visual }: { visual: Extract<Visual, { kind: "band" }> }) {
   return (
     <div className={visual.dark ? styles.bandDark : styles.band}>
-      <Image
-        src={asset(visual.src)}
-        alt={visual.alt}
-        width={visual.width ?? 2000}
-        height={visual.height ?? 1125}
-        sizes="(max-width: 1000px) 100vw, 1320px"
-        className={styles.bandImage}
-      />
+      {visual.video ? (
+        <video
+          src={asset(visual.video)}
+          poster={asset(visual.src)}
+          aria-label={visual.alt}
+          width={visual.width ?? 1920}
+          height={visual.height ?? 1080}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          className={styles.bandImage}
+        />
+      ) : (
+        <Image
+          src={asset(visual.src)}
+          alt={visual.alt}
+          width={visual.width ?? 2000}
+          height={visual.height ?? 1125}
+          sizes="(max-width: 1000px) 100vw, 1320px"
+          className={styles.bandImage}
+        />
+      )}
     </div>
   );
 }
