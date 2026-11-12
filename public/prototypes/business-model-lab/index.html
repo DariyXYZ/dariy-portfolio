@@ -245,10 +245,10 @@ a{color:inherit;text-decoration:none}
 .live .hint{font-size:12px;color:var(--faint);line-height:1.5;padding:2px 4px}
 
 /* тест 2 */
-.org{position:relative;margin-top:26px;height:290px}
+.org{position:relative;margin-top:38px;height:350px}
 .org svg.lines{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
-.org svg.lines path{fill:none;stroke:var(--ghost);stroke-width:1.5;stroke-dasharray:4 4;transition:stroke .3s}
-.org svg.lines path.act{stroke:var(--ink-2);stroke-dasharray:none}
+.org svg.lines path{fill:none;stroke:#D1D5DB;stroke-width:1.5;stroke-dasharray:4 5;stroke-linecap:round;stroke-linejoin:round;transition:stroke .3s}
+.org svg.lines path.act{stroke:#A7ABB2;stroke-dasharray:none}
 .node{position:absolute;width:188px;padding:12px 10px 12px 14px;border-radius:16px;background:var(--card);box-shadow:var(--sh);transform:translateX(-50%);
   transition:opacity .3s,box-shadow .3s,background .3s}
 .node.off{box-shadow:inset 0 0 0 1px var(--line-2);background:transparent}
@@ -1095,11 +1095,11 @@ function toast(t){const el=$('#toast');$('span',el).textContent=t;el.classList.a
 /* ---------- модель ---------- */
 const ROLES=[
  {id:'owner',name:'Владелец',pay:150000,x:50,y:0},
- {id:'manager',name:'Управляющий',pay:100000,x:17,y:104,parent:'owner'},
- {id:'marketer',name:'Маркетолог',pay:80000,x:50,y:104,parent:'owner'},
- {id:'accountant',name:'Бухгалтер',pay:40000,x:83,y:104,parent:'owner'},
- {id:'barista',name:'Бариста',pay:90000,x:17,y:214,parent:'manager'},
- {id:'cleaning',name:'Уборка',pay:15000,x:50,y:214,parent:'manager'},
+ {id:'manager',name:'Управляющий',pay:100000,x:17,y:128,parent:'owner'},
+ {id:'marketer',name:'Маркетолог',pay:80000,x:50,y:128,parent:'owner'},
+ {id:'accountant',name:'Бухгалтер',pay:40000,x:83,y:128,parent:'owner'},
+ {id:'barista',name:'Бариста',pay:90000,x:17,y:260,parent:'manager'},
+ {id:'cleaning',name:'Уборка',pay:15000,x:50,y:260,parent:'manager'},
 ];
 const S={guests:60,days:26,check:650,cost:110,loss:.02,rent:220000,other:60000,invest:4500000,
   team:{owner:1,manager:0,marketer:0,accountant:0,barista:2,cleaning:1},balance:1000,ver:0,hasV3:false,planned:true,opt:false,edits:[]};
@@ -1171,11 +1171,13 @@ function buildOrg(){
     org.appendChild(n)});
 }
 function drawLines(){
-  const org=$('#org'),box=org.getBoundingClientRect();if(!box.width)return;let d='';
-  ROLES.filter(r=>r.parent).forEach(r=>{const a=$('#n-'+r.parent).getBoundingClientRect(),b=$('#n-'+r.id).getBoundingClientRect();
+  const org=$('#org'),box=org.getBoundingClientRect();if(!box.width)return;
+  const roleById=Object.fromEntries(ROLES.map(r=>[r.id,r]));
+  const branchActive=r=>Boolean(S.team[r.id])&&(!r.parent||branchActive(roleById[r.parent]));
+  const paths=ROLES.filter(r=>r.parent).map(r=>{const a=$('#n-'+r.parent).getBoundingClientRect(),b=$('#n-'+r.id).getBoundingClientRect();
     const x1=a.left+a.width/2-box.left,y1=a.bottom-box.top,x2=b.left+b.width/2-box.left,y2=b.top-box.top,my=y1+16;
-    d+=`<path class="${S.team[r.id]>0?'act':''}" d="M${x1} ${y1} L${x1} ${my-8} Q${x1} ${my} ${x1+Math.sign(x2-x1)*8} ${my} L${x2-Math.sign(x2-x1)*8} ${my} Q${x2} ${my} ${x2} ${my+8} L${x2} ${y2}"/>`});
-  $('#org-lines').innerHTML=d;
+    return {active:branchActive(r),html:`<path data-to="${r.id}" class="${branchActive(r)?'act':''}" d="M${x1} ${y1} L${x1} ${my-8} Q${x1} ${my} ${x1+Math.sign(x2-x1)*8} ${my} L${x2-Math.sign(x2-x1)*8} ${my} Q${x2} ${my} ${x2} ${my+8} L${x2} ${y2}"/>`}});
+  $('#org-lines').innerHTML=paths.sort((a,b)=>Number(a.active)-Number(b.active)).map(p=>p.html).join('');
 }
 function renderOrg(){
   ROLES.forEach(r=>{const n=$('#n-'+r.id),c=S.team[r.id]||0;$('.stp span',n).textContent=c;n.classList.toggle('off',!c)});
