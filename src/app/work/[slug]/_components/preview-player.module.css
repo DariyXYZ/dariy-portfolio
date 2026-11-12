@@ -1,0 +1,101 @@
+.wrap {
+  position: relative;
+  border: 1px solid var(--line);
+  background: #f8f9fa;
+  overflow: hidden;
+}
+
+.wrap:fullscreen {
+  border: 0;
+  display: grid;
+  place-items: center;
+  background: #f8f9fa;
+}
+
+.video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 8 / 5;
+  cursor: pointer;
+}
+
+.ui {
+  position: absolute;
+  right: 12px;
+  bottom: 14px;
+  display: flex;
+  gap: 6px;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.btn {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 999px;
+  color: #fff;
+  background: rgba(17, 24, 39, 0.42);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.btn:hover {
+  background: rgba(17, 24, 39, 0.7);
+}
+
+.btn svg {
+  width: 12px;
+  height: 12px;
+}
+
+.track {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 10px;
+  display: flex;
+  align-items: flex-end;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.fill {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: rgba(17, 24, 39, 0.55);
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: height 0.2s ease;
+}
+
+.track:hover .fill {
+  height: 4px;
+}
+
+.wrap:hover .ui,
+.wrap:focus-within .ui,
+.wrap[data-paused] .ui {
+  opacity: 1;
+  transform: none;
+}
+
+.wrap:hover .track,
+.wrap[data-paused] .track {
+  opacity: 1;
+}
+
+@media (hover: none) {
+  .ui {
+    opacity: 1;
+    transform: none;
+  }
+}

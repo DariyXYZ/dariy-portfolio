@@ -12,6 +12,7 @@ import { StatStrip } from "@/components/ui/stat-strip";
 import { getCase, getPublishedCases, CaseVisual } from "@/features/cases";
 import { site, asset } from "@/config/site";
 import { CaseNav } from "./_components/case-nav";
+import { PreviewPlayer } from "./_components/preview-player";
 import styles from "./case.module.css";
 
 type PageProps = {
@@ -141,19 +142,11 @@ export default async function CasePage({ params }: PageProps) {
               </h2>
               <p className={styles.previewCaption}>{item.previewVideo.caption}</p>
             </div>
-            <video
-              className={styles.previewVideo}
+            <PreviewPlayer
+              src={asset(item.previewVideo.src)}
               poster={asset(item.previewVideo.poster)}
-              aria-label={item.previewVideo.title}
-              autoPlay
-              muted
-              loop
-              playsInline
-              controls
-              preload="metadata"
-            >
-              <source src={asset(item.previewVideo.src)} type="video/mp4" />
-            </video>
+              label={item.previewVideo.title}
+            />
           </Container>
         </section>
       ) : null}
